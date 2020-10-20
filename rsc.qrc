@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="">
+        <file>Resources/笔刷.png</file>
+        <file>Resources/相机.png</file>
+    </qresource>
+</RCC>
