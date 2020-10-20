@@ -330,6 +330,9 @@
    <property name="allowedAreas">
     <set>Qt::LeftDockWidgetArea</set>
    </property>
+   <property name="windowTitle">
+    <string>ISeg Toolbox</string>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
@@ -358,6 +361,9 @@
         <height>36</height>
        </rect>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -370,6 +376,44 @@
         <width>30</width>
         <height>30</height>
        </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>30</y>
+        <width>36</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../rsc.qrc">
+        <normaloff>:/Resources/橡皮擦.png</normaloff>:/Resources/橡皮擦.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
