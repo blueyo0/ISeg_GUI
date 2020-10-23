@@ -3,5 +3,6 @@
         <file>Resources/笔刷.png</file>
         <file>Resources/相机.png</file>
         <file>Resources/橡皮擦.png</file>
+        <file>Resources/橡皮光标.png</file>
     </qresource>
 </RCC>

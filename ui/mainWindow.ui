@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1154</width>
+    <height>793</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -300,7 +300,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1154</width>
      <height>22</height>
     </rect>
    </property>
@@ -324,7 +324,7 @@
    <property name="minimumSize">
     <size>
      <width>240</width>
-     <height>38</height>
+     <height>40</height>
     </size>
    </property>
    <property name="allowedAreas">
@@ -341,10 +341,18 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>0</y>
+       <y>20</y>
        <width>221</width>
-       <height>81</height>
+       <height>101</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="autoFillBackground">
       <bool>true</bool>
@@ -352,11 +360,11 @@
      <property name="title">
       <string>工具</string>
      </property>
-     <widget class="QToolButton" name="toolButton">
+     <widget class="QToolButton" name="paintButton">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>30</y>
+        <y>50</y>
         <width>36</width>
         <height>36</height>
        </rect>
@@ -390,11 +398,11 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QToolButton" name="toolButton_2">
+     <widget class="QToolButton" name="eraseButton">
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>30</y>
+        <y>50</y>
         <width>36</width>
         <height>36</height>
        </rect>
@@ -414,6 +422,281 @@
       </property>
       <property name="checkable">
        <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>221</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>状态</string>
+     </property>
+     <widget class="QWidget" name="horizontalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>16</number>
+       </property>
+       <item>
+        <widget class="QSpinBox" name="pos_x"/>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="pos_y"/>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="pos_z"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>45</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>坐标 (x, y, z)</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>比例</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="scaleSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>141</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::UpDownArrows</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
+      </property>
+      <property name="minimum">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>190</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>自适应比例</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>420</y>
+       <width>221</width>
+       <height>231</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>信息</string>
+     </property>
+     <widget class="QLabel" name="state_label">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>50</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>黑体</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>标记</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="state_label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>模式：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>笔刷大小：</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="penWidthSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>91</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun-ExtB</family>
+        <pointsize>9</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>200</number>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::DefaultStepType</enum>
+      </property>
+      <property name="value">
+       <number>5</number>
       </property>
      </widget>
     </widget>
