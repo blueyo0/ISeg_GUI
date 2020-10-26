@@ -119,27 +119,27 @@ class UpCatconv(nn.Module):
         return out
 
 
-# if __name__ == '__main__':
-#     import torch
-#     import numpy as np
-#     import random
-#     from torch.utils.data import DataLoader
-#     torch.manual_seed(123)
-#     torch.cuda.manual_seed(123)
-#     torch.cuda.manual_seed_all(123)
-#     np.random.seed(123)  # Numpy module.
-#     random.seed(123)  # Python random module.
-#     torch.manual_seed(123)
-#     torch.backends.cudnn.benchmark = False
-#     torch.backends.cudnn.deterministic = True
-#     torch.set_default_tensor_type('torch.FloatTensor')
+if __name__ == '__main__':
+    import torch
+    import numpy as np
+    import random
+    from torch.utils.data import DataLoader
+    torch.manual_seed(123)
+    torch.cuda.manual_seed(123)
+    torch.cuda.manual_seed_all(123)
+    np.random.seed(123)  # Numpy module.
+    random.seed(123)  # Python random module.
+    torch.manual_seed(123)
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    torch.set_default_tensor_type('torch.FloatTensor')
 
-#     x = torch.tensor(np.random.random([5, 2, 240, 240]), dtype=torch.float32)
-#     net_params = {'num_filters':32, 'num_channels':2, 'num_classes':2}
-#     model = Unet(net_params)
-#     model.eval()
+    x = torch.tensor(np.random.random([5, 2, 240, 240]), dtype=torch.float32)
+    net_params = {'num_filters':32, 'num_channels':2, 'num_classes':2}
+    model = Unet(net_params)
+    model.eval()
 
-#     with torch.no_grad():
-#         out1 = model(x)
-#         out2 = model(x)
-#         print(np.all(out1.cpu().numpy() == out2.cpu().numpy()))
+    with torch.no_grad():
+        out1 = model(x)
+        out2 = model(x)
+        print(np.all(out1.cpu().numpy() == out2.cpu().numpy()))

@@ -15,7 +15,8 @@ class BraTS_SLICE(Dataset):
         segname = os.path.join(dirname, "BraTS20_Training_{:03d}_seg.nii.gz".format(index+1))
         img, seg = nib.load(filename).get_fdata()[:,:,self.slice_no],\
                    nib.load(segname).get_fdata()[:,:,self.slice_no]
-        img, seg =  torch.from_numpy(img).unsqueeze(0), torch.from_numpy(seg).unsqueeze(0)
+        img, seg =  torch.from_numpy(img).float().unsqueeze(0),\
+                    torch.from_numpy(seg).float().unsqueeze(0)
         return img, seg
     def __len__(self):
         return self.data_num-1
