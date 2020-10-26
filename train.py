@@ -8,8 +8,14 @@ import time
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
-DATA_DIR = "D:/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData"
-MODEL_PATH = "D:/code/Model_File"
+import platform
+sysstr = platform.system()
+if(sysstr=="Windows"):
+    DATA_DIR = "D:/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData"
+    MODEL_PATH = "D:/code/Model_File"
+elif(sysstr=="Linux"):
+    DATA_DIR = "/opt/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData"
+    MODEL_PATH = "/opt/model"
 
 def diceCoeff(pred, gt, smooth=1, activation='sigmoid'):
     r""" computational formula：
@@ -75,13 +81,15 @@ def train_ch5(net, train_iter, test_iter, batch_size, optimizer, device, num_epo
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
             n += y.shape[0]
             batch_count += 1
+            print(batch_count)
         test_acc = evaluate_accuracy(test_iter, net)
         torch.save(model, os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(epoch)))
         print('epoch %d, loss %.4f, train acc %.3f, test acc %.3f, time %.1f sec'
               % (epoch + 1, train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start))
 
-# net_params = {'num_filters':32, 'num_channels':1, 'num_classes':1}
-# model = Unet(net_params)
+
+# MODE = 'train'
+MODE = 'test'
 
 data = BraTS_SLICE(DATA_DIR)
 train_size = int(0.8 * len(data))
@@ -90,18 +98,27 @@ train_dataset, test_dataset = torch.utils.data.random_split(data, [train_size, t
 train_loader = DataLoader(train_dataset, batch_size=5, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=5, shuffle=True) 
 
+# print(torch.cuda.device_count())
+# print(torch.cuda.current_device())
+# print(torch.cuda.get_device_name(0))
+if(MODE=='train'):
+    net_params = {'num_filters':32, 'num_channels':1, 'num_classes':1}
+    model = Unet(net_params)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    train_ch5(net=model, train_iter=train_loader, test_iter=test_loader, 
+            batch_size=5, optimizer=optimizer, device='cuda', num_epochs=1)
 
-# optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-# train_ch5(net=model, train_iter=train_loader, test_iter=test_loader, 
-#           batch_size=5, optimizer=optimizer, device='cuda', num_epochs=10)
+elif(MODE=='test'):
+    model = torch.load(os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(0)))
+    model.eval()
 
-model = torch.load(os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(9)))
-model.eval()
+    for img, seg in test_loader:
+        # with torch.no_grad():
+        #     pred = model(img.to("cuda"))
+        plt.imshow(img.cpu().detach().numpy()[0,0,:,:])
+        plt.show()
 
-for img, seg in test_loader:
-    with torch.no_grad():
-        pred = model(img.to("cuda"))
-    plt.imshow(pred.cpu().detach().numpy()[0,0,:,:])
-    plt.show()
+        plt.imshow(seg.cpu().detach().numpy()[0,0,:,:])
+        plt.show()
 
 
