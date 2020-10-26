@@ -13,9 +13,11 @@ sysstr = platform.system()
 if(sysstr=="Windows"):
     DATA_DIR = "D:/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData"
     MODEL_PATH = "D:/code/Model_File"
+    OUT_FILE = "D:/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData/training_data.h5"
 elif(sysstr=="Linux"):
     DATA_DIR = "/opt/data/private/why/BraTS2020/MICCAI_BraTS2020_TrainingData"
     MODEL_PATH = "/opt/data/private/why/model"
+    OUT_FILE = "/opt/data/private/why/BraTS2020/MICCAI_BraTS2020_TrainingData/training_data.h5"
 
 def diceCoeff(pred, gt, smooth=1, activation='sigmoid'):
     r""" computational formula：
@@ -90,14 +92,15 @@ def train_model(net, train_iter, test_iter, batch_size, optimizer, device, num_e
         print('epoch %d, loss %.4f, train acc %.3f, test acc %.3f, time %.1f sec'
               % (epoch + 1, train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start))
 
-
+MODE = 'preprocess'
 MODE = 'train'
 MODE = 'test'
 
 DEVICE = 'cuda'
 # DEVICE = 'cpu'
 
-data = BraTS_SLICE(DATA_DIR)
+# data = BraTS_SLICE(DATA_DIR)
+data = BraTS_SLICE_h5(OUT_FILE)
 train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
 train_dataset, test_dataset = torch.utils.data.random_split(data, [train_size, test_size])
@@ -138,7 +141,11 @@ elif(MODE=='test'):
 
         for i in range(5):
             max_dice = 0.0
+<<<<<<< HEAD
             max_threshold = 0.5
+=======
+            max_threshold = 0.1
+>>>>>>> 867673ca7e6af8b646641d91f8965a4cb2be9726
             # for threshold in np.arange(0.1, 0.7, 0.01):
             #     pred_copy = pred.copy()
             #     for x in np.nditer(pred_copy, op_flags=['readwrite']):
@@ -160,4 +167,8 @@ elif(MODE=='test'):
             plt.imshow(seg.cpu().detach().numpy()[i,0,:,:])
             plt.show()
 
-
+elif(MODE == 'preprocess'):
+    # preprocess_data_to_hdf5(DATA_DIR, OUT_FILE, (240, 240), 259)
+    f = tables.open_file(OUT_FILE, mode='r')
+    data = f.root.img[0]
+    f.close()
