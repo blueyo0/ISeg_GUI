@@ -1,0 +1,9 @@
+
+/home/small_dark/.vscode/extensions/ms-python.python-2020.9.114305/pythonFiles/lib/python/debugpy
+/_vendored/pydevd/_pydevd_bundle/pydevd_resolver.py:193: 
+UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. 
+Its .grad attribute won't be populated during autograd.backward(). 
+If you indeed want the gradient for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. 
+If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. 
+See github.com/pytorch/pytorch/pull/30531 for more informations.
+  attr = getattr(var, name)

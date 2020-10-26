@@ -14,8 +14,8 @@ if(sysstr=="Windows"):
     DATA_DIR = "D:/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData"
     MODEL_PATH = "D:/code/Model_File"
 elif(sysstr=="Linux"):
-    DATA_DIR = "/opt/dataset/BraTS2020/MICCAI_BraTS2020_TrainingData"
-    MODEL_PATH = "/opt/model"
+    DATA_DIR = "/opt/data/private/why/BraTS2020/MICCAI_BraTS2020_TrainingData"
+    MODEL_PATH = "/opt/data/private/why/model"
 
 def diceCoeff(pred, gt, smooth=1, activation='sigmoid'):
     r""" computational formula：
@@ -63,17 +63,20 @@ def evaluate_accuracy(data_iter, net, device=None):
             n += y.shape[0]
     return acc_sum / n
 
-def train_ch5(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
+def train_model(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs):
     net = net.to(device)
     print("training on ", device)
+    # loss = nn.MSELoss()
     loss = diceCoeff
     for epoch in range(num_epochs):
+        model.train()
         train_l_sum, train_acc_sum, n, batch_count, start = 0.0, 0.0, 0, 0, time.time()
         for X, y in train_iter:
             X = X.to(device)
             y = y.to(device)
             y_hat = net(X)
-            l = loss(y_hat, y)
+            y_hat = y_hat[:,0,:,:].unsqueeze(1)
+            l = 1-loss(y_hat, y)
             optimizer.zero_grad()
             l.backward()
             optimizer.step()
@@ -81,15 +84,18 @@ def train_ch5(net, train_iter, test_iter, batch_size, optimizer, device, num_epo
             train_acc_sum += (y_hat.argmax(dim=1) == y).sum().cpu().item()
             n += y.shape[0]
             batch_count += 1
-            print(batch_count)
+            print((u'\r'+str(batch_count)), end=' ')
         test_acc = evaluate_accuracy(test_iter, net)
         torch.save(model, os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(epoch)))
         print('epoch %d, loss %.4f, train acc %.3f, test acc %.3f, time %.1f sec'
               % (epoch + 1, train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start))
 
 
-# MODE = 'train'
-MODE = 'test'
+MODE = 'train'
+# MODE = 'test'
+
+DEVICE = 'cuda'
+# DEVICE = 'cpu'
 
 data = BraTS_SLICE(DATA_DIR)
 train_size = int(0.8 * len(data))
@@ -102,23 +108,56 @@ test_loader = DataLoader(test_dataset, batch_size=5, shuffle=True)
 # print(torch.cuda.current_device())
 # print(torch.cuda.get_device_name(0))
 if(MODE=='train'):
-    net_params = {'num_filters':32, 'num_channels':1, 'num_classes':1}
-    model = Unet(net_params)
+    num_classes = 3
+    net_params = {'num_filters':32, 'num_channels':1, 'num_classes':num_classes}
+    model = Unet(net_params).to(DEVICE)
+    # for img, seg in train_loader:
+    #     pred = model(img.to(DEVICE))
+    #     for ix in range(5):
+    #         for iy in range(num_classes):
+    #             plt.subplot(num_classes+1,5,ix+iy*5+1)
+    #             plt.imshow(pred.cpu().detach().numpy()[ix,iy,:,:])
+    #     for ix in range(5):
+    #         plt.subplot(num_classes+1,5,num_classes*5+1+ix)
+    #         plt.imshow(seg.cpu().detach().numpy()[ix,0,:,:])
+    #     plt.show()
+
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    train_ch5(net=model, train_iter=train_loader, test_iter=test_loader, 
-            batch_size=5, optimizer=optimizer, device='cuda', num_epochs=1)
+    train_model(net=model, train_iter=train_loader, test_iter=test_loader, 
+                batch_size=5, optimizer=optimizer, device=DEVICE, num_epochs=10)
 
 elif(MODE=='test'):
-    model = torch.load(os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(0)))
+    model = torch.load(os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(9)))
+    net_params = {'num_filters':32, 'num_channels':1, 'num_classes':3}
+    model = Unet(net_params).to(DEVICE)
     model.eval()
 
     for img, seg in test_loader:
-        # with torch.no_grad():
-        #     pred = model(img.to("cuda"))
-        plt.imshow(img.cpu().detach().numpy()[0,0,:,:])
-        plt.show()
+        with torch.no_grad():
+            pred = model(img.to(DEVICE)).cpu().detach().numpy()
 
-        plt.imshow(seg.cpu().detach().numpy()[0,0,:,:])
-        plt.show()
+        for i in range(5):
+            max_dice = 0.0
+            max_threshold = 0.1
+            for threshold in np.arange(0.1, 0.7, 0.01):
+                pred_copy = pred.copy()
+                for x in np.nditer(pred_copy, op_flags=['readwrite']):
+                    x[...]= 1.0 if(x<threshold) else 0.0
+                dice = diceCoeff(torch.from_numpy(pred_copy[0,0,:,:]), seg[0,0,:,:])
+                print(threshold, dice, end='\r')
+                if(dice > max_dice):
+                    max_threshold = threshold
+                
+
+            for x in np.nditer(pred, op_flags=['readwrite']):
+                x[...]= 1.0 if(x>max_threshold) else 0.0
+
+            plt.subplot(1,3,1)
+            plt.imshow(pred[i,0,:,:])
+            plt.subplot(1,3,2)
+            plt.imshow(img.cpu().detach().numpy()[i,0,:,:])
+            plt.subplot(1,3,3)
+            plt.imshow(seg.cpu().detach().numpy()[i,0,:,:])
+            plt.show()
 
 

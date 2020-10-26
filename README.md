@@ -16,3 +16,7 @@ PaintView 重写
 - [x] 处理scrollbar逻辑
 - [ ] 处理截图逻辑
 - [ ] 自适应缩放
+
+## 参考
+
+[BraTS-2020](https://github.com/akhanss/BraTS-2020)

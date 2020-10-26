@@ -134,10 +134,11 @@ if __name__ == '__main__':
     torch.backends.cudnn.deterministic = True
     torch.set_default_tensor_type('torch.FloatTensor')
 
-    x = torch.tensor(np.random.random([5, 2, 240, 240]), dtype=torch.float32)
+    # x = torch.tensor(np.random.random([5, 2, 240, 240]), dtype=torch.float32)
+    x = torch.tensor(np.zeros([5, 2, 240, 240]), dtype=torch.float32)
     net_params = {'num_filters':32, 'num_channels':2, 'num_classes':2}
     model = Unet(net_params)
-    model.eval()
+    # model.eval()
 
     with torch.no_grad():
         out1 = model(x)
