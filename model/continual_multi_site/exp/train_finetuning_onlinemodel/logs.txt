@@ -1,0 +1,1377 @@
+2020-10-22 11:28:48 Output path = ./exp/train_finetuning_onlinemodel
+2020-10-22 11:28:48 ============= Multi-Site Training Datasets
+2020-10-22 11:28:48 Creating training dataset in ./dataset/npz_split_data/ISBI/train with 326 slices in total.
+2020-10-22 11:28:48 Creating training dataset in ./dataset/npz_split_data/ISBI_1.5/train with 297 slices in total.
+2020-10-22 11:28:48 Creating training dataset in ./dataset/npz_split_data/I2CVB/train with 361 slices in total.
+2020-10-22 11:28:48 Creating training dataset in ./dataset/npz_split_data/UCL/train with 136 slices in total.
+2020-10-22 11:28:48 Creating training dataset in ./dataset/npz_split_data/BIDMC/train with 194 slices in total.
+2020-10-22 11:28:48 Creating training dataset in ./dataset/npz_split_data/HK/train with 121 slices in total.
+2020-10-22 11:28:48 ============= Multi-Site Testing Datasets
+2020-10-22 11:28:48 Creating testing dataset in ./dataset/npz_split_data/ISBI/test with 85 slices in total.
+2020-10-22 11:28:48 Creating testing dataset in ./dataset/npz_split_data/ISBI_1.5/test with 87 slices in total.
+2020-10-22 11:28:48 Creating testing dataset in ./dataset/npz_split_data/I2CVB/test with 107 slices in total.
+2020-10-22 11:28:48 Creating testing dataset in ./dataset/npz_split_data/UCL/test with 39 slices in total.
+2020-10-22 11:28:48 Creating testing dataset in ./dataset/npz_split_data/BIDMC/test with 60 slices in total.
+2020-10-22 11:28:48 Creating testing dataset in ./dataset/npz_split_data/HK/test with 36 slices in total.
+2020-10-22 11:28:52 ============= Train on ISBI
+2020-10-22 11:28:52 Reset optimizer.
+2020-10-22 11:29:21 Iteration 200 (lr-0.0010): loss_bce : 0.1632; loss_dice: 0.8734; loss: 0.5183; 
+2020-10-22 11:29:49 Iteration 400 (lr-0.0010): loss_bce : 0.1044; loss_dice: 0.7892; loss: 0.4468; 
+2020-10-22 11:30:18 Iteration 600 (lr-0.0010): loss_bce : 0.0487; loss_dice: 0.3099; loss: 0.1793; 
+2020-10-22 11:30:46 Iteration 800 (lr-0.0010): loss_bce : 0.0408; loss_dice: 0.2303; loss: 0.1355; 
+2020-10-22 11:31:15 Iteration 1000 (lr-0.0010): loss_bce : 0.0574; loss_dice: 0.3201; loss: 0.1887; 
+2020-10-22 11:31:21 ----------------------> val_dice on ISBI is 0.7076, on previous sites is {'ISBI': 0.7075807976206033}
+2020-10-22 11:31:21 ----------------------> cur_dice improved from 0.0000 to 0.7076
+2020-10-22 11:31:50 Iteration 1200 (lr-0.0009): loss_bce : 0.0689; loss_dice: 0.3725; loss: 0.2207; 
+2020-10-22 11:32:18 Iteration 1400 (lr-0.0009): loss_bce : 0.0541; loss_dice: 0.1795; loss: 0.1168; 
+2020-10-22 11:32:47 Iteration 1600 (lr-0.0009): loss_bce : 0.1721; loss_dice: 0.7448; loss: 0.4585; 
+2020-10-22 11:33:16 Iteration 1800 (lr-0.0009): loss_bce : 0.0719; loss_dice: 0.3109; loss: 0.1914; 
+2020-10-22 11:33:44 Iteration 2000 (lr-0.0009): loss_bce : 0.0686; loss_dice: 0.1862; loss: 0.1274; 
+2020-10-22 11:33:50 ----------------------> val_dice on ISBI is 0.6593, on previous sites is {'ISBI': 0.6592735316988954}
+2020-10-22 11:33:50 ----------------------> val_dice did not improved from 0.7076
+2020-10-22 11:33:50 Iteration 2000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_2000_curdice_0.6593_predice_0.6593.pth
+2020-10-22 11:34:19 Iteration 2200 (lr-0.0008): loss_bce : 0.0530; loss_dice: 0.2760; loss: 0.1645; 
+2020-10-22 11:34:48 Iteration 2400 (lr-0.0008): loss_bce : 0.0245; loss_dice: 0.1515; loss: 0.0880; 
+2020-10-22 11:35:16 Iteration 2600 (lr-0.0008): loss_bce : 0.0448; loss_dice: 0.2581; loss: 0.1515; 
+2020-10-22 11:35:45 Iteration 2800 (lr-0.0008): loss_bce : 0.0273; loss_dice: 0.1336; loss: 0.0805; 
+2020-10-22 11:36:14 Iteration 3000 (lr-0.0008): loss_bce : 0.0371; loss_dice: 0.1941; loss: 0.1156; 
+2020-10-22 11:36:20 ----------------------> val_dice on ISBI is 0.7057, on previous sites is {'ISBI': 0.7057331204386897}
+2020-10-22 11:36:20 ----------------------> val_dice did not improved from 0.7076
+2020-10-22 11:36:48 Iteration 3200 (lr-0.0007): loss_bce : 0.0425; loss_dice: 0.2157; loss: 0.1291; 
+2020-10-22 11:37:17 Iteration 3400 (lr-0.0007): loss_bce : 0.0281; loss_dice: 0.0960; loss: 0.0621; 
+2020-10-22 11:37:46 Iteration 3600 (lr-0.0007): loss_bce : 0.0317; loss_dice: 0.1495; loss: 0.0906; 
+2020-10-22 11:38:14 Iteration 3800 (lr-0.0007): loss_bce : 0.0152; loss_dice: 0.1046; loss: 0.0599; 
+2020-10-22 11:38:43 Iteration 4000 (lr-0.0007): loss_bce : 0.0166; loss_dice: 0.1326; loss: 0.0746; 
+2020-10-22 11:38:49 ----------------------> val_dice on ISBI is 0.7928, on previous sites is {'ISBI': 0.7928450736690902}
+2020-10-22 11:38:49 ----------------------> cur_dice improved from 0.7076 to 0.7928
+2020-10-22 11:38:49 Iteration 4000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_4000_curdice_0.7928_predice_0.7928.pth
+2020-10-22 11:39:18 Iteration 4200 (lr-0.0007): loss_bce : 0.0325; loss_dice: 0.2083; loss: 0.1204; 
+2020-10-22 11:39:47 Iteration 4400 (lr-0.0007): loss_bce : 0.0271; loss_dice: 0.0922; loss: 0.0596; 
+2020-10-22 11:40:15 Iteration 4600 (lr-0.0007): loss_bce : 0.0186; loss_dice: 0.1212; loss: 0.0699; 
+2020-10-22 11:40:44 Iteration 4800 (lr-0.0007): loss_bce : 0.0294; loss_dice: 0.1001; loss: 0.0648; 
+2020-10-22 11:41:13 Iteration 5000 (lr-0.0007): loss_bce : 0.0243; loss_dice: 0.1076; loss: 0.0659; 
+2020-10-22 11:41:19 ----------------------> val_dice on ISBI is 0.8273, on previous sites is {'ISBI': 0.8272507573338546}
+2020-10-22 11:41:19 ----------------------> cur_dice improved from 0.7928 to 0.8273
+2020-10-22 11:41:47 Iteration 5200 (lr-0.0006): loss_bce : 0.0189; loss_dice: 0.0717; loss: 0.0453; 
+2020-10-22 11:42:16 Iteration 5400 (lr-0.0006): loss_bce : 0.0142; loss_dice: 0.0714; loss: 0.0428; 
+2020-10-22 11:42:45 Iteration 5600 (lr-0.0006): loss_bce : 0.0285; loss_dice: 0.1237; loss: 0.0761; 
+2020-10-22 11:43:14 Iteration 5800 (lr-0.0006): loss_bce : 0.0207; loss_dice: 0.0934; loss: 0.0571; 
+2020-10-22 11:43:42 Iteration 6000 (lr-0.0006): loss_bce : 0.0243; loss_dice: 0.0959; loss: 0.0601; 
+2020-10-22 11:43:48 ----------------------> val_dice on ISBI is 0.8264, on previous sites is {'ISBI': 0.8264241599131488}
+2020-10-22 11:43:48 ----------------------> val_dice did not improved from 0.8273
+2020-10-22 11:43:48 Iteration 6000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_6000_curdice_0.8264_predice_0.8264.pth
+2020-10-22 11:44:17 Iteration 6200 (lr-0.0005): loss_bce : 0.0220; loss_dice: 0.0605; loss: 0.0412; 
+2020-10-22 11:44:46 Iteration 6400 (lr-0.0005): loss_bce : 0.0264; loss_dice: 0.1335; loss: 0.0800; 
+2020-10-22 11:45:14 Iteration 6600 (lr-0.0005): loss_bce : 0.0238; loss_dice: 0.0902; loss: 0.0570; 
+2020-10-22 11:45:43 Iteration 6800 (lr-0.0005): loss_bce : 0.0336; loss_dice: 0.1482; loss: 0.0909; 
+2020-10-22 11:46:11 Iteration 7000 (lr-0.0005): loss_bce : 0.0335; loss_dice: 0.0954; loss: 0.0645; 
+2020-10-22 11:46:17 ----------------------> val_dice on ISBI is 0.8434, on previous sites is {'ISBI': 0.8433722000720815}
+2020-10-22 11:46:18 ----------------------> cur_dice improved from 0.8273 to 0.8434
+2020-10-22 11:46:46 Iteration 7200 (lr-0.0005): loss_bce : 0.0227; loss_dice: 0.0712; loss: 0.0469; 
+2020-10-22 11:47:15 Iteration 7400 (lr-0.0005): loss_bce : 0.0106; loss_dice: 0.0887; loss: 0.0496; 
+2020-10-22 11:47:43 Iteration 7600 (lr-0.0005): loss_bce : 0.0300; loss_dice: 0.0720; loss: 0.0510; 
+2020-10-22 11:48:12 Iteration 7800 (lr-0.0005): loss_bce : 0.0164; loss_dice: 0.0935; loss: 0.0550; 
+2020-10-22 11:48:41 Iteration 8000 (lr-0.0005): loss_bce : 0.0148; loss_dice: 0.0957; loss: 0.0553; 
+2020-10-22 11:48:47 ----------------------> val_dice on ISBI is 0.8459, on previous sites is {'ISBI': 0.845941191814991}
+2020-10-22 11:48:47 ----------------------> cur_dice improved from 0.8434 to 0.8459
+2020-10-22 11:48:48 Iteration 8000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_8000_curdice_0.8459_predice_0.8459.pth
+2020-10-22 11:49:16 Iteration 8200 (lr-0.0004): loss_bce : 0.0115; loss_dice: 0.0670; loss: 0.0393; 
+2020-10-22 11:49:45 Iteration 8400 (lr-0.0004): loss_bce : 0.0110; loss_dice: 0.0717; loss: 0.0414; 
+2020-10-22 11:50:13 Iteration 8600 (lr-0.0004): loss_bce : 0.0156; loss_dice: 0.0634; loss: 0.0395; 
+2020-10-22 11:50:42 Iteration 8800 (lr-0.0004): loss_bce : 0.0289; loss_dice: 0.0678; loss: 0.0484; 
+2020-10-22 11:51:11 Iteration 9000 (lr-0.0004): loss_bce : 0.0181; loss_dice: 0.0529; loss: 0.0355; 
+2020-10-22 11:51:17 ----------------------> val_dice on ISBI is 0.8506, on previous sites is {'ISBI': 0.8505557425863928}
+2020-10-22 11:51:17 ----------------------> cur_dice improved from 0.8459 to 0.8506
+2020-10-22 11:51:46 Iteration 9200 (lr-0.0004): loss_bce : 0.0176; loss_dice: 0.0625; loss: 0.0401; 
+2020-10-22 11:52:14 Iteration 9400 (lr-0.0004): loss_bce : 0.0120; loss_dice: 0.0639; loss: 0.0380; 
+2020-10-22 11:52:43 Iteration 9600 (lr-0.0004): loss_bce : 0.0125; loss_dice: 0.0674; loss: 0.0400; 
+2020-10-22 11:53:12 Iteration 9800 (lr-0.0004): loss_bce : 0.0192; loss_dice: 0.0570; loss: 0.0381; 
+2020-10-22 11:53:40 Iteration 10000 (lr-0.0004): loss_bce : 0.0134; loss_dice: 0.0678; loss: 0.0406; 
+2020-10-22 11:53:46 ----------------------> val_dice on ISBI is 0.8528, on previous sites is {'ISBI': 0.852768772921973}
+2020-10-22 11:53:46 ----------------------> cur_dice improved from 0.8506 to 0.8528
+2020-10-22 11:53:46 Iteration 10000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_10000_curdice_0.8528_predice_0.8528.pth
+2020-10-22 11:54:15 Iteration 10200 (lr-0.0004): loss_bce : 0.0142; loss_dice: 0.0680; loss: 0.0411; 
+2020-10-22 11:54:44 Iteration 10400 (lr-0.0004): loss_bce : 0.0095; loss_dice: 0.0407; loss: 0.0251; 
+2020-10-22 11:55:13 Iteration 10600 (lr-0.0004): loss_bce : 0.0251; loss_dice: 0.0779; loss: 0.0515; 
+2020-10-22 11:55:41 Iteration 10800 (lr-0.0004): loss_bce : 0.0212; loss_dice: 0.1110; loss: 0.0661; 
+2020-10-22 11:56:10 Iteration 11000 (lr-0.0004): loss_bce : 0.0094; loss_dice: 0.0502; loss: 0.0298; 
+2020-10-22 11:56:16 ----------------------> val_dice on ISBI is 0.8573, on previous sites is {'ISBI': 0.8572506171573927}
+2020-10-22 11:56:16 ----------------------> cur_dice improved from 0.8528 to 0.8573
+2020-10-22 11:56:45 Iteration 11200 (lr-0.0003): loss_bce : 0.0128; loss_dice: 0.0553; loss: 0.0340; 
+2020-10-22 11:57:14 Iteration 11400 (lr-0.0003): loss_bce : 0.0197; loss_dice: 0.0928; loss: 0.0562; 
+2020-10-22 11:57:42 Iteration 11600 (lr-0.0003): loss_bce : 0.0163; loss_dice: 0.0806; loss: 0.0485; 
+2020-10-22 11:58:11 Iteration 11800 (lr-0.0003): loss_bce : 0.0092; loss_dice: 0.0495; loss: 0.0293; 
+2020-10-22 11:58:40 Iteration 12000 (lr-0.0003): loss_bce : 0.0113; loss_dice: 0.0587; loss: 0.0350; 
+2020-10-22 11:58:45 ----------------------> val_dice on ISBI is 0.8452, on previous sites is {'ISBI': 0.8452190158054925}
+2020-10-22 11:58:45 ----------------------> val_dice did not improved from 0.8573
+2020-10-22 11:58:46 Iteration 12000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_12000_curdice_0.8452_predice_0.8452.pth
+2020-10-22 11:59:14 Iteration 12200 (lr-0.0003): loss_bce : 0.0099; loss_dice: 0.0574; loss: 0.0336; 
+2020-10-22 11:59:43 Iteration 12400 (lr-0.0003): loss_bce : 0.0127; loss_dice: 0.0719; loss: 0.0423; 
+2020-10-22 12:00:11 Iteration 12600 (lr-0.0003): loss_bce : 0.0276; loss_dice: 0.1228; loss: 0.0752; 
+2020-10-22 12:00:40 Iteration 12800 (lr-0.0003): loss_bce : 0.0088; loss_dice: 0.0496; loss: 0.0292; 
+2020-10-22 12:01:09 Iteration 13000 (lr-0.0003): loss_bce : 0.0112; loss_dice: 0.0459; loss: 0.0286; 
+2020-10-22 12:01:15 ----------------------> val_dice on ISBI is 0.8527, on previous sites is {'ISBI': 0.8526937969937328}
+2020-10-22 12:01:15 ----------------------> val_dice did not improved from 0.8573
+2020-10-22 12:01:44 Iteration 13200 (lr-0.0003): loss_bce : 0.0079; loss_dice: 0.0544; loss: 0.0312; 
+2020-10-22 12:02:12 Iteration 13400 (lr-0.0003): loss_bce : 0.0158; loss_dice: 0.0522; loss: 0.0340; 
+2020-10-22 12:02:41 Iteration 13600 (lr-0.0003): loss_bce : 0.0125; loss_dice: 0.0618; loss: 0.0371; 
+2020-10-22 12:03:10 Iteration 13800 (lr-0.0003): loss_bce : 0.0070; loss_dice: 0.0432; loss: 0.0251; 
+2020-10-22 12:03:38 Iteration 14000 (lr-0.0003): loss_bce : 0.0169; loss_dice: 0.0586; loss: 0.0378; 
+2020-10-22 12:03:44 ----------------------> val_dice on ISBI is 0.8569, on previous sites is {'ISBI': 0.8569015860518224}
+2020-10-22 12:03:44 ----------------------> val_dice did not improved from 0.8573
+2020-10-22 12:03:44 Iteration 14000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_14000_curdice_0.8569_predice_0.8569.pth
+2020-10-22 12:04:13 Iteration 14200 (lr-0.0002): loss_bce : 0.0127; loss_dice: 0.0478; loss: 0.0303; 
+2020-10-22 12:04:42 Iteration 14400 (lr-0.0002): loss_bce : 0.0085; loss_dice: 0.0563; loss: 0.0324; 
+2020-10-22 12:05:11 Iteration 14600 (lr-0.0002): loss_bce : 0.0088; loss_dice: 0.0476; loss: 0.0282; 
+2020-10-22 12:05:39 Iteration 14800 (lr-0.0002): loss_bce : 0.0114; loss_dice: 0.0458; loss: 0.0286; 
+2020-10-22 12:06:08 Iteration 15000 (lr-0.0002): loss_bce : 0.0282; loss_dice: 0.0634; loss: 0.0458; 
+2020-10-22 12:06:14 ----------------------> val_dice on ISBI is 0.8598, on previous sites is {'ISBI': 0.8597929005354558}
+2020-10-22 12:06:14 ----------------------> cur_dice improved from 0.8573 to 0.8598
+2020-10-22 12:06:43 Iteration 15200 (lr-0.0002): loss_bce : 0.0085; loss_dice: 0.0590; loss: 0.0338; 
+2020-10-22 12:07:11 Iteration 15400 (lr-0.0002): loss_bce : 0.0107; loss_dice: 0.0574; loss: 0.0341; 
+2020-10-22 12:07:40 Iteration 15600 (lr-0.0002): loss_bce : 0.0136; loss_dice: 0.1043; loss: 0.0589; 
+2020-10-22 12:08:09 Iteration 15800 (lr-0.0002): loss_bce : 0.0150; loss_dice: 0.0404; loss: 0.0277; 
+2020-10-22 12:08:38 Iteration 16000 (lr-0.0002): loss_bce : 0.0080; loss_dice: 0.0714; loss: 0.0397; 
+2020-10-22 12:08:44 ----------------------> val_dice on ISBI is 0.8700, on previous sites is {'ISBI': 0.8699542482391198}
+2020-10-22 12:08:44 ----------------------> cur_dice improved from 0.8598 to 0.8700
+2020-10-22 12:08:44 Iteration 16000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_16000_curdice_0.8700_predice_0.8700.pth
+2020-10-22 12:09:12 Iteration 16200 (lr-0.0002): loss_bce : 0.0118; loss_dice: 0.0492; loss: 0.0305; 
+2020-10-22 12:09:41 Iteration 16400 (lr-0.0002): loss_bce : 0.0105; loss_dice: 0.0505; loss: 0.0305; 
+2020-10-22 12:10:10 Iteration 16600 (lr-0.0002): loss_bce : 0.0161; loss_dice: 0.0485; loss: 0.0323; 
+2020-10-22 12:10:38 Iteration 16800 (lr-0.0002): loss_bce : 0.0102; loss_dice: 0.0513; loss: 0.0308; 
+2020-10-22 12:11:07 Iteration 17000 (lr-0.0002): loss_bce : 0.0110; loss_dice: 0.0382; loss: 0.0246; 
+2020-10-22 12:11:13 ----------------------> val_dice on ISBI is 0.8621, on previous sites is {'ISBI': 0.8620834224835695}
+2020-10-22 12:11:13 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:11:42 Iteration 17200 (lr-0.0002): loss_bce : 0.0065; loss_dice: 0.0465; loss: 0.0265; 
+2020-10-22 12:12:10 Iteration 17400 (lr-0.0002): loss_bce : 0.0133; loss_dice: 0.0439; loss: 0.0286; 
+2020-10-22 12:12:39 Iteration 17600 (lr-0.0002): loss_bce : 0.0098; loss_dice: 0.0374; loss: 0.0236; 
+2020-10-22 12:13:08 Iteration 17800 (lr-0.0002): loss_bce : 0.0067; loss_dice: 0.0378; loss: 0.0222; 
+2020-10-22 12:13:36 Iteration 18000 (lr-0.0002): loss_bce : 0.0090; loss_dice: 0.0484; loss: 0.0287; 
+2020-10-22 12:13:42 ----------------------> val_dice on ISBI is 0.8579, on previous sites is {'ISBI': 0.8579183924243975}
+2020-10-22 12:13:42 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:13:42 Iteration 18000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_18000_curdice_0.8579_predice_0.8579.pth
+2020-10-22 12:14:11 Iteration 18200 (lr-0.0002): loss_bce : 0.0116; loss_dice: 0.1177; loss: 0.0646; 
+2020-10-22 12:14:40 Iteration 18400 (lr-0.0002): loss_bce : 0.0074; loss_dice: 0.0557; loss: 0.0316; 
+2020-10-22 12:15:08 Iteration 18600 (lr-0.0002): loss_bce : 0.0089; loss_dice: 0.0409; loss: 0.0249; 
+2020-10-22 12:15:37 Iteration 18800 (lr-0.0002): loss_bce : 0.0140; loss_dice: 0.0731; loss: 0.0435; 
+2020-10-22 12:16:06 Iteration 19000 (lr-0.0002): loss_bce : 0.0123; loss_dice: 0.0601; loss: 0.0362; 
+2020-10-22 12:16:12 ----------------------> val_dice on ISBI is 0.8605, on previous sites is {'ISBI': 0.8605009031577094}
+2020-10-22 12:16:12 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:16:40 Iteration 19200 (lr-0.0001): loss_bce : 0.0080; loss_dice: 0.0503; loss: 0.0292; 
+2020-10-22 12:17:09 Iteration 19400 (lr-0.0001): loss_bce : 0.0083; loss_dice: 0.0417; loss: 0.0250; 
+2020-10-22 12:17:38 Iteration 19600 (lr-0.0001): loss_bce : 0.0073; loss_dice: 0.0425; loss: 0.0249; 
+2020-10-22 12:18:06 Iteration 19800 (lr-0.0001): loss_bce : 0.0118; loss_dice: 0.0492; loss: 0.0305; 
+2020-10-22 12:18:35 Iteration 20000 (lr-0.0001): loss_bce : 0.0169; loss_dice: 0.0464; loss: 0.0316; 
+2020-10-22 12:18:41 ----------------------> val_dice on ISBI is 0.8640, on previous sites is {'ISBI': 0.8639591728427168}
+2020-10-22 12:18:41 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:18:41 Iteration 20000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_20000_curdice_0.8640_predice_0.8640.pth
+2020-10-22 12:19:10 Iteration 20200 (lr-0.0001): loss_bce : 0.0079; loss_dice: 0.0389; loss: 0.0234; 
+2020-10-22 12:19:38 Iteration 20400 (lr-0.0001): loss_bce : 0.0094; loss_dice: 0.0646; loss: 0.0370; 
+2020-10-22 12:20:07 Iteration 20600 (lr-0.0001): loss_bce : 0.0079; loss_dice: 0.0441; loss: 0.0260; 
+2020-10-22 12:20:36 Iteration 20800 (lr-0.0001): loss_bce : 0.0089; loss_dice: 0.0574; loss: 0.0331; 
+2020-10-22 12:21:05 Iteration 21000 (lr-0.0001): loss_bce : 0.0129; loss_dice: 0.0396; loss: 0.0262; 
+2020-10-22 12:21:11 ----------------------> val_dice on ISBI is 0.8568, on previous sites is {'ISBI': 0.8568097681347769}
+2020-10-22 12:21:11 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:21:39 Iteration 21200 (lr-0.0001): loss_bce : 0.0059; loss_dice: 0.0343; loss: 0.0201; 
+2020-10-22 12:22:08 Iteration 21400 (lr-0.0001): loss_bce : 0.0088; loss_dice: 0.0400; loss: 0.0244; 
+2020-10-22 12:22:36 Iteration 21600 (lr-0.0001): loss_bce : 0.0134; loss_dice: 0.0353; loss: 0.0244; 
+2020-10-22 12:23:05 Iteration 21800 (lr-0.0001): loss_bce : 0.0092; loss_dice: 0.0535; loss: 0.0314; 
+2020-10-22 12:23:34 Iteration 22000 (lr-0.0001): loss_bce : 0.0160; loss_dice: 0.0801; loss: 0.0480; 
+2020-10-22 12:23:40 ----------------------> val_dice on ISBI is 0.8494, on previous sites is {'ISBI': 0.8494236823338069}
+2020-10-22 12:23:40 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:23:40 Iteration 22000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_22000_curdice_0.8494_predice_0.8494.pth
+2020-10-22 12:24:08 Iteration 22200 (lr-0.0001): loss_bce : 0.0088; loss_dice: 0.0430; loss: 0.0259; 
+2020-10-22 12:24:37 Iteration 22400 (lr-0.0001): loss_bce : 0.0069; loss_dice: 0.0502; loss: 0.0285; 
+2020-10-22 12:25:06 Iteration 22600 (lr-0.0001): loss_bce : 0.0088; loss_dice: 0.0493; loss: 0.0291; 
+2020-10-22 12:25:34 Iteration 22800 (lr-0.0001): loss_bce : 0.0158; loss_dice: 0.0824; loss: 0.0491; 
+2020-10-22 12:26:03 Iteration 23000 (lr-0.0001): loss_bce : 0.0091; loss_dice: 0.0477; loss: 0.0284; 
+2020-10-22 12:26:09 ----------------------> val_dice on ISBI is 0.8627, on previous sites is {'ISBI': 0.8626981574272854}
+2020-10-22 12:26:09 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:26:37 Iteration 23200 (lr-0.0001): loss_bce : 0.0089; loss_dice: 0.0516; loss: 0.0302; 
+2020-10-22 12:27:06 Iteration 23400 (lr-0.0001): loss_bce : 0.0110; loss_dice: 0.0540; loss: 0.0325; 
+2020-10-22 12:27:35 Iteration 23600 (lr-0.0001): loss_bce : 0.0109; loss_dice: 0.0359; loss: 0.0234; 
+2020-10-22 12:28:04 Iteration 23800 (lr-0.0001): loss_bce : 0.0201; loss_dice: 0.0476; loss: 0.0338; 
+2020-10-22 12:28:32 Iteration 24000 (lr-0.0001): loss_bce : 0.0094; loss_dice: 0.0496; loss: 0.0295; 
+2020-10-22 12:28:38 ----------------------> val_dice on ISBI is 0.8670, on previous sites is {'ISBI': 0.8670311095194588}
+2020-10-22 12:28:38 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:28:39 Iteration 24000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_24000_curdice_0.8670_predice_0.8670.pth
+2020-10-22 12:29:07 Iteration 24200 (lr-0.0001): loss_bce : 0.0095; loss_dice: 0.0359; loss: 0.0227; 
+2020-10-22 12:29:36 Iteration 24400 (lr-0.0001): loss_bce : 0.0150; loss_dice: 0.0470; loss: 0.0310; 
+2020-10-22 12:30:04 Iteration 24600 (lr-0.0001): loss_bce : 0.0074; loss_dice: 0.0345; loss: 0.0209; 
+2020-10-22 12:30:33 Iteration 24800 (lr-0.0001): loss_bce : 0.0081; loss_dice: 0.0540; loss: 0.0311; 
+2020-10-22 12:31:02 Iteration 25000 (lr-0.0001): loss_bce : 0.0056; loss_dice: 0.0391; loss: 0.0223; 
+2020-10-22 12:31:08 ----------------------> val_dice on ISBI is 0.8637, on previous sites is {'ISBI': 0.8636827040810181}
+2020-10-22 12:31:08 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:31:36 Iteration 25200 (lr-0.0001): loss_bce : 0.0070; loss_dice: 0.0328; loss: 0.0199; 
+2020-10-22 12:32:05 Iteration 25400 (lr-0.0001): loss_bce : 0.0102; loss_dice: 0.0352; loss: 0.0227; 
+2020-10-22 12:32:34 Iteration 25600 (lr-0.0001): loss_bce : 0.0064; loss_dice: 0.0486; loss: 0.0275; 
+2020-10-22 12:33:02 Iteration 25800 (lr-0.0001): loss_bce : 0.0111; loss_dice: 0.0367; loss: 0.0239; 
+2020-10-22 12:33:31 Iteration 26000 (lr-0.0001): loss_bce : 0.0159; loss_dice: 0.0353; loss: 0.0256; 
+2020-10-22 12:33:37 ----------------------> val_dice on ISBI is 0.8679, on previous sites is {'ISBI': 0.8679272038560253}
+2020-10-22 12:33:37 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:33:37 Iteration 26000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_26000_curdice_0.8679_predice_0.8679.pth
+2020-10-22 12:34:06 Iteration 26200 (lr-0.0001): loss_bce : 0.0075; loss_dice: 0.0437; loss: 0.0256; 
+2020-10-22 12:34:35 Iteration 26400 (lr-0.0001): loss_bce : 0.0086; loss_dice: 0.0408; loss: 0.0247; 
+2020-10-22 12:35:03 Iteration 26600 (lr-0.0001): loss_bce : 0.0088; loss_dice: 0.0463; loss: 0.0275; 
+2020-10-22 12:35:45 Iteration 26800 (lr-0.0001): loss_bce : 0.0085; loss_dice: 0.0840; loss: 0.0463; 
+2020-10-22 12:36:14 Iteration 27000 (lr-0.0001): loss_bce : 0.0114; loss_dice: 0.0567; loss: 0.0340; 
+2020-10-22 12:36:20 ----------------------> val_dice on ISBI is 0.8633, on previous sites is {'ISBI': 0.8632968587765587}
+2020-10-22 12:36:20 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:36:49 Iteration 27200 (lr-0.0001): loss_bce : 0.0112; loss_dice: 0.0588; loss: 0.0350; 
+2020-10-22 12:37:17 Iteration 27400 (lr-0.0001): loss_bce : 0.0088; loss_dice: 0.0348; loss: 0.0218; 
+2020-10-22 12:37:46 Iteration 27600 (lr-0.0001): loss_bce : 0.0091; loss_dice: 0.0416; loss: 0.0253; 
+2020-10-22 12:38:15 Iteration 27800 (lr-0.0001): loss_bce : 0.0066; loss_dice: 0.0447; loss: 0.0257; 
+2020-10-22 12:38:43 Iteration 28000 (lr-0.0001): loss_bce : 0.0108; loss_dice: 0.0472; loss: 0.0290; 
+2020-10-22 12:38:49 ----------------------> val_dice on ISBI is 0.8636, on previous sites is {'ISBI': 0.8636085226903969}
+2020-10-22 12:38:49 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:38:50 Iteration 28000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_28000_curdice_0.8636_predice_0.8636.pth
+2020-10-22 12:39:18 Iteration 28200 (lr-0.0001): loss_bce : 0.0109; loss_dice: 0.0511; loss: 0.0310; 
+2020-10-22 12:39:47 Iteration 28400 (lr-0.0001): loss_bce : 0.0076; loss_dice: 0.0316; loss: 0.0196; 
+2020-10-22 12:40:15 Iteration 28600 (lr-0.0001): loss_bce : 0.0067; loss_dice: 0.0665; loss: 0.0366; 
+2020-10-22 12:40:44 Iteration 28800 (lr-0.0001): loss_bce : 0.0110; loss_dice: 0.0489; loss: 0.0299; 
+2020-10-22 12:41:13 Iteration 29000 (lr-0.0001): loss_bce : 0.0080; loss_dice: 0.0592; loss: 0.0336; 
+2020-10-22 12:41:19 ----------------------> val_dice on ISBI is 0.8554, on previous sites is {'ISBI': 0.8553676912279805}
+2020-10-22 12:41:19 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:41:48 Iteration 29200 (lr-0.0001): loss_bce : 0.0074; loss_dice: 0.0466; loss: 0.0270; 
+2020-10-22 12:42:16 Iteration 29400 (lr-0.0001): loss_bce : 0.0096; loss_dice: 0.0501; loss: 0.0299; 
+2020-10-22 12:42:45 Iteration 29600 (lr-0.0001): loss_bce : 0.0105; loss_dice: 0.0556; loss: 0.0330; 
+2020-10-22 12:43:14 Iteration 29800 (lr-0.0001): loss_bce : 0.0117; loss_dice: 0.0393; loss: 0.0255; 
+2020-10-22 12:43:42 Iteration 30000 (lr-0.0001): loss_bce : 0.0094; loss_dice: 0.0623; loss: 0.0359; 
+2020-10-22 12:43:48 ----------------------> val_dice on ISBI is 0.8669, on previous sites is {'ISBI': 0.8668985755322804}
+2020-10-22 12:43:48 ----------------------> val_dice did not improved from 0.8700
+2020-10-22 12:43:48 Iteration 30000: save model to ./exp/train_finetuning_onlinemodel/ISBI/step_30000_curdice_0.8669_predice_0.8669.pth
+2020-10-22 12:43:48 ============= Train on ISBI_1.5
+2020-10-22 12:43:48 Reset optimizer.
+2020-10-22 12:44:17 Iteration 200 (lr-0.0010): loss_bce : 0.0579; loss_dice: 0.1803; loss: 0.1191; 
+2020-10-22 12:44:46 Iteration 400 (lr-0.0010): loss_bce : 0.0585; loss_dice: 0.1366; loss: 0.0975; 
+2020-10-22 12:45:15 Iteration 600 (lr-0.0010): loss_bce : 0.0406; loss_dice: 0.1098; loss: 0.0752; 
+2020-10-22 12:45:44 Iteration 800 (lr-0.0010): loss_bce : 0.0419; loss_dice: 0.1032; loss: 0.0726; 
+2020-10-22 12:46:12 Iteration 1000 (lr-0.0010): loss_bce : 0.0384; loss_dice: 0.1168; loss: 0.0776; 
+2020-10-22 12:46:18 ----------------------> val_dice on ISBI_1.5 is 0.8267, on previous sites is {'ISBI': 0.4878646311375295, 'ISBI_1.5': 0.8266872935778395}
+2020-10-22 12:46:18 ----------------------> cur_dice improved from 0.0000 to 0.8267
+2020-10-22 12:46:47 Iteration 1200 (lr-0.0009): loss_bce : 0.0325; loss_dice: 0.1196; loss: 0.0760; 
+2020-10-22 12:47:16 Iteration 1400 (lr-0.0009): loss_bce : 0.0156; loss_dice: 0.0775; loss: 0.0465; 
+2020-10-22 12:47:45 Iteration 1600 (lr-0.0009): loss_bce : 0.0252; loss_dice: 0.1013; loss: 0.0632; 
+2020-10-22 12:48:13 Iteration 1800 (lr-0.0009): loss_bce : 0.0166; loss_dice: 0.0560; loss: 0.0363; 
+2020-10-22 12:48:42 Iteration 2000 (lr-0.0009): loss_bce : 0.0355; loss_dice: 0.0731; loss: 0.0543; 
+2020-10-22 12:48:48 ----------------------> val_dice on ISBI_1.5 is 0.8079, on previous sites is {'ISBI': 0.6227872692915098, 'ISBI_1.5': 0.8078730658882397}
+2020-10-22 12:48:48 ----------------------> val_dice did not improved from 0.8267
+2020-10-22 12:48:48 Iteration 2000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_2000_curdice_0.8079_predice_0.7153.pth
+2020-10-22 12:49:17 Iteration 2200 (lr-0.0008): loss_bce : 0.0255; loss_dice: 0.0670; loss: 0.0462; 
+2020-10-22 12:49:46 Iteration 2400 (lr-0.0008): loss_bce : 0.0240; loss_dice: 0.0838; loss: 0.0539; 
+2020-10-22 12:50:15 Iteration 2600 (lr-0.0008): loss_bce : 0.0164; loss_dice: 0.0712; loss: 0.0438; 
+2020-10-22 12:50:43 Iteration 2800 (lr-0.0008): loss_bce : 0.0132; loss_dice: 0.0451; loss: 0.0291; 
+2020-10-22 12:51:12 Iteration 3000 (lr-0.0008): loss_bce : 0.0240; loss_dice: 0.0814; loss: 0.0527; 
+2020-10-22 12:51:18 ----------------------> val_dice on ISBI_1.5 is 0.7915, on previous sites is {'ISBI': 0.4704489007669615, 'ISBI_1.5': 0.7915481577258564}
+2020-10-22 12:51:18 ----------------------> val_dice did not improved from 0.8267
+2020-10-22 12:51:47 Iteration 3200 (lr-0.0007): loss_bce : 0.0122; loss_dice: 0.0537; loss: 0.0330; 
+2020-10-22 12:52:15 Iteration 3400 (lr-0.0007): loss_bce : 0.0134; loss_dice: 0.0539; loss: 0.0337; 
+2020-10-22 12:52:44 Iteration 3600 (lr-0.0007): loss_bce : 0.0117; loss_dice: 0.0414; loss: 0.0265; 
+2020-10-22 12:53:13 Iteration 3800 (lr-0.0007): loss_bce : 0.0235; loss_dice: 0.0800; loss: 0.0517; 
+2020-10-22 12:53:42 Iteration 4000 (lr-0.0007): loss_bce : 0.0410; loss_dice: 0.1703; loss: 0.1056; 
+2020-10-22 12:53:48 ----------------------> val_dice on ISBI_1.5 is 0.8300, on previous sites is {'ISBI': 0.5130953765225003, 'ISBI_1.5': 0.8300455871741651}
+2020-10-22 12:53:48 ----------------------> cur_dice improved from 0.8267 to 0.8300
+2020-10-22 12:53:48 Iteration 4000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_4000_curdice_0.8300_predice_0.6716.pth
+2020-10-22 12:54:17 Iteration 4200 (lr-0.0007): loss_bce : 0.0085; loss_dice: 0.0532; loss: 0.0308; 
+2020-10-22 12:54:45 Iteration 4400 (lr-0.0007): loss_bce : 0.0187; loss_dice: 0.0796; loss: 0.0492; 
+2020-10-22 12:55:14 Iteration 4600 (lr-0.0007): loss_bce : 0.0103; loss_dice: 0.0431; loss: 0.0267; 
+2020-10-22 12:55:43 Iteration 4800 (lr-0.0007): loss_bce : 0.0189; loss_dice: 0.0804; loss: 0.0496; 
+2020-10-22 12:56:11 Iteration 5000 (lr-0.0007): loss_bce : 0.0133; loss_dice: 0.0484; loss: 0.0308; 
+2020-10-22 12:56:17 ----------------------> val_dice on ISBI_1.5 is 0.8271, on previous sites is {'ISBI': 0.5356928763044265, 'ISBI_1.5': 0.8270677427681089}
+2020-10-22 12:56:17 ----------------------> val_dice did not improved from 0.8300
+2020-10-22 12:56:46 Iteration 5200 (lr-0.0006): loss_bce : 0.0106; loss_dice: 0.0411; loss: 0.0258; 
+2020-10-22 12:57:15 Iteration 5400 (lr-0.0006): loss_bce : 0.0141; loss_dice: 0.0427; loss: 0.0284; 
+2020-10-22 12:57:44 Iteration 5600 (lr-0.0006): loss_bce : 0.0120; loss_dice: 0.0506; loss: 0.0313; 
+2020-10-22 12:58:13 Iteration 5800 (lr-0.0006): loss_bce : 0.0203; loss_dice: 0.0844; loss: 0.0524; 
+2020-10-22 12:58:41 Iteration 6000 (lr-0.0006): loss_bce : 0.0168; loss_dice: 0.0495; loss: 0.0332; 
+2020-10-22 12:58:47 ----------------------> val_dice on ISBI_1.5 is 0.8310, on previous sites is {'ISBI': 0.47978195406637614, 'ISBI_1.5': 0.8310470992998001}
+2020-10-22 12:58:47 ----------------------> cur_dice improved from 0.8300 to 0.8310
+2020-10-22 12:58:47 Iteration 6000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_6000_curdice_0.8310_predice_0.6554.pth
+2020-10-22 12:59:16 Iteration 6200 (lr-0.0005): loss_bce : 0.0215; loss_dice: 0.0678; loss: 0.0447; 
+2020-10-22 12:59:45 Iteration 6400 (lr-0.0005): loss_bce : 0.0072; loss_dice: 0.0412; loss: 0.0242; 
+2020-10-22 13:00:14 Iteration 6600 (lr-0.0005): loss_bce : 0.0105; loss_dice: 0.0493; loss: 0.0299; 
+2020-10-22 13:00:43 Iteration 6800 (lr-0.0005): loss_bce : 0.0160; loss_dice: 0.0526; loss: 0.0343; 
+2020-10-22 13:01:11 Iteration 7000 (lr-0.0005): loss_bce : 0.0089; loss_dice: 0.0373; loss: 0.0231; 
+2020-10-22 13:01:17 ----------------------> val_dice on ISBI_1.5 is 0.8155, on previous sites is {'ISBI': 0.5999466006422595, 'ISBI_1.5': 0.8155268878631862}
+2020-10-22 13:01:17 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:01:46 Iteration 7200 (lr-0.0005): loss_bce : 0.0118; loss_dice: 0.0482; loss: 0.0300; 
+2020-10-22 13:02:15 Iteration 7400 (lr-0.0005): loss_bce : 0.0117; loss_dice: 0.0564; loss: 0.0340; 
+2020-10-22 13:02:43 Iteration 7600 (lr-0.0005): loss_bce : 0.0072; loss_dice: 0.0400; loss: 0.0236; 
+2020-10-22 13:03:12 Iteration 7800 (lr-0.0005): loss_bce : 0.0139; loss_dice: 0.0515; loss: 0.0327; 
+2020-10-22 13:03:41 Iteration 8000 (lr-0.0005): loss_bce : 0.0209; loss_dice: 0.0450; loss: 0.0329; 
+2020-10-22 13:03:47 ----------------------> val_dice on ISBI_1.5 is 0.8155, on previous sites is {'ISBI': 0.5714057736960322, 'ISBI_1.5': 0.815474329438722}
+2020-10-22 13:03:47 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:03:47 Iteration 8000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_8000_curdice_0.8155_predice_0.6934.pth
+2020-10-22 13:04:16 Iteration 8200 (lr-0.0004): loss_bce : 0.0112; loss_dice: 0.0542; loss: 0.0327; 
+2020-10-22 13:04:45 Iteration 8400 (lr-0.0004): loss_bce : 0.0109; loss_dice: 0.0405; loss: 0.0257; 
+2020-10-22 13:05:13 Iteration 8600 (lr-0.0004): loss_bce : 0.0110; loss_dice: 0.0445; loss: 0.0277; 
+2020-10-22 13:05:42 Iteration 8800 (lr-0.0004): loss_bce : 0.0116; loss_dice: 0.0404; loss: 0.0260; 
+2020-10-22 13:06:11 Iteration 9000 (lr-0.0004): loss_bce : 0.0149; loss_dice: 0.0592; loss: 0.0370; 
+2020-10-22 13:06:17 ----------------------> val_dice on ISBI_1.5 is 0.8164, on previous sites is {'ISBI': 0.545038902075989, 'ISBI_1.5': 0.8163937454691625}
+2020-10-22 13:06:17 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:06:45 Iteration 9200 (lr-0.0004): loss_bce : 0.0137; loss_dice: 0.0686; loss: 0.0412; 
+2020-10-22 13:07:14 Iteration 9400 (lr-0.0004): loss_bce : 0.0094; loss_dice: 0.0384; loss: 0.0239; 
+2020-10-22 13:07:43 Iteration 9600 (lr-0.0004): loss_bce : 0.0085; loss_dice: 0.0460; loss: 0.0273; 
+2020-10-22 13:08:12 Iteration 9800 (lr-0.0004): loss_bce : 0.0089; loss_dice: 0.0419; loss: 0.0254; 
+2020-10-22 13:08:40 Iteration 10000 (lr-0.0004): loss_bce : 0.0096; loss_dice: 0.0391; loss: 0.0244; 
+2020-10-22 13:08:46 ----------------------> val_dice on ISBI_1.5 is 0.8129, on previous sites is {'ISBI': 0.5787679671349064, 'ISBI_1.5': 0.812948236130595}
+2020-10-22 13:08:46 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:08:46 Iteration 10000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_10000_curdice_0.8129_predice_0.6959.pth
+2020-10-22 13:09:15 Iteration 10200 (lr-0.0004): loss_bce : 0.0070; loss_dice: 0.0403; loss: 0.0237; 
+2020-10-22 13:09:44 Iteration 10400 (lr-0.0004): loss_bce : 0.0108; loss_dice: 0.0437; loss: 0.0273; 
+2020-10-22 13:10:13 Iteration 10600 (lr-0.0004): loss_bce : 0.0101; loss_dice: 0.0411; loss: 0.0256; 
+2020-10-22 13:10:41 Iteration 10800 (lr-0.0004): loss_bce : 0.0120; loss_dice: 0.0506; loss: 0.0313; 
+2020-10-22 13:11:10 Iteration 11000 (lr-0.0004): loss_bce : 0.0105; loss_dice: 0.0573; loss: 0.0339; 
+2020-10-22 13:11:16 ----------------------> val_dice on ISBI_1.5 is 0.8172, on previous sites is {'ISBI': 0.5523637201229352, 'ISBI_1.5': 0.8171547170605323}
+2020-10-22 13:11:16 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:11:45 Iteration 11200 (lr-0.0003): loss_bce : 0.0114; loss_dice: 0.0491; loss: 0.0302; 
+2020-10-22 13:12:13 Iteration 11400 (lr-0.0003): loss_bce : 0.0084; loss_dice: 0.0332; loss: 0.0208; 
+2020-10-22 13:12:42 Iteration 11600 (lr-0.0003): loss_bce : 0.0077; loss_dice: 0.0348; loss: 0.0213; 
+2020-10-22 13:13:11 Iteration 11800 (lr-0.0003): loss_bce : 0.0083; loss_dice: 0.0438; loss: 0.0260; 
+2020-10-22 13:13:40 Iteration 12000 (lr-0.0003): loss_bce : 0.0099; loss_dice: 0.0386; loss: 0.0242; 
+2020-10-22 13:13:46 ----------------------> val_dice on ISBI_1.5 is 0.8249, on previous sites is {'ISBI': 0.5025895863389357, 'ISBI_1.5': 0.8249226808695443}
+2020-10-22 13:13:46 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:13:46 Iteration 12000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_12000_curdice_0.8249_predice_0.6638.pth
+2020-10-22 13:14:15 Iteration 12200 (lr-0.0003): loss_bce : 0.0082; loss_dice: 0.0424; loss: 0.0253; 
+2020-10-22 13:14:43 Iteration 12400 (lr-0.0003): loss_bce : 0.0084; loss_dice: 0.0387; loss: 0.0236; 
+2020-10-22 13:15:12 Iteration 12600 (lr-0.0003): loss_bce : 0.0095; loss_dice: 0.0412; loss: 0.0254; 
+2020-10-22 13:15:41 Iteration 12800 (lr-0.0003): loss_bce : 0.0067; loss_dice: 0.0316; loss: 0.0192; 
+2020-10-22 13:16:10 Iteration 13000 (lr-0.0003): loss_bce : 0.0125; loss_dice: 0.0669; loss: 0.0397; 
+2020-10-22 13:16:16 ----------------------> val_dice on ISBI_1.5 is 0.8260, on previous sites is {'ISBI': 0.5491475682508357, 'ISBI_1.5': 0.8259747059558453}
+2020-10-22 13:16:16 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:16:44 Iteration 13200 (lr-0.0003): loss_bce : 0.0111; loss_dice: 0.0351; loss: 0.0231; 
+2020-10-22 13:17:13 Iteration 13400 (lr-0.0003): loss_bce : 0.0081; loss_dice: 0.0311; loss: 0.0196; 
+2020-10-22 13:17:42 Iteration 13600 (lr-0.0003): loss_bce : 0.0116; loss_dice: 0.0385; loss: 0.0250; 
+2020-10-22 13:18:11 Iteration 13800 (lr-0.0003): loss_bce : 0.0078; loss_dice: 0.0373; loss: 0.0226; 
+2020-10-22 13:18:40 Iteration 14000 (lr-0.0003): loss_bce : 0.0146; loss_dice: 0.0420; loss: 0.0283; 
+2020-10-22 13:18:45 ----------------------> val_dice on ISBI_1.5 is 0.8250, on previous sites is {'ISBI': 0.5607291953735277, 'ISBI_1.5': 0.825036136166883}
+2020-10-22 13:18:45 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:18:46 Iteration 14000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_14000_curdice_0.8250_predice_0.6929.pth
+2020-10-22 13:19:14 Iteration 14200 (lr-0.0002): loss_bce : 0.0158; loss_dice: 0.0545; loss: 0.0351; 
+2020-10-22 13:19:43 Iteration 14400 (lr-0.0002): loss_bce : 0.0094; loss_dice: 0.0386; loss: 0.0240; 
+2020-10-22 13:20:12 Iteration 14600 (lr-0.0002): loss_bce : 0.0071; loss_dice: 0.0293; loss: 0.0182; 
+2020-10-22 13:20:40 Iteration 14800 (lr-0.0002): loss_bce : 0.0085; loss_dice: 0.0323; loss: 0.0204; 
+2020-10-22 13:21:09 Iteration 15000 (lr-0.0002): loss_bce : 0.0104; loss_dice: 0.0365; loss: 0.0234; 
+2020-10-22 13:21:15 ----------------------> val_dice on ISBI_1.5 is 0.8211, on previous sites is {'ISBI': 0.5180943269928746, 'ISBI_1.5': 0.821068274012089}
+2020-10-22 13:21:15 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:21:44 Iteration 15200 (lr-0.0002): loss_bce : 0.0095; loss_dice: 0.0320; loss: 0.0208; 
+2020-10-22 13:22:13 Iteration 15400 (lr-0.0002): loss_bce : 0.0085; loss_dice: 0.0281; loss: 0.0183; 
+2020-10-22 13:22:42 Iteration 15600 (lr-0.0002): loss_bce : 0.0101; loss_dice: 0.0385; loss: 0.0243; 
+2020-10-22 13:23:10 Iteration 15800 (lr-0.0002): loss_bce : 0.0074; loss_dice: 0.0348; loss: 0.0211; 
+2020-10-22 13:23:39 Iteration 16000 (lr-0.0002): loss_bce : 0.0099; loss_dice: 0.0522; loss: 0.0310; 
+2020-10-22 13:23:45 ----------------------> val_dice on ISBI_1.5 is 0.8150, on previous sites is {'ISBI': 0.5878843036553448, 'ISBI_1.5': 0.8149871321355658}
+2020-10-22 13:23:45 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:23:45 Iteration 16000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_16000_curdice_0.8150_predice_0.7014.pth
+2020-10-22 13:24:14 Iteration 16200 (lr-0.0002): loss_bce : 0.0087; loss_dice: 0.0412; loss: 0.0250; 
+2020-10-22 13:24:43 Iteration 16400 (lr-0.0002): loss_bce : 0.0145; loss_dice: 0.0465; loss: 0.0305; 
+2020-10-22 13:25:12 Iteration 16600 (lr-0.0002): loss_bce : 0.0098; loss_dice: 0.0304; loss: 0.0201; 
+2020-10-22 13:25:40 Iteration 16800 (lr-0.0002): loss_bce : 0.0097; loss_dice: 0.0428; loss: 0.0263; 
+2020-10-22 13:26:09 Iteration 17000 (lr-0.0002): loss_bce : 0.0081; loss_dice: 0.0268; loss: 0.0175; 
+2020-10-22 13:26:15 ----------------------> val_dice on ISBI_1.5 is 0.8271, on previous sites is {'ISBI': 0.5329358759285447, 'ISBI_1.5': 0.8271397574104018}
+2020-10-22 13:26:15 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:26:44 Iteration 17200 (lr-0.0002): loss_bce : 0.0082; loss_dice: 0.0307; loss: 0.0195; 
+2020-10-22 13:27:12 Iteration 17400 (lr-0.0002): loss_bce : 0.0088; loss_dice: 0.0263; loss: 0.0176; 
+2020-10-22 13:27:41 Iteration 17600 (lr-0.0002): loss_bce : 0.0081; loss_dice: 0.0346; loss: 0.0213; 
+2020-10-22 13:28:10 Iteration 17800 (lr-0.0002): loss_bce : 0.0106; loss_dice: 0.0356; loss: 0.0231; 
+2020-10-22 13:28:39 Iteration 18000 (lr-0.0002): loss_bce : 0.0082; loss_dice: 0.0314; loss: 0.0198; 
+2020-10-22 13:28:45 ----------------------> val_dice on ISBI_1.5 is 0.8288, on previous sites is {'ISBI': 0.5044188945094544, 'ISBI_1.5': 0.8288405180997088}
+2020-10-22 13:28:45 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:28:45 Iteration 18000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_18000_curdice_0.8288_predice_0.6666.pth
+2020-10-22 13:29:14 Iteration 18200 (lr-0.0002): loss_bce : 0.0110; loss_dice: 0.0656; loss: 0.0383; 
+2020-10-22 13:29:42 Iteration 18400 (lr-0.0002): loss_bce : 0.0125; loss_dice: 0.0555; loss: 0.0340; 
+2020-10-22 13:30:11 Iteration 18600 (lr-0.0002): loss_bce : 0.0082; loss_dice: 0.0301; loss: 0.0191; 
+2020-10-22 13:30:40 Iteration 18800 (lr-0.0002): loss_bce : 0.0151; loss_dice: 0.0421; loss: 0.0286; 
+2020-10-22 13:31:09 Iteration 19000 (lr-0.0002): loss_bce : 0.0076; loss_dice: 0.0285; loss: 0.0181; 
+2020-10-22 13:31:15 ----------------------> val_dice on ISBI_1.5 is 0.8245, on previous sites is {'ISBI': 0.5322228917005785, 'ISBI_1.5': 0.824519209867386}
+2020-10-22 13:31:15 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:31:44 Iteration 19200 (lr-0.0001): loss_bce : 0.0082; loss_dice: 0.0320; loss: 0.0201; 
+2020-10-22 13:32:23 Iteration 19400 (lr-0.0001): loss_bce : 0.0107; loss_dice: 0.0575; loss: 0.0341; 
+2020-10-22 13:33:03 Iteration 19600 (lr-0.0001): loss_bce : 0.0085; loss_dice: 0.0349; loss: 0.0217; 
+2020-10-22 13:33:42 Iteration 19800 (lr-0.0001): loss_bce : 0.0073; loss_dice: 0.0396; loss: 0.0234; 
+2020-10-22 13:34:21 Iteration 20000 (lr-0.0001): loss_bce : 0.0103; loss_dice: 0.0438; loss: 0.0271; 
+2020-10-22 13:34:29 ----------------------> val_dice on ISBI_1.5 is 0.8163, on previous sites is {'ISBI': 0.5635207832136161, 'ISBI_1.5': 0.8163224897366096}
+2020-10-22 13:34:29 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:34:29 Iteration 20000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_20000_curdice_0.8163_predice_0.6899.pth
+2020-10-22 13:35:07 Iteration 20200 (lr-0.0001): loss_bce : 0.0078; loss_dice: 0.0332; loss: 0.0205; 
+2020-10-22 13:35:46 Iteration 20400 (lr-0.0001): loss_bce : 0.0095; loss_dice: 0.0482; loss: 0.0288; 
+2020-10-22 13:36:25 Iteration 20600 (lr-0.0001): loss_bce : 0.0043; loss_dice: 0.0296; loss: 0.0169; 
+2020-10-22 13:37:05 Iteration 20800 (lr-0.0001): loss_bce : 0.0101; loss_dice: 0.0461; loss: 0.0281; 
+2020-10-22 13:37:43 Iteration 21000 (lr-0.0001): loss_bce : 0.0057; loss_dice: 0.0269; loss: 0.0163; 
+2020-10-22 13:37:51 ----------------------> val_dice on ISBI_1.5 is 0.8196, on previous sites is {'ISBI': 0.5058022535091241, 'ISBI_1.5': 0.8195922430714213}
+2020-10-22 13:37:51 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:38:30 Iteration 21200 (lr-0.0001): loss_bce : 0.0117; loss_dice: 0.0438; loss: 0.0277; 
+2020-10-22 13:39:09 Iteration 21400 (lr-0.0001): loss_bce : 0.0104; loss_dice: 0.0333; loss: 0.0219; 
+2020-10-22 13:39:47 Iteration 21600 (lr-0.0001): loss_bce : 0.0077; loss_dice: 0.0324; loss: 0.0201; 
+2020-10-22 13:40:27 Iteration 21800 (lr-0.0001): loss_bce : 0.0086; loss_dice: 0.0361; loss: 0.0224; 
+2020-10-22 13:41:06 Iteration 22000 (lr-0.0001): loss_bce : 0.0067; loss_dice: 0.0367; loss: 0.0217; 
+2020-10-22 13:41:14 ----------------------> val_dice on ISBI_1.5 is 0.8186, on previous sites is {'ISBI': 0.5522894441448395, 'ISBI_1.5': 0.8185528380217031}
+2020-10-22 13:41:14 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:41:14 Iteration 22000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_22000_curdice_0.8186_predice_0.6854.pth
+2020-10-22 13:41:53 Iteration 22200 (lr-0.0001): loss_bce : 0.0082; loss_dice: 0.0332; loss: 0.0207; 
+2020-10-22 13:42:31 Iteration 22400 (lr-0.0001): loss_bce : 0.0086; loss_dice: 0.0336; loss: 0.0211; 
+2020-10-22 13:43:11 Iteration 22600 (lr-0.0001): loss_bce : 0.0076; loss_dice: 0.0300; loss: 0.0188; 
+2020-10-22 13:43:49 Iteration 22800 (lr-0.0001): loss_bce : 0.0091; loss_dice: 0.0265; loss: 0.0178; 
+2020-10-22 13:44:27 Iteration 23000 (lr-0.0001): loss_bce : 0.0079; loss_dice: 0.0359; loss: 0.0219; 
+2020-10-22 13:44:35 ----------------------> val_dice on ISBI_1.5 is 0.8202, on previous sites is {'ISBI': 0.5395554645067212, 'ISBI_1.5': 0.8202030762576209}
+2020-10-22 13:44:35 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:45:13 Iteration 23200 (lr-0.0001): loss_bce : 0.0079; loss_dice: 0.0287; loss: 0.0183; 
+2020-10-22 13:45:52 Iteration 23400 (lr-0.0001): loss_bce : 0.0073; loss_dice: 0.0502; loss: 0.0288; 
+2020-10-22 13:46:31 Iteration 23600 (lr-0.0001): loss_bce : 0.0071; loss_dice: 0.0341; loss: 0.0206; 
+2020-10-22 13:47:11 Iteration 23800 (lr-0.0001): loss_bce : 0.0071; loss_dice: 0.0304; loss: 0.0187; 
+2020-10-22 13:47:49 Iteration 24000 (lr-0.0001): loss_bce : 0.0081; loss_dice: 0.0327; loss: 0.0204; 
+2020-10-22 13:47:57 ----------------------> val_dice on ISBI_1.5 is 0.8173, on previous sites is {'ISBI': 0.5217253742120549, 'ISBI_1.5': 0.8172832018361573}
+2020-10-22 13:47:57 ----------------------> val_dice did not improved from 0.8310
+2020-10-22 13:47:57 Iteration 24000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_24000_curdice_0.8173_predice_0.6695.pth
+2020-10-22 13:48:36 Iteration 24200 (lr-0.0001): loss_bce : 0.0090; loss_dice: 0.0318; loss: 0.0204; 
+2020-10-22 13:49:14 Iteration 24400 (lr-0.0001): loss_bce : 0.0121; loss_dice: 0.0361; loss: 0.0241; 
+2020-10-22 13:49:53 Iteration 24600 (lr-0.0001): loss_bce : 0.0068; loss_dice: 0.0275; loss: 0.0172; 
+2020-10-22 13:50:33 Iteration 24800 (lr-0.0001): loss_bce : 0.0080; loss_dice: 0.0289; loss: 0.0185; 
+2020-10-22 13:51:11 Iteration 25000 (lr-0.0001): loss_bce : 0.0089; loss_dice: 0.0369; loss: 0.0229; 
+2020-10-22 13:51:19 ----------------------> val_dice on ISBI_1.5 is 0.8315, on previous sites is {'ISBI': 0.5379633697127829, 'ISBI_1.5': 0.8315241704698352}
+2020-10-22 13:51:19 ----------------------> cur_dice improved from 0.8310 to 0.8315
+2020-10-22 13:51:58 Iteration 25200 (lr-0.0001): loss_bce : 0.0070; loss_dice: 0.0344; loss: 0.0207; 
+2020-10-22 13:52:37 Iteration 25400 (lr-0.0001): loss_bce : 0.0088; loss_dice: 0.0391; loss: 0.0239; 
+2020-10-22 13:53:16 Iteration 25600 (lr-0.0001): loss_bce : 0.0082; loss_dice: 0.0331; loss: 0.0207; 
+2020-10-22 13:53:55 Iteration 25800 (lr-0.0001): loss_bce : 0.0068; loss_dice: 0.0226; loss: 0.0147; 
+2020-10-22 13:54:34 Iteration 26000 (lr-0.0001): loss_bce : 0.0071; loss_dice: 0.0415; loss: 0.0243; 
+2020-10-22 13:54:41 ----------------------> val_dice on ISBI_1.5 is 0.8256, on previous sites is {'ISBI': 0.5166705640405916, 'ISBI_1.5': 0.8256213957621911}
+2020-10-22 13:54:41 ----------------------> val_dice did not improved from 0.8315
+2020-10-22 13:54:41 Iteration 26000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_26000_curdice_0.8256_predice_0.6711.pth
+2020-10-22 13:55:20 Iteration 26200 (lr-0.0001): loss_bce : 0.0188; loss_dice: 0.0633; loss: 0.0410; 
+2020-10-22 13:55:59 Iteration 26400 (lr-0.0001): loss_bce : 0.0087; loss_dice: 0.0346; loss: 0.0217; 
+2020-10-22 13:56:38 Iteration 26600 (lr-0.0001): loss_bce : 0.0162; loss_dice: 0.0596; loss: 0.0379; 
+2020-10-22 13:57:17 Iteration 26800 (lr-0.0001): loss_bce : 0.0114; loss_dice: 0.0309; loss: 0.0211; 
+2020-10-22 13:57:56 Iteration 27000 (lr-0.0001): loss_bce : 0.0092; loss_dice: 0.0322; loss: 0.0207; 
+2020-10-22 13:58:04 ----------------------> val_dice on ISBI_1.5 is 0.8178, on previous sites is {'ISBI': 0.5375780428599148, 'ISBI_1.5': 0.8178144996030147}
+2020-10-22 13:58:04 ----------------------> val_dice did not improved from 0.8315
+2020-10-22 13:58:43 Iteration 27200 (lr-0.0001): loss_bce : 0.0091; loss_dice: 0.0366; loss: 0.0229; 
+2020-10-22 13:59:22 Iteration 27400 (lr-0.0001): loss_bce : 0.0066; loss_dice: 0.0374; loss: 0.0220; 
+2020-10-22 14:00:01 Iteration 27600 (lr-0.0001): loss_bce : 0.0083; loss_dice: 0.0354; loss: 0.0219; 
+2020-10-22 14:00:40 Iteration 27800 (lr-0.0001): loss_bce : 0.0075; loss_dice: 0.0247; loss: 0.0161; 
+2020-10-22 14:01:19 Iteration 28000 (lr-0.0001): loss_bce : 0.0070; loss_dice: 0.0246; loss: 0.0158; 
+2020-10-22 14:01:26 ----------------------> val_dice on ISBI_1.5 is 0.8176, on previous sites is {'ISBI': 0.5440652883806875, 'ISBI_1.5': 0.8176418409534182}
+2020-10-22 14:01:26 ----------------------> val_dice did not improved from 0.8315
+2020-10-22 14:01:27 Iteration 28000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_28000_curdice_0.8176_predice_0.6809.pth
+2020-10-22 14:02:05 Iteration 28200 (lr-0.0001): loss_bce : 0.0098; loss_dice: 0.0385; loss: 0.0241; 
+2020-10-22 14:02:44 Iteration 28400 (lr-0.0001): loss_bce : 0.0083; loss_dice: 0.0262; loss: 0.0173; 
+2020-10-22 14:03:23 Iteration 28600 (lr-0.0001): loss_bce : 0.0089; loss_dice: 0.0338; loss: 0.0214; 
+2020-10-22 14:04:02 Iteration 28800 (lr-0.0001): loss_bce : 0.0070; loss_dice: 0.0380; loss: 0.0225; 
+2020-10-22 14:04:39 Iteration 29000 (lr-0.0001): loss_bce : 0.0075; loss_dice: 0.0300; loss: 0.0187; 
+2020-10-22 14:04:47 ----------------------> val_dice on ISBI_1.5 is 0.8139, on previous sites is {'ISBI': 0.5295502886874718, 'ISBI_1.5': 0.8138851475067085}
+2020-10-22 14:04:47 ----------------------> val_dice did not improved from 0.8315
+2020-10-22 14:05:26 Iteration 29200 (lr-0.0001): loss_bce : 0.0071; loss_dice: 0.0300; loss: 0.0185; 
+2020-10-22 14:06:05 Iteration 29400 (lr-0.0001): loss_bce : 0.0070; loss_dice: 0.0402; loss: 0.0236; 
+2020-10-22 14:06:44 Iteration 29600 (lr-0.0001): loss_bce : 0.0094; loss_dice: 0.0316; loss: 0.0205; 
+2020-10-22 14:07:23 Iteration 29800 (lr-0.0001): loss_bce : 0.0058; loss_dice: 0.0285; loss: 0.0172; 
+2020-10-22 14:08:02 Iteration 30000 (lr-0.0001): loss_bce : 0.0071; loss_dice: 0.0323; loss: 0.0197; 
+2020-10-22 14:08:09 ----------------------> val_dice on ISBI_1.5 is 0.8221, on previous sites is {'ISBI': 0.5535587170420554, 'ISBI_1.5': 0.8220707237173196}
+2020-10-22 14:08:09 ----------------------> val_dice did not improved from 0.8315
+2020-10-22 14:08:09 Iteration 30000: save model to ./exp/train_finetuning_onlinemodel/ISBI_1.5/step_30000_curdice_0.8221_predice_0.6878.pth
+2020-10-22 14:08:09 ============= Train on I2CVB
+2020-10-22 14:08:09 Reset optimizer.
+2020-10-22 14:08:48 Iteration 200 (lr-0.0010): loss_bce : 0.0346; loss_dice: 0.1526; loss: 0.0936; 
+2020-10-22 14:09:27 Iteration 400 (lr-0.0010): loss_bce : 0.0236; loss_dice: 0.1189; loss: 0.0712; 
+2020-10-22 14:10:06 Iteration 600 (lr-0.0010): loss_bce : 0.0355; loss_dice: 0.1990; loss: 0.1173; 
+2020-10-22 14:10:44 Iteration 800 (lr-0.0010): loss_bce : 0.0219; loss_dice: 0.0909; loss: 0.0564; 
+2020-10-22 14:11:23 Iteration 1000 (lr-0.0010): loss_bce : 0.0209; loss_dice: 0.1000; loss: 0.0605; 
+2020-10-22 14:11:30 ----------------------> val_dice on I2CVB is 0.3633, on previous sites is {'ISBI': 0.2414140604955828, 'ISBI_1.5': 0.023888536622441555, 'I2CVB': 0.3632730522915121}
+2020-10-22 14:11:30 ----------------------> cur_dice improved from 0.0000 to 0.3633
+2020-10-22 14:12:09 Iteration 1200 (lr-0.0009): loss_bce : 0.0221; loss_dice: 0.1203; loss: 0.0712; 
+2020-10-22 14:12:48 Iteration 1400 (lr-0.0009): loss_bce : 0.0287; loss_dice: 0.1558; loss: 0.0923; 
+2020-10-22 14:13:27 Iteration 1600 (lr-0.0009): loss_bce : 0.0110; loss_dice: 0.0878; loss: 0.0494; 
+2020-10-22 14:14:05 Iteration 1800 (lr-0.0009): loss_bce : 0.0143; loss_dice: 0.1031; loss: 0.0587; 
+2020-10-22 14:14:44 Iteration 2000 (lr-0.0009): loss_bce : 0.0199; loss_dice: 0.1270; loss: 0.0735; 
+2020-10-22 14:14:51 ----------------------> val_dice on I2CVB is 0.8026, on previous sites is {'ISBI': 0.23501225879703994, 'ISBI_1.5': 0.04475835534087916, 'I2CVB': 0.802598254419602}
+2020-10-22 14:14:52 ----------------------> cur_dice improved from 0.3633 to 0.8026
+2020-10-22 14:14:52 Iteration 2000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_2000_curdice_0.8026_predice_0.3608.pth
+2020-10-22 14:15:30 Iteration 2200 (lr-0.0008): loss_bce : 0.0140; loss_dice: 0.0765; loss: 0.0452; 
+2020-10-22 14:16:09 Iteration 2400 (lr-0.0008): loss_bce : 0.0167; loss_dice: 0.0796; loss: 0.0481; 
+2020-10-22 14:16:48 Iteration 2600 (lr-0.0008): loss_bce : 0.1181; loss_dice: 0.7925; loss: 0.4553; 
+2020-10-22 14:17:27 Iteration 2800 (lr-0.0008): loss_bce : 0.0993; loss_dice: 0.3597; loss: 0.2295; 
+2020-10-22 14:18:06 Iteration 3000 (lr-0.0008): loss_bce : 0.0608; loss_dice: 0.2542; loss: 0.1575; 
+2020-10-22 14:18:13 ----------------------> val_dice on I2CVB is 0.0833, on previous sites is {'ISBI': 0.09410857082771779, 'ISBI_1.5': 0.0005533642936171147, 'I2CVB': 0.08333054623221543}
+2020-10-22 14:18:13 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:18:51 Iteration 3200 (lr-0.0007): loss_bce : 0.0235; loss_dice: 0.1269; loss: 0.0752; 
+2020-10-22 14:19:29 Iteration 3400 (lr-0.0007): loss_bce : 0.0429; loss_dice: 0.2442; loss: 0.1436; 
+2020-10-22 14:20:08 Iteration 3600 (lr-0.0007): loss_bce : 0.0330; loss_dice: 0.1796; loss: 0.1063; 
+2020-10-22 14:20:47 Iteration 3800 (lr-0.0007): loss_bce : 0.0214; loss_dice: 0.1719; loss: 0.0966; 
+2020-10-22 14:21:26 Iteration 4000 (lr-0.0007): loss_bce : 0.0419; loss_dice: 0.2337; loss: 0.1378; 
+2020-10-22 14:21:34 ----------------------> val_dice on I2CVB is 0.5852, on previous sites is {'ISBI': 0.22194003289912254, 'ISBI_1.5': 0.04263379874731554, 'I2CVB': 0.5851675411677568}
+2020-10-22 14:21:34 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:21:34 Iteration 4000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_4000_curdice_0.5852_predice_0.2832.pth
+2020-10-22 14:22:13 Iteration 4200 (lr-0.0007): loss_bce : 0.1667; loss_dice: 0.8259; loss: 0.4963; 
+2020-10-22 14:22:52 Iteration 4400 (lr-0.0007): loss_bce : 0.1866; loss_dice: 0.8928; loss: 0.5397; 
+2020-10-22 14:23:31 Iteration 4600 (lr-0.0007): loss_bce : 0.0939; loss_dice: 0.6070; loss: 0.3505; 
+2020-10-22 14:24:10 Iteration 4800 (lr-0.0007): loss_bce : 0.0742; loss_dice: 0.7475; loss: 0.4108; 
+2020-10-22 14:24:48 Iteration 5000 (lr-0.0007): loss_bce : 0.0923; loss_dice: 0.3061; loss: 0.1992; 
+2020-10-22 14:24:56 ----------------------> val_dice on I2CVB is 0.5708, on previous sites is {'ISBI': 0.09420705231186612, 'ISBI_1.5': 0.009815771230593687, 'I2CVB': 0.5707767203851468}
+2020-10-22 14:24:56 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:25:35 Iteration 5200 (lr-0.0006): loss_bce : 0.0737; loss_dice: 0.2902; loss: 0.1819; 
+2020-10-22 14:26:13 Iteration 5400 (lr-0.0006): loss_bce : 0.0548; loss_dice: 0.2754; loss: 0.1651; 
+2020-10-22 14:26:52 Iteration 5600 (lr-0.0006): loss_bce : 0.1829; loss_dice: 0.9440; loss: 0.5634; 
+2020-10-22 14:27:31 Iteration 5800 (lr-0.0006): loss_bce : 0.1355; loss_dice: 0.8455; loss: 0.4905; 
+2020-10-22 14:28:10 Iteration 6000 (lr-0.0006): loss_bce : 0.1153; loss_dice: 0.7425; loss: 0.4289; 
+2020-10-22 14:28:18 ----------------------> val_dice on I2CVB is 0.0889, on previous sites is {'ISBI': 0.0024707981833705195, 'ISBI_1.5': 0.002732709094656075, 'I2CVB': 0.08890022829216794}
+2020-10-22 14:28:18 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:28:18 Iteration 6000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_6000_curdice_0.0889_predice_0.0314.pth
+2020-10-22 14:28:56 Iteration 6200 (lr-0.0005): loss_bce : 0.0805; loss_dice: 0.6655; loss: 0.3730; 
+2020-10-22 14:29:34 Iteration 6400 (lr-0.0005): loss_bce : 0.1072; loss_dice: 0.6527; loss: 0.3800; 
+2020-10-22 14:30:13 Iteration 6600 (lr-0.0005): loss_bce : 0.0619; loss_dice: 0.5738; loss: 0.3178; 
+2020-10-22 14:30:51 Iteration 6800 (lr-0.0005): loss_bce : 0.0835; loss_dice: 0.6444; loss: 0.3640; 
+2020-10-22 14:31:30 Iteration 7000 (lr-0.0005): loss_bce : 0.0855; loss_dice: 0.5671; loss: 0.3263; 
+2020-10-22 14:31:37 ----------------------> val_dice on I2CVB is 0.4289, on previous sites is {'ISBI': 0.030465814140107895, 'ISBI_1.5': 0.004755097722982598, 'I2CVB': 0.4289132704350376}
+2020-10-22 14:31:37 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:32:15 Iteration 7200 (lr-0.0005): loss_bce : 0.0925; loss_dice: 0.4941; loss: 0.2933; 
+2020-10-22 14:32:53 Iteration 7400 (lr-0.0005): loss_bce : 0.0530; loss_dice: 0.2729; loss: 0.1629; 
+2020-10-22 14:33:32 Iteration 7600 (lr-0.0005): loss_bce : 0.0381; loss_dice: 0.2934; loss: 0.1658; 
+2020-10-22 14:34:11 Iteration 7800 (lr-0.0005): loss_bce : 0.0436; loss_dice: 0.2168; loss: 0.1302; 
+2020-10-22 14:34:50 Iteration 8000 (lr-0.0005): loss_bce : 0.0475; loss_dice: 0.2722; loss: 0.1598; 
+2020-10-22 14:34:58 ----------------------> val_dice on I2CVB is 0.6666, on previous sites is {'ISBI': 0.05751734096759805, 'ISBI_1.5': 0.003840626889344374, 'I2CVB': 0.6666303918468728}
+2020-10-22 14:34:58 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:34:58 Iteration 8000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_8000_curdice_0.6666_predice_0.2427.pth
+2020-10-22 14:35:36 Iteration 8200 (lr-0.0004): loss_bce : 0.0645; loss_dice: 0.2943; loss: 0.1794; 
+2020-10-22 14:36:15 Iteration 8400 (lr-0.0004): loss_bce : 0.0415; loss_dice: 0.2234; loss: 0.1324; 
+2020-10-22 14:36:54 Iteration 8600 (lr-0.0004): loss_bce : 0.0520; loss_dice: 0.2527; loss: 0.1524; 
+2020-10-22 14:37:33 Iteration 8800 (lr-0.0004): loss_bce : 0.0760; loss_dice: 0.2911; loss: 0.1835; 
+2020-10-22 14:38:12 Iteration 9000 (lr-0.0004): loss_bce : 0.0374; loss_dice: 0.1616; loss: 0.0995; 
+2020-10-22 14:38:19 ----------------------> val_dice on I2CVB is 0.7580, on previous sites is {'ISBI': 0.12095105679081737, 'ISBI_1.5': 0.01260740177447664, 'I2CVB': 0.7579911860612848}
+2020-10-22 14:38:19 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:38:58 Iteration 9200 (lr-0.0004): loss_bce : 0.0403; loss_dice: 0.2172; loss: 0.1287; 
+2020-10-22 14:39:36 Iteration 9400 (lr-0.0004): loss_bce : 0.0261; loss_dice: 0.1561; loss: 0.0911; 
+2020-10-22 14:40:15 Iteration 9600 (lr-0.0004): loss_bce : 0.0369; loss_dice: 0.1685; loss: 0.1027; 
+2020-10-22 14:40:54 Iteration 9800 (lr-0.0004): loss_bce : 0.0314; loss_dice: 0.1604; loss: 0.0959; 
+2020-10-22 14:41:33 Iteration 10000 (lr-0.0004): loss_bce : 0.0586; loss_dice: 0.2743; loss: 0.1664; 
+2020-10-22 14:41:40 ----------------------> val_dice on I2CVB is 0.7133, on previous sites is {'ISBI': 0.08862531641118937, 'ISBI_1.5': 0.008333669849035238, 'I2CVB': 0.7133499767570535}
+2020-10-22 14:41:40 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:41:40 Iteration 10000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_10000_curdice_0.7133_predice_0.2701.pth
+2020-10-22 14:42:18 Iteration 10200 (lr-0.0004): loss_bce : 0.0458; loss_dice: 0.2082; loss: 0.1270; 
+2020-10-22 14:42:57 Iteration 10400 (lr-0.0004): loss_bce : 0.0272; loss_dice: 0.1659; loss: 0.0965; 
+2020-10-22 14:43:36 Iteration 10600 (lr-0.0004): loss_bce : 0.0263; loss_dice: 0.1386; loss: 0.0825; 
+2020-10-22 14:44:15 Iteration 10800 (lr-0.0004): loss_bce : 0.0249; loss_dice: 0.1639; loss: 0.0944; 
+2020-10-22 14:44:54 Iteration 11000 (lr-0.0004): loss_bce : 0.0362; loss_dice: 0.1953; loss: 0.1157; 
+2020-10-22 14:45:02 ----------------------> val_dice on I2CVB is 0.7377, on previous sites is {'ISBI': 0.10841210888030993, 'ISBI_1.5': 0.018928206691681125, 'I2CVB': 0.7376543734876946}
+2020-10-22 14:45:02 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:45:41 Iteration 11200 (lr-0.0003): loss_bce : 0.0314; loss_dice: 0.1684; loss: 0.0999; 
+2020-10-22 14:46:20 Iteration 11400 (lr-0.0003): loss_bce : 0.0290; loss_dice: 0.1183; loss: 0.0737; 
+2020-10-22 14:46:58 Iteration 11600 (lr-0.0003): loss_bce : 0.0150; loss_dice: 0.0896; loss: 0.0523; 
+2020-10-22 14:47:37 Iteration 11800 (lr-0.0003): loss_bce : 0.0370; loss_dice: 0.1667; loss: 0.1019; 
+2020-10-22 14:48:15 Iteration 12000 (lr-0.0003): loss_bce : 0.0430; loss_dice: 0.2256; loss: 0.1343; 
+2020-10-22 14:48:22 ----------------------> val_dice on I2CVB is 0.7747, on previous sites is {'ISBI': 0.10807580284035112, 'ISBI_1.5': 0.010681084391205888, 'I2CVB': 0.7747457201398821}
+2020-10-22 14:48:22 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:48:23 Iteration 12000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_12000_curdice_0.7747_predice_0.2978.pth
+2020-10-22 14:49:01 Iteration 12200 (lr-0.0003): loss_bce : 0.0301; loss_dice: 0.1322; loss: 0.0811; 
+2020-10-22 14:49:40 Iteration 12400 (lr-0.0003): loss_bce : 0.0254; loss_dice: 0.1068; loss: 0.0661; 
+2020-10-22 14:50:18 Iteration 12600 (lr-0.0003): loss_bce : 0.0413; loss_dice: 0.1774; loss: 0.1093; 
+2020-10-22 14:50:57 Iteration 12800 (lr-0.0003): loss_bce : 0.0310; loss_dice: 0.1277; loss: 0.0793; 
+2020-10-22 14:51:36 Iteration 13000 (lr-0.0003): loss_bce : 0.0381; loss_dice: 0.1443; loss: 0.0912; 
+2020-10-22 14:51:44 ----------------------> val_dice on I2CVB is 0.7564, on previous sites is {'ISBI': 0.1602462697241631, 'ISBI_1.5': 0.018155851048392475, 'I2CVB': 0.7563859236234116}
+2020-10-22 14:51:44 ----------------------> val_dice did not improved from 0.8026
+2020-10-22 14:52:22 Iteration 13200 (lr-0.0003): loss_bce : 0.0217; loss_dice: 0.1335; loss: 0.0776; 
+2020-10-22 14:53:01 Iteration 13400 (lr-0.0003): loss_bce : 0.0285; loss_dice: 0.1521; loss: 0.0903; 
+2020-10-22 14:53:39 Iteration 13600 (lr-0.0003): loss_bce : 0.0315; loss_dice: 0.1400; loss: 0.0858; 
+2020-10-22 14:54:18 Iteration 13800 (lr-0.0003): loss_bce : 0.0231; loss_dice: 0.1132; loss: 0.0681; 
+2020-10-22 14:54:56 Iteration 14000 (lr-0.0003): loss_bce : 0.0342; loss_dice: 0.1702; loss: 0.1022; 
+2020-10-22 14:55:04 ----------------------> val_dice on I2CVB is 0.8099, on previous sites is {'ISBI': 0.18072789592800456, 'ISBI_1.5': 0.01739505389614857, 'I2CVB': 0.8099253831536586}
+2020-10-22 14:55:04 ----------------------> cur_dice improved from 0.8026 to 0.8099
+2020-10-22 14:55:04 Iteration 14000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_14000_curdice_0.8099_predice_0.3360.pth
+2020-10-22 14:55:43 Iteration 14200 (lr-0.0002): loss_bce : 0.0238; loss_dice: 0.1214; loss: 0.0726; 
+2020-10-22 14:56:22 Iteration 14400 (lr-0.0002): loss_bce : 0.0236; loss_dice: 0.1099; loss: 0.0668; 
+2020-10-22 14:57:01 Iteration 14600 (lr-0.0002): loss_bce : 0.0206; loss_dice: 0.1032; loss: 0.0619; 
+2020-10-22 14:57:40 Iteration 14800 (lr-0.0002): loss_bce : 0.0266; loss_dice: 0.1168; loss: 0.0717; 
+2020-10-22 14:58:18 Iteration 15000 (lr-0.0002): loss_bce : 0.0167; loss_dice: 0.1147; loss: 0.0657; 
+2020-10-22 14:58:25 ----------------------> val_dice on I2CVB is 0.7217, on previous sites is {'ISBI': 0.18997546847262273, 'ISBI_1.5': 0.01886815766873589, 'I2CVB': 0.7217141849887536}
+2020-10-22 14:58:25 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 14:59:04 Iteration 15200 (lr-0.0002): loss_bce : 0.0123; loss_dice: 0.0844; loss: 0.0484; 
+2020-10-22 14:59:43 Iteration 15400 (lr-0.0002): loss_bce : 0.0194; loss_dice: 0.0856; loss: 0.0525; 
+2020-10-22 15:00:22 Iteration 15600 (lr-0.0002): loss_bce : 0.0281; loss_dice: 0.1789; loss: 0.1035; 
+2020-10-22 15:01:01 Iteration 15800 (lr-0.0002): loss_bce : 0.0152; loss_dice: 0.0943; loss: 0.0547; 
+2020-10-22 15:01:40 Iteration 16000 (lr-0.0002): loss_bce : 0.0417; loss_dice: 0.1280; loss: 0.0848; 
+2020-10-22 15:01:47 ----------------------> val_dice on I2CVB is 0.7116, on previous sites is {'ISBI': 0.08891126467787493, 'ISBI_1.5': 0.0020153615163263465, 'I2CVB': 0.7115686147428781}
+2020-10-22 15:01:47 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:01:47 Iteration 16000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_16000_curdice_0.7116_predice_0.2675.pth
+2020-10-22 15:02:26 Iteration 16200 (lr-0.0002): loss_bce : 0.0267; loss_dice: 0.1227; loss: 0.0747; 
+2020-10-22 15:03:05 Iteration 16400 (lr-0.0002): loss_bce : 0.0212; loss_dice: 0.1152; loss: 0.0682; 
+2020-10-22 15:03:44 Iteration 16600 (lr-0.0002): loss_bce : 0.0310; loss_dice: 0.1207; loss: 0.0759; 
+2020-10-22 15:04:23 Iteration 16800 (lr-0.0002): loss_bce : 0.0282; loss_dice: 0.1323; loss: 0.0802; 
+2020-10-22 15:05:02 Iteration 17000 (lr-0.0002): loss_bce : 0.0259; loss_dice: 0.1177; loss: 0.0718; 
+2020-10-22 15:05:09 ----------------------> val_dice on I2CVB is 0.7519, on previous sites is {'ISBI': 0.12200242930004672, 'ISBI_1.5': 0.006801707149245917, 'I2CVB': 0.7518586752192156}
+2020-10-22 15:05:09 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:05:48 Iteration 17200 (lr-0.0002): loss_bce : 0.0229; loss_dice: 0.1275; loss: 0.0752; 
+2020-10-22 15:06:27 Iteration 17400 (lr-0.0002): loss_bce : 0.0223; loss_dice: 0.1242; loss: 0.0733; 
+2020-10-22 15:07:06 Iteration 17600 (lr-0.0002): loss_bce : 0.0234; loss_dice: 0.0859; loss: 0.0547; 
+2020-10-22 15:07:45 Iteration 17800 (lr-0.0002): loss_bce : 0.0152; loss_dice: 0.0949; loss: 0.0551; 
+2020-10-22 15:08:24 Iteration 18000 (lr-0.0002): loss_bce : 0.0159; loss_dice: 0.0759; loss: 0.0459; 
+2020-10-22 15:08:31 ----------------------> val_dice on I2CVB is 0.7381, on previous sites is {'ISBI': 0.15574836962159774, 'ISBI_1.5': 0.011547428337110267, 'I2CVB': 0.7381128141246669}
+2020-10-22 15:08:31 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:08:31 Iteration 18000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_18000_curdice_0.7381_predice_0.3018.pth
+2020-10-22 15:09:11 Iteration 18200 (lr-0.0002): loss_bce : 0.0277; loss_dice: 0.1337; loss: 0.0807; 
+2020-10-22 15:09:49 Iteration 18400 (lr-0.0002): loss_bce : 0.0268; loss_dice: 0.1208; loss: 0.0738; 
+2020-10-22 15:10:28 Iteration 18600 (lr-0.0002): loss_bce : 0.0141; loss_dice: 0.0884; loss: 0.0512; 
+2020-10-22 15:11:07 Iteration 18800 (lr-0.0002): loss_bce : 0.0165; loss_dice: 0.0958; loss: 0.0561; 
+2020-10-22 15:11:46 Iteration 19000 (lr-0.0002): loss_bce : 0.0224; loss_dice: 0.1032; loss: 0.0628; 
+2020-10-22 15:11:54 ----------------------> val_dice on I2CVB is 0.8066, on previous sites is {'ISBI': 0.17053250488857138, 'ISBI_1.5': 0.018204574970306836, 'I2CVB': 0.8065687281624202}
+2020-10-22 15:11:54 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:12:32 Iteration 19200 (lr-0.0001): loss_bce : 0.0204; loss_dice: 0.1497; loss: 0.0850; 
+2020-10-22 15:13:11 Iteration 19400 (lr-0.0001): loss_bce : 0.0304; loss_dice: 0.1338; loss: 0.0821; 
+2020-10-22 15:13:50 Iteration 19600 (lr-0.0001): loss_bce : 0.0167; loss_dice: 0.1004; loss: 0.0586; 
+2020-10-22 15:14:29 Iteration 19800 (lr-0.0001): loss_bce : 0.0282; loss_dice: 0.1511; loss: 0.0897; 
+2020-10-22 15:15:08 Iteration 20000 (lr-0.0001): loss_bce : 0.0148; loss_dice: 0.0843; loss: 0.0495; 
+2020-10-22 15:15:16 ----------------------> val_dice on I2CVB is 0.7087, on previous sites is {'ISBI': 0.12163276704421881, 'ISBI_1.5': 0.004409853682883667, 'I2CVB': 0.708657842310934}
+2020-10-22 15:15:16 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:15:16 Iteration 20000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_20000_curdice_0.7087_predice_0.2782.pth
+2020-10-22 15:15:55 Iteration 20200 (lr-0.0001): loss_bce : 0.0192; loss_dice: 0.0954; loss: 0.0573; 
+2020-10-22 15:16:33 Iteration 20400 (lr-0.0001): loss_bce : 0.0134; loss_dice: 0.0754; loss: 0.0444; 
+2020-10-22 15:17:11 Iteration 20600 (lr-0.0001): loss_bce : 0.0130; loss_dice: 0.0907; loss: 0.0518; 
+2020-10-22 15:17:50 Iteration 20800 (lr-0.0001): loss_bce : 0.0179; loss_dice: 0.0823; loss: 0.0501; 
+2020-10-22 15:18:29 Iteration 21000 (lr-0.0001): loss_bce : 0.0357; loss_dice: 0.1191; loss: 0.0774; 
+2020-10-22 15:18:37 ----------------------> val_dice on I2CVB is 0.7931, on previous sites is {'ISBI': 0.16702121685374385, 'ISBI_1.5': 0.012033939388700414, 'I2CVB': 0.7931415238008247}
+2020-10-22 15:18:37 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:19:15 Iteration 21200 (lr-0.0001): loss_bce : 0.0170; loss_dice: 0.0824; loss: 0.0497; 
+2020-10-22 15:19:55 Iteration 21400 (lr-0.0001): loss_bce : 0.0179; loss_dice: 0.1011; loss: 0.0595; 
+2020-10-22 15:20:34 Iteration 21600 (lr-0.0001): loss_bce : 0.0201; loss_dice: 0.0819; loss: 0.0510; 
+2020-10-22 15:21:13 Iteration 21800 (lr-0.0001): loss_bce : 0.0249; loss_dice: 0.1338; loss: 0.0794; 
+2020-10-22 15:21:51 Iteration 22000 (lr-0.0001): loss_bce : 0.0173; loss_dice: 0.0774; loss: 0.0473; 
+2020-10-22 15:21:59 ----------------------> val_dice on I2CVB is 0.7961, on previous sites is {'ISBI': 0.16089612489017746, 'ISBI_1.5': 0.013507812818664275, 'I2CVB': 0.7960851647952196}
+2020-10-22 15:21:59 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:21:59 Iteration 22000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_22000_curdice_0.7961_predice_0.3235.pth
+2020-10-22 15:22:38 Iteration 22200 (lr-0.0001): loss_bce : 0.0132; loss_dice: 0.0765; loss: 0.0449; 
+2020-10-22 15:23:17 Iteration 22400 (lr-0.0001): loss_bce : 0.0200; loss_dice: 0.1523; loss: 0.0862; 
+2020-10-22 15:23:55 Iteration 22600 (lr-0.0001): loss_bce : 0.0187; loss_dice: 0.0785; loss: 0.0486; 
+2020-10-22 15:24:35 Iteration 22800 (lr-0.0001): loss_bce : 0.0252; loss_dice: 0.0935; loss: 0.0594; 
+2020-10-22 15:25:13 Iteration 23000 (lr-0.0001): loss_bce : 0.0263; loss_dice: 0.0959; loss: 0.0611; 
+2020-10-22 15:25:21 ----------------------> val_dice on I2CVB is 0.7649, on previous sites is {'ISBI': 0.15429951257451816, 'ISBI_1.5': 0.010473036537907666, 'I2CVB': 0.7648849645557647}
+2020-10-22 15:25:21 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:26:00 Iteration 23200 (lr-0.0001): loss_bce : 0.0279; loss_dice: 0.1436; loss: 0.0857; 
+2020-10-22 15:26:39 Iteration 23400 (lr-0.0001): loss_bce : 0.0150; loss_dice: 0.0863; loss: 0.0506; 
+2020-10-22 15:27:17 Iteration 23600 (lr-0.0001): loss_bce : 0.0162; loss_dice: 0.0712; loss: 0.0437; 
+2020-10-22 15:27:55 Iteration 23800 (lr-0.0001): loss_bce : 0.0185; loss_dice: 0.0990; loss: 0.0587; 
+2020-10-22 15:28:34 Iteration 24000 (lr-0.0001): loss_bce : 0.0169; loss_dice: 0.0897; loss: 0.0533; 
+2020-10-22 15:28:42 ----------------------> val_dice on I2CVB is 0.7826, on previous sites is {'ISBI': 0.15075994512403065, 'ISBI_1.5': 0.009367250242128802, 'I2CVB': 0.7825778310690571}
+2020-10-22 15:28:42 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:28:42 Iteration 24000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_24000_curdice_0.7826_predice_0.3142.pth
+2020-10-22 15:29:20 Iteration 24200 (lr-0.0001): loss_bce : 0.0189; loss_dice: 0.0830; loss: 0.0510; 
+2020-10-22 15:29:59 Iteration 24400 (lr-0.0001): loss_bce : 0.0196; loss_dice: 0.0803; loss: 0.0499; 
+2020-10-22 15:30:38 Iteration 24600 (lr-0.0001): loss_bce : 0.0184; loss_dice: 0.1148; loss: 0.0666; 
+2020-10-22 15:31:17 Iteration 24800 (lr-0.0001): loss_bce : 0.0165; loss_dice: 0.0740; loss: 0.0453; 
+2020-10-22 15:31:56 Iteration 25000 (lr-0.0001): loss_bce : 0.0128; loss_dice: 0.0666; loss: 0.0397; 
+2020-10-22 15:32:03 ----------------------> val_dice on I2CVB is 0.7783, on previous sites is {'ISBI': 0.14101377604590132, 'ISBI_1.5': 0.013463988096118902, 'I2CVB': 0.7782590615203888}
+2020-10-22 15:32:03 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:32:41 Iteration 25200 (lr-0.0001): loss_bce : 0.0134; loss_dice: 0.0818; loss: 0.0476; 
+2020-10-22 15:33:21 Iteration 25400 (lr-0.0001): loss_bce : 0.0180; loss_dice: 0.0795; loss: 0.0488; 
+2020-10-22 15:34:00 Iteration 25600 (lr-0.0001): loss_bce : 0.0136; loss_dice: 0.0818; loss: 0.0477; 
+2020-10-22 15:34:38 Iteration 25800 (lr-0.0001): loss_bce : 0.1323; loss_dice: 0.9424; loss: 0.5373; 
+2020-10-22 15:35:18 Iteration 26000 (lr-0.0001): loss_bce : 0.1239; loss_dice: 0.9314; loss: 0.5276; 
+2020-10-22 15:35:25 ----------------------> val_dice on I2CVB is 0.0124, on previous sites is {'ISBI': 0.0018686287932925755, 'ISBI_1.5': 0.007704342680147, 'I2CVB': 0.012442283946069107}
+2020-10-22 15:35:25 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:35:25 Iteration 26000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_26000_curdice_0.0124_predice_0.0073.pth
+2020-10-22 15:36:04 Iteration 26200 (lr-0.0001): loss_bce : 0.1466; loss_dice: 0.9133; loss: 0.5300; 
+2020-10-22 15:36:42 Iteration 26400 (lr-0.0001): loss_bce : 0.1082; loss_dice: 0.8661; loss: 0.4871; 
+2020-10-22 15:37:21 Iteration 26600 (lr-0.0001): loss_bce : 0.2358; loss_dice: 0.9568; loss: 0.5963; 
+2020-10-22 15:38:00 Iteration 26800 (lr-0.0001): loss_bce : 0.1066; loss_dice: 0.8633; loss: 0.4849; 
+2020-10-22 15:38:38 Iteration 27000 (lr-0.0001): loss_bce : 0.1871; loss_dice: 0.8803; loss: 0.5337; 
+2020-10-22 15:38:45 ----------------------> val_dice on I2CVB is 0.0744, on previous sites is {'ISBI': 0.0006862920743447763, 'ISBI_1.5': 0.0026983746041416537, 'I2CVB': 0.07442114845527315}
+2020-10-22 15:38:45 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:39:24 Iteration 27200 (lr-0.0001): loss_bce : 0.1359; loss_dice: 0.8369; loss: 0.4864; 
+2020-10-22 15:40:03 Iteration 27400 (lr-0.0001): loss_bce : 0.1371; loss_dice: 0.9090; loss: 0.5230; 
+2020-10-22 15:40:41 Iteration 27600 (lr-0.0001): loss_bce : 0.1116; loss_dice: 0.8331; loss: 0.4723; 
+2020-10-22 15:41:20 Iteration 27800 (lr-0.0001): loss_bce : 0.1224; loss_dice: 0.7985; loss: 0.4605; 
+2020-10-22 15:41:59 Iteration 28000 (lr-0.0001): loss_bce : 0.1346; loss_dice: 0.8895; loss: 0.5121; 
+2020-10-22 15:42:07 ----------------------> val_dice on I2CVB is 0.0593, on previous sites is {'ISBI': 0.0001400450865427653, 'ISBI_1.5': 0.0003897780389116522, 'I2CVB': 0.05930452762750461}
+2020-10-22 15:42:07 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:42:07 Iteration 28000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_28000_curdice_0.0593_predice_0.0199.pth
+2020-10-22 15:42:46 Iteration 28200 (lr-0.0001): loss_bce : 0.0929; loss_dice: 0.8841; loss: 0.4885; 
+2020-10-22 15:43:25 Iteration 28400 (lr-0.0001): loss_bce : 0.1831; loss_dice: 0.9378; loss: 0.5605; 
+2020-10-22 15:44:03 Iteration 28600 (lr-0.0001): loss_bce : 0.1285; loss_dice: 0.8580; loss: 0.4933; 
+2020-10-22 15:44:42 Iteration 28800 (lr-0.0001): loss_bce : 0.0986; loss_dice: 0.8303; loss: 0.4644; 
+2020-10-22 15:45:21 Iteration 29000 (lr-0.0001): loss_bce : 0.1046; loss_dice: 0.8646; loss: 0.4846; 
+2020-10-22 15:45:29 ----------------------> val_dice on I2CVB is 0.0756, on previous sites is {'ISBI': 0.0007285582603712228, 'ISBI_1.5': 0.001981366362999079, 'I2CVB': 0.07559191813750296}
+2020-10-22 15:45:29 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:46:07 Iteration 29200 (lr-0.0001): loss_bce : 0.1313; loss_dice: 0.9238; loss: 0.5275; 
+2020-10-22 15:46:46 Iteration 29400 (lr-0.0001): loss_bce : 0.1129; loss_dice: 0.8270; loss: 0.4699; 
+2020-10-22 15:47:25 Iteration 29600 (lr-0.0001): loss_bce : 0.1216; loss_dice: 0.8187; loss: 0.4702; 
+2020-10-22 15:48:04 Iteration 29800 (lr-0.0001): loss_bce : 0.1521; loss_dice: 0.7727; loss: 0.4624; 
+2020-10-22 15:48:43 Iteration 30000 (lr-0.0001): loss_bce : 0.0964; loss_dice: 0.8249; loss: 0.4607; 
+2020-10-22 15:48:50 ----------------------> val_dice on I2CVB is 0.0878, on previous sites is {'ISBI': 0.000726211291772348, 'ISBI_1.5': 0.002116570423176868, 'I2CVB': 0.08776431802240002}
+2020-10-22 15:48:50 ----------------------> val_dice did not improved from 0.8099
+2020-10-22 15:48:50 Iteration 30000: save model to ./exp/train_finetuning_onlinemodel/I2CVB/step_30000_curdice_0.0878_predice_0.0302.pth
+2020-10-22 15:48:50 ============= Train on UCL
+2020-10-22 15:48:50 Reset optimizer.
+2020-10-22 15:49:31 Iteration 200 (lr-0.0010): loss_bce : 2.8505; loss_dice: 0.9986; loss: 1.9245; 
+2020-10-22 15:50:10 Iteration 400 (lr-0.0010): loss_bce : 2.4829; loss_dice: 1.0000; loss: 1.7414; 
+2020-10-22 15:50:50 Iteration 600 (lr-0.0010): loss_bce : 3.1140; loss_dice: 1.0000; loss: 2.0570; 
+2020-10-22 15:51:29 Iteration 800 (lr-0.0010): loss_bce : 2.1088; loss_dice: 1.0000; loss: 1.5544; 
+2020-10-22 15:52:09 Iteration 1000 (lr-0.0010): loss_bce : 2.9273; loss_dice: 1.0000; loss: 1.9636; 
+2020-10-22 15:52:16 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 5.282958348592122e-06, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 15:52:16 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 15:52:57 Iteration 1200 (lr-0.0009): loss_bce : 3.4573; loss_dice: 1.0000; loss: 2.2286; 
+2020-10-22 15:53:36 Iteration 1400 (lr-0.0009): loss_bce : 2.7675; loss_dice: 1.0000; loss: 1.8837; 
+2020-10-22 15:54:16 Iteration 1600 (lr-0.0009): loss_bce : 3.4611; loss_dice: 1.0000; loss: 2.2306; 
+2020-10-22 15:54:57 Iteration 1800 (lr-0.0009): loss_bce : 2.4883; loss_dice: 1.0000; loss: 1.7441; 
+2020-10-22 15:55:37 Iteration 2000 (lr-0.0009): loss_bce : 2.5137; loss_dice: 1.0000; loss: 1.7569; 
+2020-10-22 15:55:44 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 15:55:45 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 15:55:45 Iteration 2000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_2000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 15:56:24 Iteration 2200 (lr-0.0008): loss_bce : 2.4466; loss_dice: 1.0000; loss: 1.7233; 
+2020-10-22 15:57:04 Iteration 2400 (lr-0.0008): loss_bce : 3.6260; loss_dice: 1.0000; loss: 2.3130; 
+2020-10-22 15:57:43 Iteration 2600 (lr-0.0008): loss_bce : 2.6111; loss_dice: 1.0000; loss: 1.8056; 
+2020-10-22 15:58:23 Iteration 2800 (lr-0.0008): loss_bce : 2.6052; loss_dice: 1.0000; loss: 1.8026; 
+2020-10-22 15:59:03 Iteration 3000 (lr-0.0008): loss_bce : 2.4586; loss_dice: 1.0000; loss: 1.7293; 
+2020-10-22 15:59:11 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 15:59:11 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 15:59:50 Iteration 3200 (lr-0.0007): loss_bce : 2.1928; loss_dice: 1.0000; loss: 1.5964; 
+2020-10-22 16:00:30 Iteration 3400 (lr-0.0007): loss_bce : 2.7517; loss_dice: 1.0000; loss: 1.8758; 
+2020-10-22 16:01:10 Iteration 3600 (lr-0.0007): loss_bce : 2.9585; loss_dice: 1.0000; loss: 1.9793; 
+2020-10-22 16:01:50 Iteration 3800 (lr-0.0007): loss_bce : 1.7416; loss_dice: 1.0000; loss: 1.3708; 
+2020-10-22 16:02:30 Iteration 4000 (lr-0.0007): loss_bce : 2.7315; loss_dice: 1.0000; loss: 1.8658; 
+2020-10-22 16:02:37 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:02:37 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:02:37 Iteration 4000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_4000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:03:17 Iteration 4200 (lr-0.0007): loss_bce : 3.2377; loss_dice: 1.0000; loss: 2.1189; 
+2020-10-22 16:03:56 Iteration 4400 (lr-0.0007): loss_bce : 2.5881; loss_dice: 1.0000; loss: 1.7940; 
+2020-10-22 16:04:35 Iteration 4600 (lr-0.0007): loss_bce : 2.2816; loss_dice: 1.0000; loss: 1.6408; 
+2020-10-22 16:05:15 Iteration 4800 (lr-0.0007): loss_bce : 2.3000; loss_dice: 1.0000; loss: 1.6500; 
+2020-10-22 16:05:54 Iteration 5000 (lr-0.0007): loss_bce : 3.3964; loss_dice: 1.0000; loss: 2.1982; 
+2020-10-22 16:06:02 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:06:02 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:06:41 Iteration 5200 (lr-0.0006): loss_bce : 2.5119; loss_dice: 1.0000; loss: 1.7560; 
+2020-10-22 16:07:21 Iteration 5400 (lr-0.0006): loss_bce : 3.2031; loss_dice: 1.0000; loss: 2.1015; 
+2020-10-22 16:08:00 Iteration 5600 (lr-0.0006): loss_bce : 2.3994; loss_dice: 1.0000; loss: 1.6997; 
+2020-10-22 16:08:40 Iteration 5800 (lr-0.0006): loss_bce : 2.2472; loss_dice: 1.0000; loss: 1.6236; 
+2020-10-22 16:09:20 Iteration 6000 (lr-0.0006): loss_bce : 3.5663; loss_dice: 1.0000; loss: 2.2832; 
+2020-10-22 16:09:27 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:09:27 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:09:27 Iteration 6000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_6000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:10:07 Iteration 6200 (lr-0.0005): loss_bce : 1.7687; loss_dice: 1.0000; loss: 1.3843; 
+2020-10-22 16:10:47 Iteration 6400 (lr-0.0005): loss_bce : 2.1695; loss_dice: 1.0000; loss: 1.5848; 
+2020-10-22 16:11:26 Iteration 6600 (lr-0.0005): loss_bce : 3.0485; loss_dice: 1.0000; loss: 2.0242; 
+2020-10-22 16:12:05 Iteration 6800 (lr-0.0005): loss_bce : 2.7518; loss_dice: 1.0000; loss: 1.8759; 
+2020-10-22 16:12:44 Iteration 7000 (lr-0.0005): loss_bce : 3.4391; loss_dice: 1.0000; loss: 2.2196; 
+2020-10-22 16:12:52 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:12:52 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:13:32 Iteration 7200 (lr-0.0005): loss_bce : 1.4746; loss_dice: 1.0000; loss: 1.2373; 
+2020-10-22 16:14:11 Iteration 7400 (lr-0.0005): loss_bce : 2.5288; loss_dice: 1.0000; loss: 1.7644; 
+2020-10-22 16:14:50 Iteration 7600 (lr-0.0005): loss_bce : 2.4968; loss_dice: 1.0000; loss: 1.7484; 
+2020-10-22 16:15:30 Iteration 7800 (lr-0.0005): loss_bce : 2.1970; loss_dice: 1.0000; loss: 1.5985; 
+2020-10-22 16:16:10 Iteration 8000 (lr-0.0005): loss_bce : 3.0386; loss_dice: 1.0000; loss: 2.0193; 
+2020-10-22 16:16:17 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:16:17 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:16:18 Iteration 8000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_8000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:16:57 Iteration 8200 (lr-0.0004): loss_bce : 2.0434; loss_dice: 1.0000; loss: 1.5217; 
+2020-10-22 16:17:38 Iteration 8400 (lr-0.0004): loss_bce : 1.9904; loss_dice: 1.0000; loss: 1.4952; 
+2020-10-22 16:18:17 Iteration 8600 (lr-0.0004): loss_bce : 2.0647; loss_dice: 1.0000; loss: 1.5323; 
+2020-10-22 16:18:57 Iteration 8800 (lr-0.0004): loss_bce : 2.4760; loss_dice: 1.0000; loss: 1.7380; 
+2020-10-22 16:19:37 Iteration 9000 (lr-0.0004): loss_bce : 2.6788; loss_dice: 1.0000; loss: 1.8394; 
+2020-10-22 16:19:45 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:19:45 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:20:25 Iteration 9200 (lr-0.0004): loss_bce : 2.3101; loss_dice: 1.0000; loss: 1.6551; 
+2020-10-22 16:21:04 Iteration 9400 (lr-0.0004): loss_bce : 2.8774; loss_dice: 1.0000; loss: 1.9387; 
+2020-10-22 16:21:44 Iteration 9600 (lr-0.0004): loss_bce : 2.4766; loss_dice: 1.0000; loss: 1.7383; 
+2020-10-22 16:22:24 Iteration 9800 (lr-0.0004): loss_bce : 2.0827; loss_dice: 1.0000; loss: 1.5414; 
+2020-10-22 16:23:03 Iteration 10000 (lr-0.0004): loss_bce : 3.4777; loss_dice: 1.0000; loss: 2.2388; 
+2020-10-22 16:23:10 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:23:10 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:23:10 Iteration 10000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_10000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:23:50 Iteration 10200 (lr-0.0004): loss_bce : 1.5586; loss_dice: 1.0000; loss: 1.2793; 
+2020-10-22 16:24:30 Iteration 10400 (lr-0.0004): loss_bce : 2.7991; loss_dice: 1.0000; loss: 1.8996; 
+2020-10-22 16:25:09 Iteration 10600 (lr-0.0004): loss_bce : 2.3221; loss_dice: 1.0000; loss: 1.6611; 
+2020-10-22 16:25:48 Iteration 10800 (lr-0.0004): loss_bce : 1.7717; loss_dice: 1.0000; loss: 1.3858; 
+2020-10-22 16:26:28 Iteration 11000 (lr-0.0004): loss_bce : 1.9830; loss_dice: 1.0000; loss: 1.4915; 
+2020-10-22 16:26:36 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:26:36 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:27:16 Iteration 11200 (lr-0.0003): loss_bce : 3.2019; loss_dice: 1.0000; loss: 2.1009; 
+2020-10-22 16:27:56 Iteration 11400 (lr-0.0003): loss_bce : 2.8446; loss_dice: 1.0000; loss: 1.9223; 
+2020-10-22 16:28:36 Iteration 11600 (lr-0.0003): loss_bce : 2.5107; loss_dice: 1.0000; loss: 1.7554; 
+2020-10-22 16:29:16 Iteration 11800 (lr-0.0003): loss_bce : 2.6726; loss_dice: 1.0000; loss: 1.8363; 
+2020-10-22 16:29:55 Iteration 12000 (lr-0.0003): loss_bce : 4.3319; loss_dice: 1.0000; loss: 2.6659; 
+2020-10-22 16:30:03 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:30:03 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:30:03 Iteration 12000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_12000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:30:42 Iteration 12200 (lr-0.0003): loss_bce : 2.0984; loss_dice: 1.0000; loss: 1.5492; 
+2020-10-22 16:31:22 Iteration 12400 (lr-0.0003): loss_bce : 2.8183; loss_dice: 1.0000; loss: 1.9092; 
+2020-10-22 16:32:01 Iteration 12600 (lr-0.0003): loss_bce : 2.9540; loss_dice: 1.0000; loss: 1.9770; 
+2020-10-22 16:32:41 Iteration 12800 (lr-0.0003): loss_bce : 2.9218; loss_dice: 1.0000; loss: 1.9609; 
+2020-10-22 16:33:21 Iteration 13000 (lr-0.0003): loss_bce : 2.4900; loss_dice: 1.0000; loss: 1.7450; 
+2020-10-22 16:33:29 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:33:29 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:34:08 Iteration 13200 (lr-0.0003): loss_bce : 2.5429; loss_dice: 1.0000; loss: 1.7715; 
+2020-10-22 16:34:48 Iteration 13400 (lr-0.0003): loss_bce : 1.3777; loss_dice: 1.0000; loss: 1.1888; 
+2020-10-22 16:35:27 Iteration 13600 (lr-0.0003): loss_bce : 2.3654; loss_dice: 1.0000; loss: 1.6827; 
+2020-10-22 16:36:07 Iteration 13800 (lr-0.0003): loss_bce : 1.6548; loss_dice: 1.0000; loss: 1.3274; 
+2020-10-22 16:36:47 Iteration 14000 (lr-0.0003): loss_bce : 2.1762; loss_dice: 1.0000; loss: 1.5881; 
+2020-10-22 16:36:54 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:36:55 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:36:55 Iteration 14000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_14000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:37:34 Iteration 14200 (lr-0.0002): loss_bce : 2.9854; loss_dice: 1.0000; loss: 1.9927; 
+2020-10-22 16:38:15 Iteration 14400 (lr-0.0002): loss_bce : 2.2398; loss_dice: 1.0000; loss: 1.6199; 
+2020-10-22 16:38:54 Iteration 14600 (lr-0.0002): loss_bce : 3.0612; loss_dice: 1.0000; loss: 2.0306; 
+2020-10-22 16:39:34 Iteration 14800 (lr-0.0002): loss_bce : 2.6118; loss_dice: 1.0000; loss: 1.8059; 
+2020-10-22 16:40:13 Iteration 15000 (lr-0.0002): loss_bce : 2.6491; loss_dice: 1.0000; loss: 1.8245; 
+2020-10-22 16:40:21 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:40:21 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:41:01 Iteration 15200 (lr-0.0002): loss_bce : 3.9493; loss_dice: 1.0000; loss: 2.4747; 
+2020-10-22 16:41:40 Iteration 15400 (lr-0.0002): loss_bce : 2.8080; loss_dice: 1.0000; loss: 1.9040; 
+2020-10-22 16:42:20 Iteration 15600 (lr-0.0002): loss_bce : 2.5390; loss_dice: 1.0000; loss: 1.7695; 
+2020-10-22 16:42:59 Iteration 15800 (lr-0.0002): loss_bce : 3.2809; loss_dice: 1.0000; loss: 2.1405; 
+2020-10-22 16:43:39 Iteration 16000 (lr-0.0002): loss_bce : 3.0159; loss_dice: 1.0000; loss: 2.0080; 
+2020-10-22 16:43:46 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:43:46 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:43:47 Iteration 16000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_16000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:44:26 Iteration 16200 (lr-0.0002): loss_bce : 2.1782; loss_dice: 1.0000; loss: 1.5891; 
+2020-10-22 16:45:07 Iteration 16400 (lr-0.0002): loss_bce : 2.2728; loss_dice: 1.0000; loss: 1.6364; 
+2020-10-22 16:45:47 Iteration 16600 (lr-0.0002): loss_bce : 2.5171; loss_dice: 1.0000; loss: 1.7585; 
+2020-10-22 16:46:26 Iteration 16800 (lr-0.0002): loss_bce : 3.9314; loss_dice: 1.0000; loss: 2.4657; 
+2020-10-22 16:47:04 Iteration 17000 (lr-0.0002): loss_bce : 2.0513; loss_dice: 1.0000; loss: 1.5256; 
+2020-10-22 16:47:12 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:47:12 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:47:51 Iteration 17200 (lr-0.0002): loss_bce : 2.5113; loss_dice: 1.0000; loss: 1.7556; 
+2020-10-22 16:48:31 Iteration 17400 (lr-0.0002): loss_bce : 2.8691; loss_dice: 1.0000; loss: 1.9345; 
+2020-10-22 16:49:11 Iteration 17600 (lr-0.0002): loss_bce : 2.6837; loss_dice: 1.0000; loss: 1.8419; 
+2020-10-22 16:49:52 Iteration 17800 (lr-0.0002): loss_bce : 3.0640; loss_dice: 1.0000; loss: 2.0320; 
+2020-10-22 16:50:31 Iteration 18000 (lr-0.0002): loss_bce : 2.5422; loss_dice: 1.0000; loss: 1.7711; 
+2020-10-22 16:50:38 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:50:39 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:50:39 Iteration 18000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_18000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:51:19 Iteration 18200 (lr-0.0002): loss_bce : 1.8171; loss_dice: 1.0000; loss: 1.4085; 
+2020-10-22 16:51:58 Iteration 18400 (lr-0.0002): loss_bce : 3.2834; loss_dice: 1.0000; loss: 2.1417; 
+2020-10-22 16:52:37 Iteration 18600 (lr-0.0002): loss_bce : 3.9158; loss_dice: 1.0000; loss: 2.4579; 
+2020-10-22 16:53:16 Iteration 18800 (lr-0.0002): loss_bce : 2.6291; loss_dice: 1.0000; loss: 1.8145; 
+2020-10-22 16:53:56 Iteration 19000 (lr-0.0002): loss_bce : 2.2231; loss_dice: 1.0000; loss: 1.6116; 
+2020-10-22 16:54:03 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:54:03 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:54:43 Iteration 19200 (lr-0.0001): loss_bce : 3.5470; loss_dice: 1.0000; loss: 2.2735; 
+2020-10-22 16:55:23 Iteration 19400 (lr-0.0001): loss_bce : 1.9526; loss_dice: 1.0000; loss: 1.4763; 
+2020-10-22 16:56:03 Iteration 19600 (lr-0.0001): loss_bce : 2.5488; loss_dice: 1.0000; loss: 1.7744; 
+2020-10-22 16:56:44 Iteration 19800 (lr-0.0001): loss_bce : 3.2463; loss_dice: 1.0000; loss: 2.1231; 
+2020-10-22 16:57:23 Iteration 20000 (lr-0.0001): loss_bce : 3.6642; loss_dice: 1.0000; loss: 2.3321; 
+2020-10-22 16:57:30 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 16:57:31 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 16:57:31 Iteration 20000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_20000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 16:58:10 Iteration 20200 (lr-0.0001): loss_bce : 2.4137; loss_dice: 1.0000; loss: 1.7068; 
+2020-10-22 16:58:50 Iteration 20400 (lr-0.0001): loss_bce : 2.0078; loss_dice: 1.0000; loss: 1.5039; 
+2020-10-22 16:59:30 Iteration 20600 (lr-0.0001): loss_bce : 1.3727; loss_dice: 1.0000; loss: 1.1863; 
+2020-10-22 17:00:09 Iteration 20800 (lr-0.0001): loss_bce : 1.5042; loss_dice: 1.0000; loss: 1.2521; 
+2020-10-22 17:00:48 Iteration 21000 (lr-0.0001): loss_bce : 2.6061; loss_dice: 1.0000; loss: 1.8031; 
+2020-10-22 17:00:56 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:00:56 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:01:36 Iteration 21200 (lr-0.0001): loss_bce : 2.9965; loss_dice: 1.0000; loss: 1.9982; 
+2020-10-22 17:02:15 Iteration 21400 (lr-0.0001): loss_bce : 2.6769; loss_dice: 1.0000; loss: 1.8384; 
+2020-10-22 17:02:55 Iteration 21600 (lr-0.0001): loss_bce : 3.1859; loss_dice: 1.0000; loss: 2.0930; 
+2020-10-22 17:03:35 Iteration 21800 (lr-0.0001): loss_bce : 2.2335; loss_dice: 1.0000; loss: 1.6168; 
+2020-10-22 17:04:14 Iteration 22000 (lr-0.0001): loss_bce : 2.4801; loss_dice: 1.0000; loss: 1.7400; 
+2020-10-22 17:04:22 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:04:22 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:04:22 Iteration 22000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_22000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:05:02 Iteration 22200 (lr-0.0001): loss_bce : 1.0269; loss_dice: 1.0000; loss: 1.0134; 
+2020-10-22 17:05:41 Iteration 22400 (lr-0.0001): loss_bce : 2.3404; loss_dice: 1.0000; loss: 1.6702; 
+2020-10-22 17:06:21 Iteration 22600 (lr-0.0001): loss_bce : 2.9862; loss_dice: 1.0000; loss: 1.9931; 
+2020-10-22 17:07:01 Iteration 22800 (lr-0.0001): loss_bce : 2.5975; loss_dice: 1.0000; loss: 1.7988; 
+2020-10-22 17:07:40 Iteration 23000 (lr-0.0001): loss_bce : 3.0945; loss_dice: 1.0000; loss: 2.0472; 
+2020-10-22 17:07:47 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:07:48 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:08:27 Iteration 23200 (lr-0.0001): loss_bce : 1.2092; loss_dice: 1.0000; loss: 1.1046; 
+2020-10-22 17:09:08 Iteration 23400 (lr-0.0001): loss_bce : 3.0032; loss_dice: 1.0000; loss: 2.0016; 
+2020-10-22 17:09:47 Iteration 23600 (lr-0.0001): loss_bce : 2.1874; loss_dice: 1.0000; loss: 1.5937; 
+2020-10-22 17:10:27 Iteration 23800 (lr-0.0001): loss_bce : 2.4228; loss_dice: 1.0000; loss: 1.7114; 
+2020-10-22 17:11:07 Iteration 24000 (lr-0.0001): loss_bce : 4.0681; loss_dice: 1.0000; loss: 2.5340; 
+2020-10-22 17:11:15 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:11:15 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:11:15 Iteration 24000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_24000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:11:55 Iteration 24200 (lr-0.0001): loss_bce : 2.5397; loss_dice: 1.0000; loss: 1.7698; 
+2020-10-22 17:12:34 Iteration 24400 (lr-0.0001): loss_bce : 3.0867; loss_dice: 1.0000; loss: 2.0433; 
+2020-10-22 17:13:14 Iteration 24600 (lr-0.0001): loss_bce : 1.9875; loss_dice: 1.0000; loss: 1.4938; 
+2020-10-22 17:13:54 Iteration 24800 (lr-0.0001): loss_bce : 2.0964; loss_dice: 1.0000; loss: 1.5482; 
+2020-10-22 17:14:33 Iteration 25000 (lr-0.0001): loss_bce : 3.2095; loss_dice: 1.0000; loss: 2.1048; 
+2020-10-22 17:14:40 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:14:41 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:15:21 Iteration 25200 (lr-0.0001): loss_bce : 2.4579; loss_dice: 1.0000; loss: 1.7290; 
+2020-10-22 17:16:01 Iteration 25400 (lr-0.0001): loss_bce : 2.7032; loss_dice: 1.0000; loss: 1.8516; 
+2020-10-22 17:16:41 Iteration 25600 (lr-0.0001): loss_bce : 3.2041; loss_dice: 1.0000; loss: 2.1021; 
+2020-10-22 17:17:21 Iteration 25800 (lr-0.0001): loss_bce : 1.9143; loss_dice: 1.0000; loss: 1.4571; 
+2020-10-22 17:18:00 Iteration 26000 (lr-0.0001): loss_bce : 2.9809; loss_dice: 1.0000; loss: 1.9905; 
+2020-10-22 17:18:08 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:18:08 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:18:08 Iteration 26000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_26000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:18:49 Iteration 26200 (lr-0.0001): loss_bce : 3.2689; loss_dice: 1.0000; loss: 2.1345; 
+2020-10-22 17:19:29 Iteration 26400 (lr-0.0001): loss_bce : 2.5869; loss_dice: 1.0000; loss: 1.7935; 
+2020-10-22 17:20:09 Iteration 26600 (lr-0.0001): loss_bce : 2.6731; loss_dice: 1.0000; loss: 1.8366; 
+2020-10-22 17:20:48 Iteration 26800 (lr-0.0001): loss_bce : 2.5985; loss_dice: 1.0000; loss: 1.7992; 
+2020-10-22 17:21:28 Iteration 27000 (lr-0.0001): loss_bce : 3.2856; loss_dice: 1.0000; loss: 2.1428; 
+2020-10-22 17:21:35 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:21:36 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:22:15 Iteration 27200 (lr-0.0001): loss_bce : 3.5345; loss_dice: 1.0000; loss: 2.2672; 
+2020-10-22 17:22:55 Iteration 27400 (lr-0.0001): loss_bce : 2.1466; loss_dice: 1.0000; loss: 1.5733; 
+2020-10-22 17:23:34 Iteration 27600 (lr-0.0001): loss_bce : 2.9090; loss_dice: 1.0000; loss: 1.9545; 
+2020-10-22 17:24:14 Iteration 27800 (lr-0.0001): loss_bce : 2.5457; loss_dice: 1.0000; loss: 1.7728; 
+2020-10-22 17:24:54 Iteration 28000 (lr-0.0001): loss_bce : 1.2719; loss_dice: 1.0000; loss: 1.1360; 
+2020-10-22 17:25:01 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:25:02 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:25:02 Iteration 28000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_28000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:25:41 Iteration 28200 (lr-0.0001): loss_bce : 3.6400; loss_dice: 1.0000; loss: 2.3200; 
+2020-10-22 17:26:20 Iteration 28400 (lr-0.0001): loss_bce : 2.3262; loss_dice: 1.0000; loss: 1.6631; 
+2020-10-22 17:27:01 Iteration 28600 (lr-0.0001): loss_bce : 2.4076; loss_dice: 1.0000; loss: 1.7038; 
+2020-10-22 17:27:39 Iteration 28800 (lr-0.0001): loss_bce : 2.0925; loss_dice: 1.0000; loss: 1.5462; 
+2020-10-22 17:28:19 Iteration 29000 (lr-0.0001): loss_bce : 3.1434; loss_dice: 1.0000; loss: 2.0717; 
+2020-10-22 17:28:27 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:28:27 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:29:07 Iteration 29200 (lr-0.0001): loss_bce : 3.2379; loss_dice: 1.0000; loss: 2.1190; 
+2020-10-22 17:29:47 Iteration 29400 (lr-0.0001): loss_bce : 3.0183; loss_dice: 1.0000; loss: 2.0091; 
+2020-10-22 17:30:27 Iteration 29600 (lr-0.0001): loss_bce : 2.2314; loss_dice: 1.0000; loss: 1.6157; 
+2020-10-22 17:31:06 Iteration 29800 (lr-0.0001): loss_bce : 3.2011; loss_dice: 1.0000; loss: 2.1006; 
+2020-10-22 17:31:45 Iteration 30000 (lr-0.0001): loss_bce : 2.6989; loss_dice: 1.0000; loss: 1.8495; 
+2020-10-22 17:31:53 ----------------------> val_dice on UCL is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09}
+2020-10-22 17:31:53 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:31:53 Iteration 30000: save model to ./exp/train_finetuning_onlinemodel/UCL/step_30000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:31:53 ============= Train on BIDMC
+2020-10-22 17:31:53 Reset optimizer.
+2020-10-22 17:32:33 Iteration 200 (lr-0.0010): loss_bce : 4.0289; loss_dice: 1.0000; loss: 2.5145; 
+2020-10-22 17:33:12 Iteration 400 (lr-0.0010): loss_bce : 2.9823; loss_dice: 1.0000; loss: 1.9912; 
+2020-10-22 17:33:51 Iteration 600 (lr-0.0010): loss_bce : 4.1253; loss_dice: 1.0000; loss: 2.5626; 
+2020-10-22 17:34:30 Iteration 800 (lr-0.0010): loss_bce : 3.1751; loss_dice: 1.0000; loss: 2.0876; 
+2020-10-22 17:35:09 Iteration 1000 (lr-0.0010): loss_bce : 4.2974; loss_dice: 1.0000; loss: 2.6487; 
+2020-10-22 17:35:16 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:35:17 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:35:56 Iteration 1200 (lr-0.0009): loss_bce : 3.8956; loss_dice: 1.0000; loss: 2.4478; 
+2020-10-22 17:36:35 Iteration 1400 (lr-0.0009): loss_bce : 5.5861; loss_dice: 1.0000; loss: 3.2930; 
+2020-10-22 17:37:15 Iteration 1600 (lr-0.0009): loss_bce : 4.9563; loss_dice: 1.0000; loss: 2.9781; 
+2020-10-22 17:37:54 Iteration 1800 (lr-0.0009): loss_bce : 3.4170; loss_dice: 1.0000; loss: 2.2085; 
+2020-10-22 17:38:33 Iteration 2000 (lr-0.0009): loss_bce : 4.6735; loss_dice: 1.0000; loss: 2.8367; 
+2020-10-22 17:38:40 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:38:40 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:38:40 Iteration 2000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_2000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:39:20 Iteration 2200 (lr-0.0008): loss_bce : 3.3099; loss_dice: 1.0000; loss: 2.1550; 
+2020-10-22 17:39:59 Iteration 2400 (lr-0.0008): loss_bce : 5.2028; loss_dice: 1.0000; loss: 3.1014; 
+2020-10-22 17:40:38 Iteration 2600 (lr-0.0008): loss_bce : 4.0188; loss_dice: 1.0000; loss: 2.5094; 
+2020-10-22 17:41:17 Iteration 2800 (lr-0.0008): loss_bce : 4.2194; loss_dice: 1.0000; loss: 2.6097; 
+2020-10-22 17:41:56 Iteration 3000 (lr-0.0008): loss_bce : 4.0886; loss_dice: 1.0000; loss: 2.5443; 
+2020-10-22 17:42:03 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:42:04 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:42:43 Iteration 3200 (lr-0.0007): loss_bce : 3.3981; loss_dice: 1.0000; loss: 2.1990; 
+2020-10-22 17:43:22 Iteration 3400 (lr-0.0007): loss_bce : 5.4617; loss_dice: 1.0000; loss: 3.2308; 
+2020-10-22 17:44:01 Iteration 3600 (lr-0.0007): loss_bce : 4.6168; loss_dice: 1.0000; loss: 2.8084; 
+2020-10-22 17:44:40 Iteration 3800 (lr-0.0007): loss_bce : 6.1557; loss_dice: 1.0000; loss: 3.5779; 
+2020-10-22 17:45:20 Iteration 4000 (lr-0.0007): loss_bce : 4.0083; loss_dice: 1.0000; loss: 2.5041; 
+2020-10-22 17:45:27 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:45:27 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:45:27 Iteration 4000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_4000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:46:07 Iteration 4200 (lr-0.0007): loss_bce : 3.0487; loss_dice: 1.0000; loss: 2.0244; 
+2020-10-22 17:46:46 Iteration 4400 (lr-0.0007): loss_bce : 6.1784; loss_dice: 1.0000; loss: 3.5892; 
+2020-10-22 17:47:25 Iteration 4600 (lr-0.0007): loss_bce : 3.1620; loss_dice: 1.0000; loss: 2.0810; 
+2020-10-22 17:48:04 Iteration 4800 (lr-0.0007): loss_bce : 3.6472; loss_dice: 1.0000; loss: 2.3236; 
+2020-10-22 17:48:43 Iteration 5000 (lr-0.0007): loss_bce : 4.7585; loss_dice: 1.0000; loss: 2.8792; 
+2020-10-22 17:48:50 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:48:50 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:49:29 Iteration 5200 (lr-0.0006): loss_bce : 3.4177; loss_dice: 1.0000; loss: 2.2088; 
+2020-10-22 17:50:09 Iteration 5400 (lr-0.0006): loss_bce : 3.3827; loss_dice: 1.0000; loss: 2.1913; 
+2020-10-22 17:50:48 Iteration 5600 (lr-0.0006): loss_bce : 4.3960; loss_dice: 1.0000; loss: 2.6980; 
+2020-10-22 17:51:27 Iteration 5800 (lr-0.0006): loss_bce : 6.5046; loss_dice: 1.0000; loss: 3.7523; 
+2020-10-22 17:52:06 Iteration 6000 (lr-0.0006): loss_bce : 3.2192; loss_dice: 1.0000; loss: 2.1096; 
+2020-10-22 17:52:13 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:52:13 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:52:14 Iteration 6000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_6000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:52:53 Iteration 6200 (lr-0.0005): loss_bce : 4.3715; loss_dice: 1.0000; loss: 2.6857; 
+2020-10-22 17:53:33 Iteration 6400 (lr-0.0005): loss_bce : 3.2178; loss_dice: 1.0000; loss: 2.1089; 
+2020-10-22 17:54:12 Iteration 6600 (lr-0.0005): loss_bce : 4.4531; loss_dice: 1.0000; loss: 2.7265; 
+2020-10-22 17:54:51 Iteration 6800 (lr-0.0005): loss_bce : 3.3574; loss_dice: 1.0000; loss: 2.1787; 
+2020-10-22 17:55:31 Iteration 7000 (lr-0.0005): loss_bce : 7.6745; loss_dice: 1.0000; loss: 4.3373; 
+2020-10-22 17:55:38 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:55:38 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:56:18 Iteration 7200 (lr-0.0005): loss_bce : 5.0315; loss_dice: 1.0000; loss: 3.0158; 
+2020-10-22 17:56:57 Iteration 7400 (lr-0.0005): loss_bce : 5.6336; loss_dice: 1.0000; loss: 3.3168; 
+2020-10-22 17:57:36 Iteration 7600 (lr-0.0005): loss_bce : 3.5802; loss_dice: 1.0000; loss: 2.2901; 
+2020-10-22 17:58:15 Iteration 7800 (lr-0.0005): loss_bce : 5.3739; loss_dice: 1.0000; loss: 3.1869; 
+2020-10-22 17:58:54 Iteration 8000 (lr-0.0005): loss_bce : 2.4521; loss_dice: 1.0000; loss: 1.7260; 
+2020-10-22 17:59:02 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 17:59:02 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 17:59:02 Iteration 8000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_8000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 17:59:41 Iteration 8200 (lr-0.0004): loss_bce : 4.1466; loss_dice: 1.0000; loss: 2.5733; 
+2020-10-22 18:00:20 Iteration 8400 (lr-0.0004): loss_bce : 2.8540; loss_dice: 1.0000; loss: 1.9270; 
+2020-10-22 18:00:59 Iteration 8600 (lr-0.0004): loss_bce : 4.7883; loss_dice: 1.0000; loss: 2.8941; 
+2020-10-22 18:01:39 Iteration 8800 (lr-0.0004): loss_bce : 3.1612; loss_dice: 1.0000; loss: 2.0806; 
+2020-10-22 18:02:18 Iteration 9000 (lr-0.0004): loss_bce : 4.1098; loss_dice: 1.0000; loss: 2.5549; 
+2020-10-22 18:02:25 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:02:26 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:03:05 Iteration 9200 (lr-0.0004): loss_bce : 4.1760; loss_dice: 1.0000; loss: 2.5880; 
+2020-10-22 18:03:44 Iteration 9400 (lr-0.0004): loss_bce : 1.6301; loss_dice: 1.0000; loss: 1.3151; 
+2020-10-22 18:04:23 Iteration 9600 (lr-0.0004): loss_bce : 4.1563; loss_dice: 1.0000; loss: 2.5782; 
+2020-10-22 18:05:02 Iteration 9800 (lr-0.0004): loss_bce : 3.6112; loss_dice: 1.0000; loss: 2.3056; 
+2020-10-22 18:05:42 Iteration 10000 (lr-0.0004): loss_bce : 4.6340; loss_dice: 1.0000; loss: 2.8170; 
+2020-10-22 18:05:49 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:05:50 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:05:50 Iteration 10000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_10000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:06:29 Iteration 10200 (lr-0.0004): loss_bce : 6.7833; loss_dice: 1.0000; loss: 3.8917; 
+2020-10-22 18:07:09 Iteration 10400 (lr-0.0004): loss_bce : 3.5012; loss_dice: 1.0000; loss: 2.2506; 
+2020-10-22 18:07:48 Iteration 10600 (lr-0.0004): loss_bce : 2.9668; loss_dice: 1.0000; loss: 1.9834; 
+2020-10-22 18:08:28 Iteration 10800 (lr-0.0004): loss_bce : 6.3151; loss_dice: 1.0000; loss: 3.6576; 
+2020-10-22 18:09:07 Iteration 11000 (lr-0.0004): loss_bce : 4.1278; loss_dice: 1.0000; loss: 2.5639; 
+2020-10-22 18:09:14 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:09:15 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:09:53 Iteration 11200 (lr-0.0003): loss_bce : 4.7615; loss_dice: 1.0000; loss: 2.8808; 
+2020-10-22 18:10:33 Iteration 11400 (lr-0.0003): loss_bce : 4.2868; loss_dice: 1.0000; loss: 2.6434; 
+2020-10-22 18:11:12 Iteration 11600 (lr-0.0003): loss_bce : 6.7354; loss_dice: 1.0000; loss: 3.8677; 
+2020-10-22 18:11:51 Iteration 11800 (lr-0.0003): loss_bce : 3.9044; loss_dice: 1.0000; loss: 2.4522; 
+2020-10-22 18:12:30 Iteration 12000 (lr-0.0003): loss_bce : 6.4596; loss_dice: 1.0000; loss: 3.7298; 
+2020-10-22 18:12:37 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:12:38 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:12:38 Iteration 12000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_12000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:13:17 Iteration 12200 (lr-0.0003): loss_bce : 3.9641; loss_dice: 1.0000; loss: 2.4820; 
+2020-10-22 18:13:56 Iteration 12400 (lr-0.0003): loss_bce : 5.9875; loss_dice: 1.0000; loss: 3.4937; 
+2020-10-22 18:14:34 Iteration 12600 (lr-0.0003): loss_bce : 4.1921; loss_dice: 1.0000; loss: 2.5961; 
+2020-10-22 18:15:13 Iteration 12800 (lr-0.0003): loss_bce : 3.2998; loss_dice: 1.0000; loss: 2.1499; 
+2020-10-22 18:15:52 Iteration 13000 (lr-0.0003): loss_bce : 6.3075; loss_dice: 1.0000; loss: 3.6538; 
+2020-10-22 18:15:59 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:15:59 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:16:39 Iteration 13200 (lr-0.0003): loss_bce : 4.0495; loss_dice: 1.0000; loss: 2.5247; 
+2020-10-22 18:17:18 Iteration 13400 (lr-0.0003): loss_bce : 5.2343; loss_dice: 1.0000; loss: 3.1172; 
+2020-10-22 18:17:57 Iteration 13600 (lr-0.0003): loss_bce : 4.7931; loss_dice: 1.0000; loss: 2.8965; 
+2020-10-22 18:18:36 Iteration 13800 (lr-0.0003): loss_bce : 4.3420; loss_dice: 1.0000; loss: 2.6710; 
+2020-10-22 18:19:15 Iteration 14000 (lr-0.0003): loss_bce : 3.7323; loss_dice: 1.0000; loss: 2.3661; 
+2020-10-22 18:19:23 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:19:23 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:19:23 Iteration 14000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_14000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:20:01 Iteration 14200 (lr-0.0002): loss_bce : 5.6095; loss_dice: 1.0000; loss: 3.3048; 
+2020-10-22 18:20:41 Iteration 14400 (lr-0.0002): loss_bce : 2.4183; loss_dice: 1.0000; loss: 1.7092; 
+2020-10-22 18:21:19 Iteration 14600 (lr-0.0002): loss_bce : 3.6888; loss_dice: 1.0000; loss: 2.3444; 
+2020-10-22 18:21:58 Iteration 14800 (lr-0.0002): loss_bce : 3.3762; loss_dice: 1.0000; loss: 2.1881; 
+2020-10-22 18:22:36 Iteration 15000 (lr-0.0002): loss_bce : 2.9139; loss_dice: 1.0000; loss: 1.9570; 
+2020-10-22 18:22:44 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:22:44 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:23:23 Iteration 15200 (lr-0.0002): loss_bce : 5.2546; loss_dice: 1.0000; loss: 3.1273; 
+2020-10-22 18:24:03 Iteration 15400 (lr-0.0002): loss_bce : 2.2819; loss_dice: 1.0000; loss: 1.6409; 
+2020-10-22 18:24:41 Iteration 15600 (lr-0.0002): loss_bce : 4.0732; loss_dice: 1.0000; loss: 2.5366; 
+2020-10-22 18:25:20 Iteration 15800 (lr-0.0002): loss_bce : 4.1266; loss_dice: 1.0000; loss: 2.5633; 
+2020-10-22 18:26:00 Iteration 16000 (lr-0.0002): loss_bce : 4.7706; loss_dice: 1.0000; loss: 2.8853; 
+2020-10-22 18:26:07 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:26:08 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:26:08 Iteration 16000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_16000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:26:47 Iteration 16200 (lr-0.0002): loss_bce : 3.3299; loss_dice: 1.0000; loss: 2.1650; 
+2020-10-22 18:27:26 Iteration 16400 (lr-0.0002): loss_bce : 3.6449; loss_dice: 1.0000; loss: 2.3224; 
+2020-10-22 18:28:05 Iteration 16600 (lr-0.0002): loss_bce : 2.6028; loss_dice: 1.0000; loss: 1.8014; 
+2020-10-22 18:28:45 Iteration 16800 (lr-0.0002): loss_bce : 4.7409; loss_dice: 1.0000; loss: 2.8705; 
+2020-10-22 18:29:24 Iteration 17000 (lr-0.0002): loss_bce : 3.5514; loss_dice: 1.0000; loss: 2.2757; 
+2020-10-22 18:29:32 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:29:32 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:30:11 Iteration 17200 (lr-0.0002): loss_bce : 3.7283; loss_dice: 1.0000; loss: 2.3641; 
+2020-10-22 18:30:50 Iteration 17400 (lr-0.0002): loss_bce : 3.7306; loss_dice: 1.0000; loss: 2.3653; 
+2020-10-22 18:31:30 Iteration 17600 (lr-0.0002): loss_bce : 4.6628; loss_dice: 1.0000; loss: 2.8314; 
+2020-10-22 18:32:09 Iteration 17800 (lr-0.0002): loss_bce : 6.3471; loss_dice: 1.0000; loss: 3.6736; 
+2020-10-22 18:32:49 Iteration 18000 (lr-0.0002): loss_bce : 3.2316; loss_dice: 1.0000; loss: 2.1158; 
+2020-10-22 18:32:56 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:32:56 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:32:56 Iteration 18000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_18000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:33:35 Iteration 18200 (lr-0.0002): loss_bce : 5.4791; loss_dice: 1.0000; loss: 3.2395; 
+2020-10-22 18:34:14 Iteration 18400 (lr-0.0002): loss_bce : 5.4520; loss_dice: 1.0000; loss: 3.2260; 
+2020-10-22 18:34:54 Iteration 18600 (lr-0.0002): loss_bce : 4.2591; loss_dice: 1.0000; loss: 2.6296; 
+2020-10-22 18:35:33 Iteration 18800 (lr-0.0002): loss_bce : 5.4862; loss_dice: 1.0000; loss: 3.2431; 
+2020-10-22 18:36:13 Iteration 19000 (lr-0.0002): loss_bce : 4.0944; loss_dice: 1.0000; loss: 2.5472; 
+2020-10-22 18:36:20 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:36:20 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:37:00 Iteration 19200 (lr-0.0001): loss_bce : 5.8888; loss_dice: 1.0000; loss: 3.4444; 
+2020-10-22 18:37:39 Iteration 19400 (lr-0.0001): loss_bce : 2.9215; loss_dice: 1.0000; loss: 1.9607; 
+2020-10-22 18:38:19 Iteration 19600 (lr-0.0001): loss_bce : 6.8417; loss_dice: 1.0000; loss: 3.9209; 
+2020-10-22 18:38:58 Iteration 19800 (lr-0.0001): loss_bce : 4.3592; loss_dice: 1.0000; loss: 2.6796; 
+2020-10-22 18:39:37 Iteration 20000 (lr-0.0001): loss_bce : 6.3443; loss_dice: 1.0000; loss: 3.6722; 
+2020-10-22 18:39:44 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:39:44 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:39:45 Iteration 20000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_20000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:40:24 Iteration 20200 (lr-0.0001): loss_bce : 4.6401; loss_dice: 1.0000; loss: 2.8201; 
+2020-10-22 18:41:03 Iteration 20400 (lr-0.0001): loss_bce : 5.7004; loss_dice: 1.0000; loss: 3.3502; 
+2020-10-22 18:41:43 Iteration 20600 (lr-0.0001): loss_bce : 2.3933; loss_dice: 1.0000; loss: 1.6967; 
+2020-10-22 18:42:23 Iteration 20800 (lr-0.0001): loss_bce : 2.7278; loss_dice: 1.0000; loss: 1.8639; 
+2020-10-22 18:43:02 Iteration 21000 (lr-0.0001): loss_bce : 2.7327; loss_dice: 1.0000; loss: 1.8663; 
+2020-10-22 18:43:10 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:43:10 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:43:49 Iteration 21200 (lr-0.0001): loss_bce : 3.6763; loss_dice: 1.0000; loss: 2.3381; 
+2020-10-22 18:44:29 Iteration 21400 (lr-0.0001): loss_bce : 4.5617; loss_dice: 1.0000; loss: 2.7808; 
+2020-10-22 18:45:08 Iteration 21600 (lr-0.0001): loss_bce : 4.4624; loss_dice: 1.0000; loss: 2.7312; 
+2020-10-22 18:45:47 Iteration 21800 (lr-0.0001): loss_bce : 3.4331; loss_dice: 1.0000; loss: 2.2165; 
+2020-10-22 18:46:27 Iteration 22000 (lr-0.0001): loss_bce : 5.5559; loss_dice: 1.0000; loss: 3.2780; 
+2020-10-22 18:46:34 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:46:34 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:46:34 Iteration 22000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_22000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:47:14 Iteration 22200 (lr-0.0001): loss_bce : 6.9898; loss_dice: 1.0000; loss: 3.9949; 
+2020-10-22 18:47:53 Iteration 22400 (lr-0.0001): loss_bce : 3.1811; loss_dice: 1.0000; loss: 2.0906; 
+2020-10-22 18:48:32 Iteration 22600 (lr-0.0001): loss_bce : 3.5265; loss_dice: 1.0000; loss: 2.2633; 
+2020-10-22 18:49:11 Iteration 22800 (lr-0.0001): loss_bce : 4.6055; loss_dice: 1.0000; loss: 2.8027; 
+2020-10-22 18:49:51 Iteration 23000 (lr-0.0001): loss_bce : 5.1450; loss_dice: 1.0000; loss: 3.0725; 
+2020-10-22 18:49:58 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:49:58 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:50:37 Iteration 23200 (lr-0.0001): loss_bce : 3.0741; loss_dice: 1.0000; loss: 2.0370; 
+2020-10-22 18:51:16 Iteration 23400 (lr-0.0001): loss_bce : 5.6856; loss_dice: 1.0000; loss: 3.3428; 
+2020-10-22 18:51:56 Iteration 23600 (lr-0.0001): loss_bce : 2.7663; loss_dice: 1.0000; loss: 1.8831; 
+2020-10-22 18:52:35 Iteration 23800 (lr-0.0001): loss_bce : 7.1062; loss_dice: 1.0000; loss: 4.0531; 
+2020-10-22 18:53:14 Iteration 24000 (lr-0.0001): loss_bce : 5.7953; loss_dice: 1.0000; loss: 3.3976; 
+2020-10-22 18:53:21 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:53:21 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:53:22 Iteration 24000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_24000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 18:54:01 Iteration 24200 (lr-0.0001): loss_bce : 4.0584; loss_dice: 1.0000; loss: 2.5292; 
+2020-10-22 18:54:40 Iteration 24400 (lr-0.0001): loss_bce : 3.5790; loss_dice: 1.0000; loss: 2.2895; 
+2020-10-22 18:55:19 Iteration 24600 (lr-0.0001): loss_bce : 3.3566; loss_dice: 1.0000; loss: 2.1783; 
+2020-10-22 18:55:58 Iteration 24800 (lr-0.0001): loss_bce : 5.1222; loss_dice: 1.0000; loss: 3.0611; 
+2020-10-22 18:56:37 Iteration 25000 (lr-0.0001): loss_bce : 4.8828; loss_dice: 1.0000; loss: 2.9414; 
+2020-10-22 18:56:45 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 18:56:45 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 18:57:24 Iteration 25200 (lr-0.0001): loss_bce : 3.0630; loss_dice: 1.0000; loss: 2.0315; 
+2020-10-22 18:58:03 Iteration 25400 (lr-0.0001): loss_bce : 3.4315; loss_dice: 1.0000; loss: 2.2157; 
+2020-10-22 18:58:42 Iteration 25600 (lr-0.0001): loss_bce : 4.3327; loss_dice: 1.0000; loss: 2.6664; 
+2020-10-22 18:59:21 Iteration 25800 (lr-0.0001): loss_bce : 7.9295; loss_dice: 1.0000; loss: 4.4647; 
+2020-10-22 19:00:00 Iteration 26000 (lr-0.0001): loss_bce : 3.6734; loss_dice: 1.0000; loss: 2.3367; 
+2020-10-22 19:00:08 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 19:00:08 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:00:08 Iteration 26000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_26000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:00:47 Iteration 26200 (lr-0.0001): loss_bce : 4.6946; loss_dice: 1.0000; loss: 2.8473; 
+2020-10-22 19:01:26 Iteration 26400 (lr-0.0001): loss_bce : 5.3209; loss_dice: 1.0000; loss: 3.1604; 
+2020-10-22 19:02:06 Iteration 26600 (lr-0.0001): loss_bce : 4.3092; loss_dice: 1.0000; loss: 2.6546; 
+2020-10-22 19:02:45 Iteration 26800 (lr-0.0001): loss_bce : 4.5808; loss_dice: 1.0000; loss: 2.7904; 
+2020-10-22 19:03:25 Iteration 27000 (lr-0.0001): loss_bce : 4.9213; loss_dice: 1.0000; loss: 2.9606; 
+2020-10-22 19:03:32 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 19:03:32 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:04:10 Iteration 27200 (lr-0.0001): loss_bce : 5.7977; loss_dice: 1.0000; loss: 3.3989; 
+2020-10-22 19:04:50 Iteration 27400 (lr-0.0001): loss_bce : 6.4927; loss_dice: 1.0000; loss: 3.7463; 
+2020-10-22 19:05:28 Iteration 27600 (lr-0.0001): loss_bce : 2.7832; loss_dice: 1.0000; loss: 1.8916; 
+2020-10-22 19:06:07 Iteration 27800 (lr-0.0001): loss_bce : 4.3350; loss_dice: 1.0000; loss: 2.6675; 
+2020-10-22 19:06:47 Iteration 28000 (lr-0.0001): loss_bce : 6.7488; loss_dice: 1.0000; loss: 3.8744; 
+2020-10-22 19:06:54 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 19:06:54 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:06:54 Iteration 28000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_28000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:07:33 Iteration 28200 (lr-0.0001): loss_bce : 5.3089; loss_dice: 1.0000; loss: 3.1544; 
+2020-10-22 19:08:12 Iteration 28400 (lr-0.0001): loss_bce : 4.6113; loss_dice: 1.0000; loss: 2.8057; 
+2020-10-22 19:08:52 Iteration 28600 (lr-0.0001): loss_bce : 4.7229; loss_dice: 1.0000; loss: 2.8614; 
+2020-10-22 19:09:31 Iteration 28800 (lr-0.0001): loss_bce : 4.7084; loss_dice: 1.0000; loss: 2.8542; 
+2020-10-22 19:10:09 Iteration 29000 (lr-0.0001): loss_bce : 3.0792; loss_dice: 1.0000; loss: 2.0396; 
+2020-10-22 19:10:17 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 19:10:17 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:10:56 Iteration 29200 (lr-0.0001): loss_bce : 4.6930; loss_dice: 1.0000; loss: 2.8465; 
+2020-10-22 19:11:35 Iteration 29400 (lr-0.0001): loss_bce : 4.3242; loss_dice: 1.0000; loss: 2.6621; 
+2020-10-22 19:12:14 Iteration 29600 (lr-0.0001): loss_bce : 4.7443; loss_dice: 1.0000; loss: 2.8722; 
+2020-10-22 19:12:54 Iteration 29800 (lr-0.0001): loss_bce : 4.7316; loss_dice: 1.0000; loss: 2.8658; 
+2020-10-22 19:13:33 Iteration 30000 (lr-0.0001): loss_bce : 6.6612; loss_dice: 1.0000; loss: 3.8306; 
+2020-10-22 19:13:41 ----------------------> val_dice on BIDMC is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0}
+2020-10-22 19:13:41 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:13:41 Iteration 30000: save model to ./exp/train_finetuning_onlinemodel/BIDMC/step_30000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:13:41 ============= Train on HK
+2020-10-22 19:13:41 Reset optimizer.
+2020-10-22 19:14:21 Iteration 200 (lr-0.0010): loss_bce : 2.8205; loss_dice: 1.0000; loss: 1.9103; 
+2020-10-22 19:15:01 Iteration 400 (lr-0.0010): loss_bce : 2.4414; loss_dice: 1.0000; loss: 1.7207; 
+2020-10-22 19:15:41 Iteration 600 (lr-0.0010): loss_bce : 1.6669; loss_dice: 1.0000; loss: 1.3335; 
+2020-10-22 19:16:21 Iteration 800 (lr-0.0010): loss_bce : 2.6316; loss_dice: 1.0000; loss: 1.8158; 
+2020-10-22 19:17:00 Iteration 1000 (lr-0.0010): loss_bce : 2.1551; loss_dice: 1.0000; loss: 1.5775; 
+2020-10-22 19:17:07 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:17:08 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:17:47 Iteration 1200 (lr-0.0009): loss_bce : 2.9803; loss_dice: 1.0000; loss: 1.9901; 
+2020-10-22 19:18:28 Iteration 1400 (lr-0.0009): loss_bce : 1.9889; loss_dice: 1.0000; loss: 1.4945; 
+2020-10-22 19:19:08 Iteration 1600 (lr-0.0009): loss_bce : 2.0039; loss_dice: 1.0000; loss: 1.5020; 
+2020-10-22 19:19:48 Iteration 1800 (lr-0.0009): loss_bce : 1.9977; loss_dice: 1.0000; loss: 1.4988; 
+2020-10-22 19:20:28 Iteration 2000 (lr-0.0009): loss_bce : 1.9989; loss_dice: 1.0000; loss: 1.4994; 
+2020-10-22 19:20:36 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:20:36 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:20:36 Iteration 2000: save model to ./exp/train_finetuning_onlinemodel/HK/step_2000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:21:16 Iteration 2200 (lr-0.0008): loss_bce : 3.3899; loss_dice: 1.0000; loss: 2.1950; 
+2020-10-22 19:21:56 Iteration 2400 (lr-0.0008): loss_bce : 2.8470; loss_dice: 1.0000; loss: 1.9235; 
+2020-10-22 19:22:36 Iteration 2600 (lr-0.0008): loss_bce : 3.5188; loss_dice: 1.0000; loss: 2.2594; 
+2020-10-22 19:23:16 Iteration 2800 (lr-0.0008): loss_bce : 3.1051; loss_dice: 1.0000; loss: 2.0526; 
+2020-10-22 19:23:56 Iteration 3000 (lr-0.0008): loss_bce : 2.2601; loss_dice: 1.0000; loss: 1.6301; 
+2020-10-22 19:24:03 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:24:03 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:24:44 Iteration 3200 (lr-0.0007): loss_bce : 2.6078; loss_dice: 1.0000; loss: 1.8039; 
+2020-10-22 19:25:23 Iteration 3400 (lr-0.0007): loss_bce : 3.8628; loss_dice: 1.0000; loss: 2.4314; 
+2020-10-22 19:26:03 Iteration 3600 (lr-0.0007): loss_bce : 2.8879; loss_dice: 1.0000; loss: 1.9440; 
+2020-10-22 19:26:43 Iteration 3800 (lr-0.0007): loss_bce : 3.0816; loss_dice: 1.0000; loss: 2.0408; 
+2020-10-22 19:27:23 Iteration 4000 (lr-0.0007): loss_bce : 3.4919; loss_dice: 1.0000; loss: 2.2459; 
+2020-10-22 19:27:31 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:27:31 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:27:31 Iteration 4000: save model to ./exp/train_finetuning_onlinemodel/HK/step_4000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:28:11 Iteration 4200 (lr-0.0007): loss_bce : 2.3172; loss_dice: 1.0000; loss: 1.6586; 
+2020-10-22 19:28:52 Iteration 4400 (lr-0.0007): loss_bce : 1.4770; loss_dice: 1.0000; loss: 1.2385; 
+2020-10-22 19:29:32 Iteration 4600 (lr-0.0007): loss_bce : 2.9649; loss_dice: 1.0000; loss: 1.9825; 
+2020-10-22 19:30:11 Iteration 4800 (lr-0.0007): loss_bce : 2.0650; loss_dice: 1.0000; loss: 1.5325; 
+2020-10-22 19:30:52 Iteration 5000 (lr-0.0007): loss_bce : 1.7216; loss_dice: 1.0000; loss: 1.3608; 
+2020-10-22 19:30:59 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:30:59 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:31:40 Iteration 5200 (lr-0.0006): loss_bce : 0.8721; loss_dice: 1.0000; loss: 0.9360; 
+2020-10-22 19:32:20 Iteration 5400 (lr-0.0006): loss_bce : 2.3163; loss_dice: 1.0000; loss: 1.6582; 
+2020-10-22 19:33:00 Iteration 5600 (lr-0.0006): loss_bce : 2.8354; loss_dice: 1.0000; loss: 1.9177; 
+2020-10-22 19:33:40 Iteration 5800 (lr-0.0006): loss_bce : 3.2743; loss_dice: 1.0000; loss: 2.1372; 
+2020-10-22 19:34:20 Iteration 6000 (lr-0.0006): loss_bce : 2.2177; loss_dice: 1.0000; loss: 1.6089; 
+2020-10-22 19:34:28 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:34:28 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:34:28 Iteration 6000: save model to ./exp/train_finetuning_onlinemodel/HK/step_6000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:35:08 Iteration 6200 (lr-0.0005): loss_bce : 1.7693; loss_dice: 1.0000; loss: 1.3846; 
+2020-10-22 19:35:48 Iteration 6400 (lr-0.0005): loss_bce : 3.0628; loss_dice: 1.0000; loss: 2.0314; 
+2020-10-22 19:36:28 Iteration 6600 (lr-0.0005): loss_bce : 2.0162; loss_dice: 1.0000; loss: 1.5081; 
+2020-10-22 19:37:08 Iteration 6800 (lr-0.0005): loss_bce : 3.2157; loss_dice: 1.0000; loss: 2.1078; 
+2020-10-22 19:37:48 Iteration 7000 (lr-0.0005): loss_bce : 1.5759; loss_dice: 1.0000; loss: 1.2879; 
+2020-10-22 19:37:56 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:37:56 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:38:36 Iteration 7200 (lr-0.0005): loss_bce : 3.8101; loss_dice: 1.0000; loss: 2.4050; 
+2020-10-22 19:39:16 Iteration 7400 (lr-0.0005): loss_bce : 2.8310; loss_dice: 1.0000; loss: 1.9155; 
+2020-10-22 19:39:57 Iteration 7600 (lr-0.0005): loss_bce : 3.1526; loss_dice: 1.0000; loss: 2.0763; 
+2020-10-22 19:40:36 Iteration 7800 (lr-0.0005): loss_bce : 2.0449; loss_dice: 1.0000; loss: 1.5224; 
+2020-10-22 19:41:17 Iteration 8000 (lr-0.0005): loss_bce : 2.3383; loss_dice: 1.0000; loss: 1.6692; 
+2020-10-22 19:41:24 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:41:24 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:41:25 Iteration 8000: save model to ./exp/train_finetuning_onlinemodel/HK/step_8000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:42:05 Iteration 8200 (lr-0.0004): loss_bce : 2.6113; loss_dice: 1.0000; loss: 1.8056; 
+2020-10-22 19:42:45 Iteration 8400 (lr-0.0004): loss_bce : 1.7295; loss_dice: 1.0000; loss: 1.3648; 
+2020-10-22 19:43:25 Iteration 8600 (lr-0.0004): loss_bce : 2.9017; loss_dice: 1.0000; loss: 1.9509; 
+2020-10-22 19:44:04 Iteration 8800 (lr-0.0004): loss_bce : 3.1178; loss_dice: 1.0000; loss: 2.0589; 
+2020-10-22 19:44:44 Iteration 9000 (lr-0.0004): loss_bce : 2.7000; loss_dice: 1.0000; loss: 1.8500; 
+2020-10-22 19:44:52 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:44:52 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:45:32 Iteration 9200 (lr-0.0004): loss_bce : 2.0945; loss_dice: 1.0000; loss: 1.5472; 
+2020-10-22 19:46:12 Iteration 9400 (lr-0.0004): loss_bce : 3.0056; loss_dice: 1.0000; loss: 2.0028; 
+2020-10-22 19:46:51 Iteration 9600 (lr-0.0004): loss_bce : 2.9710; loss_dice: 1.0000; loss: 1.9855; 
+2020-10-22 19:47:31 Iteration 9800 (lr-0.0004): loss_bce : 4.2261; loss_dice: 1.0000; loss: 2.6130; 
+2020-10-22 19:48:11 Iteration 10000 (lr-0.0004): loss_bce : 2.5936; loss_dice: 1.0000; loss: 1.7968; 
+2020-10-22 19:48:18 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:48:18 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:48:18 Iteration 10000: save model to ./exp/train_finetuning_onlinemodel/HK/step_10000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:48:58 Iteration 10200 (lr-0.0004): loss_bce : 2.5296; loss_dice: 1.0000; loss: 1.7648; 
+2020-10-22 19:49:38 Iteration 10400 (lr-0.0004): loss_bce : 3.1492; loss_dice: 1.0000; loss: 2.0746; 
+2020-10-22 19:50:17 Iteration 10600 (lr-0.0004): loss_bce : 3.0122; loss_dice: 1.0000; loss: 2.0061; 
+2020-10-22 19:50:57 Iteration 10800 (lr-0.0004): loss_bce : 1.7652; loss_dice: 1.0000; loss: 1.3826; 
+2020-10-22 19:51:38 Iteration 11000 (lr-0.0004): loss_bce : 3.5323; loss_dice: 1.0000; loss: 2.2661; 
+2020-10-22 19:51:45 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:51:45 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:52:25 Iteration 11200 (lr-0.0003): loss_bce : 2.7630; loss_dice: 1.0000; loss: 1.8815; 
+2020-10-22 19:53:05 Iteration 11400 (lr-0.0003): loss_bce : 1.9190; loss_dice: 1.0000; loss: 1.4595; 
+2020-10-22 19:53:45 Iteration 11600 (lr-0.0003): loss_bce : 1.9716; loss_dice: 1.0000; loss: 1.4858; 
+2020-10-22 19:54:25 Iteration 11800 (lr-0.0003): loss_bce : 2.1587; loss_dice: 1.0000; loss: 1.5794; 
+2020-10-22 19:55:05 Iteration 12000 (lr-0.0003): loss_bce : 1.6296; loss_dice: 1.0000; loss: 1.3148; 
+2020-10-22 19:55:12 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:55:12 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:55:12 Iteration 12000: save model to ./exp/train_finetuning_onlinemodel/HK/step_12000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 19:55:52 Iteration 12200 (lr-0.0003): loss_bce : 3.6283; loss_dice: 1.0000; loss: 2.3142; 
+2020-10-22 19:56:32 Iteration 12400 (lr-0.0003): loss_bce : 2.1490; loss_dice: 1.0000; loss: 1.5745; 
+2020-10-22 19:57:13 Iteration 12600 (lr-0.0003): loss_bce : 2.5423; loss_dice: 1.0000; loss: 1.7711; 
+2020-10-22 19:57:53 Iteration 12800 (lr-0.0003): loss_bce : 2.5607; loss_dice: 1.0000; loss: 1.7804; 
+2020-10-22 19:58:32 Iteration 13000 (lr-0.0003): loss_bce : 2.2883; loss_dice: 1.0000; loss: 1.6441; 
+2020-10-22 19:58:39 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 19:58:39 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 19:59:19 Iteration 13200 (lr-0.0003): loss_bce : 3.0496; loss_dice: 1.0000; loss: 2.0248; 
+2020-10-22 20:00:00 Iteration 13400 (lr-0.0003): loss_bce : 3.1462; loss_dice: 1.0000; loss: 2.0731; 
+2020-10-22 20:00:40 Iteration 13600 (lr-0.0003): loss_bce : 2.6654; loss_dice: 1.0000; loss: 1.8327; 
+2020-10-22 20:01:20 Iteration 13800 (lr-0.0003): loss_bce : 2.5365; loss_dice: 1.0000; loss: 1.7683; 
+2020-10-22 20:02:00 Iteration 14000 (lr-0.0003): loss_bce : 2.6116; loss_dice: 1.0000; loss: 1.8058; 
+2020-10-22 20:02:07 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:02:08 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:02:08 Iteration 14000: save model to ./exp/train_finetuning_onlinemodel/HK/step_14000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:02:47 Iteration 14200 (lr-0.0002): loss_bce : 2.2767; loss_dice: 1.0000; loss: 1.6383; 
+2020-10-22 20:03:28 Iteration 14400 (lr-0.0002): loss_bce : 2.1796; loss_dice: 1.0000; loss: 1.5898; 
+2020-10-22 20:04:07 Iteration 14600 (lr-0.0002): loss_bce : 3.3109; loss_dice: 1.0000; loss: 2.1555; 
+2020-10-22 20:04:47 Iteration 14800 (lr-0.0002): loss_bce : 2.9171; loss_dice: 1.0000; loss: 1.9586; 
+2020-10-22 20:05:27 Iteration 15000 (lr-0.0002): loss_bce : 2.7087; loss_dice: 1.0000; loss: 1.8543; 
+2020-10-22 20:05:34 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:05:34 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:06:14 Iteration 15200 (lr-0.0002): loss_bce : 3.3360; loss_dice: 1.0000; loss: 2.1680; 
+2020-10-22 20:06:53 Iteration 15400 (lr-0.0002): loss_bce : 2.4840; loss_dice: 1.0000; loss: 1.7420; 
+2020-10-22 20:07:32 Iteration 15600 (lr-0.0002): loss_bce : 1.7692; loss_dice: 1.0000; loss: 1.3846; 
+2020-10-22 20:08:12 Iteration 15800 (lr-0.0002): loss_bce : 2.4032; loss_dice: 1.0000; loss: 1.7016; 
+2020-10-22 20:08:53 Iteration 16000 (lr-0.0002): loss_bce : 1.3130; loss_dice: 1.0000; loss: 1.1565; 
+2020-10-22 20:09:00 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:09:00 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:09:00 Iteration 16000: save model to ./exp/train_finetuning_onlinemodel/HK/step_16000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:09:40 Iteration 16200 (lr-0.0002): loss_bce : 2.0426; loss_dice: 1.0000; loss: 1.5213; 
+2020-10-22 20:10:20 Iteration 16400 (lr-0.0002): loss_bce : 2.6346; loss_dice: 1.0000; loss: 1.8173; 
+2020-10-22 20:11:00 Iteration 16600 (lr-0.0002): loss_bce : 2.5182; loss_dice: 1.0000; loss: 1.7591; 
+2020-10-22 20:11:40 Iteration 16800 (lr-0.0002): loss_bce : 3.0533; loss_dice: 1.0000; loss: 2.0266; 
+2020-10-22 20:12:20 Iteration 17000 (lr-0.0002): loss_bce : 3.2547; loss_dice: 1.0000; loss: 2.1274; 
+2020-10-22 20:12:28 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:12:28 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:13:08 Iteration 17200 (lr-0.0002): loss_bce : 1.7490; loss_dice: 1.0000; loss: 1.3745; 
+2020-10-22 20:13:48 Iteration 17400 (lr-0.0002): loss_bce : 2.6735; loss_dice: 1.0000; loss: 1.8367; 
+2020-10-22 20:14:28 Iteration 17600 (lr-0.0002): loss_bce : 2.4867; loss_dice: 1.0000; loss: 1.7434; 
+2020-10-22 20:15:08 Iteration 17800 (lr-0.0002): loss_bce : 4.4514; loss_dice: 1.0000; loss: 2.7257; 
+2020-10-22 20:15:48 Iteration 18000 (lr-0.0002): loss_bce : 2.1382; loss_dice: 1.0000; loss: 1.5691; 
+2020-10-22 20:15:55 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:15:56 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:15:56 Iteration 18000: save model to ./exp/train_finetuning_onlinemodel/HK/step_18000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:16:36 Iteration 18200 (lr-0.0002): loss_bce : 1.4776; loss_dice: 1.0000; loss: 1.2388; 
+2020-10-22 20:17:16 Iteration 18400 (lr-0.0002): loss_bce : 2.4123; loss_dice: 1.0000; loss: 1.7062; 
+2020-10-22 20:17:56 Iteration 18600 (lr-0.0002): loss_bce : 2.9998; loss_dice: 1.0000; loss: 1.9999; 
+2020-10-22 20:18:36 Iteration 18800 (lr-0.0002): loss_bce : 1.7619; loss_dice: 1.0000; loss: 1.3810; 
+2020-10-22 20:19:16 Iteration 19000 (lr-0.0002): loss_bce : 1.8036; loss_dice: 1.0000; loss: 1.4018; 
+2020-10-22 20:19:23 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:19:23 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:20:04 Iteration 19200 (lr-0.0001): loss_bce : 3.1237; loss_dice: 1.0000; loss: 2.0618; 
+2020-10-22 20:20:44 Iteration 19400 (lr-0.0001): loss_bce : 2.5621; loss_dice: 1.0000; loss: 1.7811; 
+2020-10-22 20:21:24 Iteration 19600 (lr-0.0001): loss_bce : 3.3031; loss_dice: 1.0000; loss: 2.1515; 
+2020-10-22 20:22:03 Iteration 19800 (lr-0.0001): loss_bce : 3.3584; loss_dice: 1.0000; loss: 2.1792; 
+2020-10-22 20:22:44 Iteration 20000 (lr-0.0001): loss_bce : 3.0497; loss_dice: 1.0000; loss: 2.0249; 
+2020-10-22 20:22:51 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:22:51 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:22:51 Iteration 20000: save model to ./exp/train_finetuning_onlinemodel/HK/step_20000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:23:31 Iteration 20200 (lr-0.0001): loss_bce : 2.3938; loss_dice: 1.0000; loss: 1.6969; 
+2020-10-22 20:24:11 Iteration 20400 (lr-0.0001): loss_bce : 3.1947; loss_dice: 1.0000; loss: 2.0974; 
+2020-10-22 20:24:51 Iteration 20600 (lr-0.0001): loss_bce : 2.1417; loss_dice: 1.0000; loss: 1.5708; 
+2020-10-22 20:25:31 Iteration 20800 (lr-0.0001): loss_bce : 1.7858; loss_dice: 1.0000; loss: 1.3929; 
+2020-10-22 20:26:11 Iteration 21000 (lr-0.0001): loss_bce : 3.4836; loss_dice: 1.0000; loss: 2.2418; 
+2020-10-22 20:26:18 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:26:19 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:26:58 Iteration 21200 (lr-0.0001): loss_bce : 2.8447; loss_dice: 1.0000; loss: 1.9223; 
+2020-10-22 20:27:37 Iteration 21400 (lr-0.0001): loss_bce : 1.8668; loss_dice: 1.0000; loss: 1.4334; 
+2020-10-22 20:28:17 Iteration 21600 (lr-0.0001): loss_bce : 2.7586; loss_dice: 1.0000; loss: 1.8793; 
+2020-10-22 20:28:58 Iteration 21800 (lr-0.0001): loss_bce : 3.3110; loss_dice: 1.0000; loss: 2.1555; 
+2020-10-22 20:29:38 Iteration 22000 (lr-0.0001): loss_bce : 2.1680; loss_dice: 1.0000; loss: 1.5840; 
+2020-10-22 20:29:46 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:29:46 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:29:46 Iteration 22000: save model to ./exp/train_finetuning_onlinemodel/HK/step_22000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:30:26 Iteration 22200 (lr-0.0001): loss_bce : 2.2231; loss_dice: 1.0000; loss: 1.6115; 
+2020-10-22 20:31:06 Iteration 22400 (lr-0.0001): loss_bce : 1.7941; loss_dice: 1.0000; loss: 1.3971; 
+2020-10-22 20:31:46 Iteration 22600 (lr-0.0001): loss_bce : 4.4093; loss_dice: 1.0000; loss: 2.7047; 
+2020-10-22 20:32:26 Iteration 22800 (lr-0.0001): loss_bce : 3.9836; loss_dice: 1.0000; loss: 2.4918; 
+2020-10-22 20:33:07 Iteration 23000 (lr-0.0001): loss_bce : 3.3407; loss_dice: 1.0000; loss: 2.1703; 
+2020-10-22 20:33:14 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:33:14 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:33:54 Iteration 23200 (lr-0.0001): loss_bce : 2.6595; loss_dice: 1.0000; loss: 1.8297; 
+2020-10-22 20:34:34 Iteration 23400 (lr-0.0001): loss_bce : 3.1676; loss_dice: 1.0000; loss: 2.0838; 
+2020-10-22 20:35:14 Iteration 23600 (lr-0.0001): loss_bce : 2.5989; loss_dice: 1.0000; loss: 1.7995; 
+2020-10-22 20:35:54 Iteration 23800 (lr-0.0001): loss_bce : 3.1676; loss_dice: 1.0000; loss: 2.0838; 
+2020-10-22 20:36:34 Iteration 24000 (lr-0.0001): loss_bce : 2.4621; loss_dice: 1.0000; loss: 1.7311; 
+2020-10-22 20:36:42 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:36:42 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:36:42 Iteration 24000: save model to ./exp/train_finetuning_onlinemodel/HK/step_24000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:37:22 Iteration 24200 (lr-0.0001): loss_bce : 2.1970; loss_dice: 1.0000; loss: 1.5985; 
+2020-10-22 20:38:02 Iteration 24400 (lr-0.0001): loss_bce : 2.8586; loss_dice: 1.0000; loss: 1.9293; 
+2020-10-22 20:38:42 Iteration 24600 (lr-0.0001): loss_bce : 2.9631; loss_dice: 1.0000; loss: 1.9816; 
+2020-10-22 20:39:22 Iteration 24800 (lr-0.0001): loss_bce : 3.1853; loss_dice: 1.0000; loss: 2.0927; 
+2020-10-22 20:40:01 Iteration 25000 (lr-0.0001): loss_bce : 2.5042; loss_dice: 1.0000; loss: 1.7521; 
+2020-10-22 20:40:09 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:40:09 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:40:49 Iteration 25200 (lr-0.0001): loss_bce : 2.0835; loss_dice: 1.0000; loss: 1.5417; 
+2020-10-22 20:41:28 Iteration 25400 (lr-0.0001): loss_bce : 3.1909; loss_dice: 1.0000; loss: 2.0955; 
+2020-10-22 20:42:08 Iteration 25600 (lr-0.0001): loss_bce : 3.1843; loss_dice: 1.0000; loss: 2.0922; 
+2020-10-22 20:42:48 Iteration 25800 (lr-0.0001): loss_bce : 2.1172; loss_dice: 1.0000; loss: 1.5586; 
+2020-10-22 20:43:29 Iteration 26000 (lr-0.0001): loss_bce : 2.2485; loss_dice: 1.0000; loss: 1.6243; 
+2020-10-22 20:43:36 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:43:36 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:43:36 Iteration 26000: save model to ./exp/train_finetuning_onlinemodel/HK/step_26000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:44:16 Iteration 26200 (lr-0.0001): loss_bce : 1.8090; loss_dice: 1.0000; loss: 1.4045; 
+2020-10-22 20:44:55 Iteration 26400 (lr-0.0001): loss_bce : 2.8946; loss_dice: 1.0000; loss: 1.9473; 
+2020-10-22 20:45:35 Iteration 26600 (lr-0.0001): loss_bce : 1.7731; loss_dice: 1.0000; loss: 1.3865; 
+2020-10-22 20:46:15 Iteration 26800 (lr-0.0001): loss_bce : 2.7693; loss_dice: 1.0000; loss: 1.8846; 
+2020-10-22 20:46:55 Iteration 27000 (lr-0.0001): loss_bce : 2.5003; loss_dice: 1.0000; loss: 1.7501; 
+2020-10-22 20:47:03 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:47:03 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:47:44 Iteration 27200 (lr-0.0001): loss_bce : 2.6857; loss_dice: 1.0000; loss: 1.8428; 
+2020-10-22 20:48:24 Iteration 27400 (lr-0.0001): loss_bce : 2.1311; loss_dice: 1.0000; loss: 1.5656; 
+2020-10-22 20:49:03 Iteration 27600 (lr-0.0001): loss_bce : 2.1610; loss_dice: 1.0000; loss: 1.5805; 
+2020-10-22 20:49:43 Iteration 27800 (lr-0.0001): loss_bce : 1.0638; loss_dice: 1.0000; loss: 1.0319; 
+2020-10-22 20:50:23 Iteration 28000 (lr-0.0001): loss_bce : 2.1627; loss_dice: 1.0000; loss: 1.5813; 
+2020-10-22 20:50:30 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:50:31 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:50:31 Iteration 28000: save model to ./exp/train_finetuning_onlinemodel/HK/step_28000_curdice_0.0000_predice_0.0000.pth
+2020-10-22 20:51:11 Iteration 28200 (lr-0.0001): loss_bce : 3.7110; loss_dice: 1.0000; loss: 2.3555; 
+2020-10-22 20:51:51 Iteration 28400 (lr-0.0001): loss_bce : 2.1762; loss_dice: 1.0000; loss: 1.5881; 
+2020-10-22 20:52:30 Iteration 28600 (lr-0.0001): loss_bce : 1.5372; loss_dice: 1.0000; loss: 1.2686; 
+2020-10-22 20:53:11 Iteration 28800 (lr-0.0001): loss_bce : 2.3301; loss_dice: 1.0000; loss: 1.6650; 
+2020-10-22 20:53:51 Iteration 29000 (lr-0.0001): loss_bce : 2.7069; loss_dice: 1.0000; loss: 1.8534; 
+2020-10-22 20:53:59 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:53:59 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:54:39 Iteration 29200 (lr-0.0001): loss_bce : 2.7719; loss_dice: 1.0000; loss: 1.8860; 
+2020-10-22 20:55:19 Iteration 29400 (lr-0.0001): loss_bce : 1.9596; loss_dice: 1.0000; loss: 1.4798; 
+2020-10-22 20:55:59 Iteration 29600 (lr-0.0001): loss_bce : 1.8327; loss_dice: 1.0000; loss: 1.4164; 
+2020-10-22 20:56:38 Iteration 29800 (lr-0.0001): loss_bce : 2.8482; loss_dice: 1.0000; loss: 1.9241; 
+2020-10-22 20:57:18 Iteration 30000 (lr-0.0001): loss_bce : 3.5837; loss_dice: 1.0000; loss: 2.2918; 
+2020-10-22 20:57:25 ----------------------> val_dice on HK is 0.0000, on previous sites is {'ISBI': 0.0, 'ISBI_1.5': 0.0, 'I2CVB': 0.0, 'UCL': 1.419158208937872e-09, 'BIDMC': 0.0, 'HK': 0.0}
+2020-10-22 20:57:25 ----------------------> cur_dice improved from 0.0000 to 0.0000
+2020-10-22 20:57:25 Iteration 30000: save model to ./exp/train_finetuning_onlinemodel/HK/step_30000_curdice_0.0000_predice_0.0000.pth

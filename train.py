@@ -92,7 +92,7 @@ def train_model(net, train_iter, test_iter, batch_size, optimizer, device, num_e
 
 
 MODE = 'train'
-# MODE = 'test'
+MODE = 'test'
 
 DEVICE = 'cuda'
 # DEVICE = 'cpu'
@@ -124,10 +124,10 @@ if(MODE=='train'):
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     train_model(net=model, train_iter=train_loader, test_iter=test_loader, 
-                batch_size=5, optimizer=optimizer, device=DEVICE, num_epochs=10)
+                batch_size=5, optimizer=optimizer, device=DEVICE, num_epochs=1)
 
 elif(MODE=='test'):
-    model = torch.load(os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(9)))
+    model = torch.load(os.path.join(MODEL_PATH, "unet2d_epoch{:03d}.pth".format(0)))
     net_params = {'num_filters':32, 'num_channels':1, 'num_classes':3}
     model = Unet(net_params).to(DEVICE)
     model.eval()
@@ -138,19 +138,19 @@ elif(MODE=='test'):
 
         for i in range(5):
             max_dice = 0.0
-            max_threshold = 0.1
-            for threshold in np.arange(0.1, 0.7, 0.01):
-                pred_copy = pred.copy()
-                for x in np.nditer(pred_copy, op_flags=['readwrite']):
-                    x[...]= 1.0 if(x<threshold) else 0.0
-                dice = diceCoeff(torch.from_numpy(pred_copy[0,0,:,:]), seg[0,0,:,:])
-                print(threshold, dice, end='\r')
-                if(dice > max_dice):
-                    max_threshold = threshold
+            max_threshold = 0.5
+            # for threshold in np.arange(0.1, 0.7, 0.01):
+            #     pred_copy = pred.copy()
+            #     for x in np.nditer(pred_copy, op_flags=['readwrite']):
+            #         x[...]= 1.0 if(x<threshold) else 0.0
+            #     dice = diceCoeff(torch.from_numpy(pred_copy[0,0,:,:]), seg[0,0,:,:])
+            #     print(threshold, dice, end='\r')
+            #     if(dice > max_dice):
+            #         max_threshold = threshold
                 
 
-            for x in np.nditer(pred, op_flags=['readwrite']):
-                x[...]= 1.0 if(x>max_threshold) else 0.0
+            # for x in np.nditer(pred, op_flags=['readwrite']):
+            #     x[...]= 1.0 if(x>max_threshold) else 0.0
 
             plt.subplot(1,3,1)
             plt.imshow(pred[i,0,:,:])

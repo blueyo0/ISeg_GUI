@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="continual_learning_benchmark" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="continual_learning_benchmark">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/opt/data/private/zhangjingyang/continual_multi_site" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="continual_multi_site">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c2d57e15-e3d6-43ef-8b17-0415c730f490" name="continual_multi_site">
+        <fileTransfer rootFolder="/opt/data/private/zhangjingyang/continual_multi_site" accessType="SFTP" host="202.120.40.136" port="25951" sshConfigId="3c62fbaf-c2ab-424d-b02c-0688ee15898e" sshConfig="continual_learning_benchmark">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
