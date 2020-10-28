@@ -5,14 +5,17 @@
 '''
 配置文件
 '''
+import os
 import ast
 import configparser
 from collections.abc import Mapping
 
 
 class Settings(Mapping):
-    def __init__(self, setting_file='./settings.ini'):
+    def __init__(self, setting_file='settings.ini'):
         config = configparser.ConfigParser()
+        if (not os.path.exists(setting_file)):
+            setting_file = os.path.join(os.path.abspath('.'), setting_file)
         config.read(setting_file)
         self.settings_dict = _parse_values(config)
 

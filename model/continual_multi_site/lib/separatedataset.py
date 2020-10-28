@@ -71,7 +71,7 @@ class SeparateDataset(Dataset):
     def _data_augmentation(self, img, gt):
         if random.randint(0,1) == 1:
             img = img[::-1,...]
-            gt = gt[::-1,...]
+            gt = gt[::-1,...] # 翻转img和gt中图片顺序
         # if random.randint(0,1) == 1:
         #     shift_pixel = random.randint(0,10)
         #     img = self._translate(img, shift=shift_pixel)

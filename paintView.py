@@ -1,4 +1,11 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+'''
+@File    :   paintView.py
+@Time    :   2020/10/28 17:01:07
+@Author  :   Haoyu Wang 
+@Version :   1.0
+@Contact :   small_dark@sina.com
+'''
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *

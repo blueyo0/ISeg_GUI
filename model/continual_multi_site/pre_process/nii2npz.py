@@ -9,15 +9,18 @@ import shutil, os
 import SimpleITK as sitk
 import numpy as np
 
+WORK_DIR = '/opt/data/private/why'
+DATA_DIR = os.path.join(WORK_DIR, 'dataset')
+
 def _load_normalized_vol(nii_path):
     '''
     从nii中读取体数据和分割标签
     :param nii_path: 单个病人的体数据和分割标签的路径
     :return: 体数据,分割和病人名称，注意是numpy数组格式
     '''
-    img_path, label_path = nii_path.split(',')[0], nii_path.split(',')[1]
-    img_path = '../' + img_path
-    label_path = '../' + label_path
+    img_path, label_path = nii_path.split(',')[0][3:], nii_path.split(',')[1][3:]
+    img_path = os.path.join(WORK_DIR, img_path)
+    label_path = os.path.join(WORK_DIR, label_path)
     case_name = img_path[-13:-7]
     print(f'Produce {case_name}')
 
@@ -29,7 +32,7 @@ def _load_normalized_vol(nii_path):
     binary_mask = np.ones(mask.shape)
     mean = np.sum(img * binary_mask) / np.sum(binary_mask)
     std = np.sqrt(np.sum(np.square(img - mean) * binary_mask) / np.sum(binary_mask))
-    normalized_img = (img - mean) / std  # 正则化处理
+    normalized_img = (img - mean) / std  # 正则化处理   
     mask[mask == 2] = 1
 
     # 旋转方向 和 数据验证
@@ -56,10 +59,11 @@ def _label_decomp(label_vol, num_cls):
     numpy version of tf.one_hot
     """
     one_hot = []
-    for i in range(num_cls):
+    for i in range(1, num_cls):
         _vol = np.zeros(label_vol.shape)
         _vol[label_vol == i] = 1
         one_hot.append(_vol)
+    return one_hot
 
 
 def _extract_patch(image, mask):
@@ -88,15 +92,16 @@ def _extract_patch(image, mask):
 if __name__ == '__main__':
     datasets = ['BIDMC', 'HK', 'I2CVB' ,'ISBI', 'ISBI_1.5', 'UCL']
     for dataset in datasets:
-        datalist = '../../dataset/%s_train_list' % dataset
+        datalist = os.path.join(DATA_DIR, '%s_train_list' % dataset)
+        # datalist = '../../dataset/%s_train_list' % dataset
         with open(datalist, 'r') as fp:
             rows = fp.readlines()
         image_list = [row[:-1] for row in rows]
         train_list = image_list[:int(len(image_list) * 0.75)]  # 训练数据nii名称列表
         test_list = image_list[int(len(image_list) * 0.75):]  # 测试数据nii名称列表
 
-        output_train_dir = '../../dataset/npz_data/%s/train' % dataset  # 训练数据保存路径
-        output_test_dir = '../../dataset/npz_data/%s/test' % dataset  # 测试数据保存路径
+        output_train_dir = os.path.join(DATA_DIR, 'npz_data/%s/train' % dataset)  # 训练数据保存路径
+        output_test_dir = os.path.join(DATA_DIR, 'npz_data/%s/test' % dataset) # 测试数据保存路径
         shutil.rmtree(output_train_dir, ignore_errors=True)
         os.makedirs(output_train_dir)
         shutil.rmtree(output_test_dir, ignore_errors=True)

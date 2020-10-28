@@ -1,4 +1,11 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+'''
+@File    :   main.py
+@Time    :   2020/10/28 17:00:29
+@Author  :   Haoyu Wang 
+@Version :   1.0
+@Contact :   small_dark@sina.com
+'''
 
 import sys
 from PIL import Image
@@ -11,7 +18,6 @@ import SimpleITK as sitk
 import numpy as np
 import matplotlib.pyplot as plt
 from paintMode import PaintMode
-
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
