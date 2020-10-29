@@ -17,26 +17,32 @@ from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
 
 class KITS_SLICE_h5(Dataset):
-    def __init__(self, data_dir, return_slice=False):
-        self.case_num = 299
-        self.data_dir = data_dir
-        self.return_idx = return_idx           
+    def __init__(self, data_dir, return_idx=False):
+        # self.case_num = 300
+        self.data_dir = Path(data_dir)
+        self.return_idx = return_idx
+        self.size_arr = np.load(self.data_dir/"kits_slice_size.npy")
+        self.case_num = self.size_arr.shape[0]         
 
     def __getitem__(self, index):
-        filename = "kits_data_case_{:05d}.h5".format(index)
+        # TO-DO 二分根据Index确定case_id
+        lb , hb = 0, 0 # 下界，上界
+        for case_id in range(self.case_num):
+            hb = self.size_arr[case_id, 1]
+            if(index>=lb and index<hb): break
+            lb = hb
+
+        slice_id = index - lb
+        filename = self.data_dir / "kits_data_case_{:05d}.h5".format(case_id)
         h5_file = tables.open_file(filename, mode='r')
-        img, seg = h5_file.root.img[index], h5_file.root.seg[index]
-        if(self.return_slice):
-            idx = h5_file.root.idx[index]
+        img, seg = h5_file.root.img[slice_id], h5_file.root.seg[slice_id]
+        if(self.return_idx):
+            idx = h5_file.root.idx[slice_id]
             return img, seg, idx
         return img, seg
 
     def __len__(self):
-        total_len = 0
-        for i in range(self.case_num):
-            h5_file.root.img.shape #TO-DO
-        
-        pass
+        return self.size_arr[-1,-1]
 
 class BraTS_SLICE(Dataset):
     def __init__(self, data_dir, slice_no=64):
@@ -161,7 +167,7 @@ def load_volume(cid, mode):
         vol = nib.load(str(case_path / "imaging.nii.gz"))
     elif(mode=='sitk'):
         itk_vol = sitk.ReadImage(str(case_path / "imaging.nii.gz"))
-        vol = sitk.GetArrayFromImage(itk_vol).transpose([1,2,0])
+        vol = sitk.GetArrayFromImage(itk_vol)#.transpose([1,2,0])
     return vol
 
 
@@ -171,7 +177,7 @@ def load_segmentation(cid, mode):
         seg = nib.load(str(case_path / "segmentation.nii.gz"))
     elif(mode=='sitk'):
         itk_seg = sitk.ReadImage(str(case_path / "segmentation.nii.gz"))
-        seg = sitk.GetArrayFromImage(itk_seg).transpose([1,2,0])
+        seg = sitk.GetArrayFromImage(itk_seg)#.transpose([1,2,0])
     return seg
 
 
@@ -247,8 +253,9 @@ if __name__ == "__main__":
     npz data-reading time cost:30.78306 s
     '''
     OVERWRITE = True#覆盖旧文件
-    # MODE = "preprocess"
-    MODE = "test"
+    MODE = "preprocess"
+    # MODE = "test"
+    # MODE = "dataset"
     if(MODE=="test"):
         WRITE_TEST = True #写入测试
         READ_TEST = True #读取测试
@@ -257,6 +264,18 @@ if __name__ == "__main__":
         WRITE_TEST = False #写入测试
         READ_TEST = False #读取测试
         REAL_PROPRECESS = True #实际预处理代码
+    elif(MODE=="dataset"):
+        WRITE_TEST = False #写入测试
+        READ_TEST = False #读取测试
+        REAL_PROPRECESS = False #实际预处理代码
+
+    if(MODE=="dataset"):
+        dataset = KITS_SLICE_h5("/opt/data/private/why/dataset/KITS2019_modified/")
+        loader = DataLoader(dataset, batch_size=5, shuffle=True)
+        for img, seg in loader:
+            print("h")
+
+
 
 
     # 程序入口
@@ -329,8 +348,10 @@ if __name__ == "__main__":
         
         print("Data preprocessing started.")
         start = time.time() 
-        totol_slice_num = 0
-        for i in range(5):
+        slice_num_arr = []
+        slice_sum = 0
+        slice_size_file = pre_data_dir/"kits_slice_size.npy"
+        for i in range(300):
             out_file =  pre_data_dir / ("kits_data_"+get_full_case_id(i)+".h5")
             img, seg = load_case(i, mode='sitk')
             print("[%03d]Data file is loaded"%(i), end="\r")
@@ -349,8 +370,10 @@ if __name__ == "__main__":
                                                 mask_shape=(img.shape[0], img.shape[1], 2),
                                                 use_idx=True)
 
-                totol_slice_num += len(slice_indexs)
-                
+                slice_sum += len(slice_indexs)
+                slice_num_arr.append([len(slice_indexs), slice_sum])
+                np.save(slice_size_file, np.array(slice_num_arr))
+
                 for idx, slice_idx in enumerate(slice_indexs):
                     img_storage.append(img_patches[idx][np.newaxis])
                     seg_storage.append(seg_patches[idx][np.newaxis])
@@ -363,8 +386,10 @@ if __name__ == "__main__":
             pred_sec = (300-i-1)/(i+1)*total_sec
             pred_h, pred_m, pred_s = pred_sec/3600, (pred_sec%3600)/60, pred_sec%60
             print("Case {:03d} Elapsed Time: {:02d}:{:02d}:{:02d} \t Left Time: {:02d}:{:02d}:{:02d}"\
-                .format(i,int(round(h)), int(round(m)), int(round(s)),
-                          int(round(pred_h)), int(round(pred_m)), int(round(pred_s))))
-          
-
-
+                .format(i,int(h), int(m), int(s),
+                          int(pred_h), int(pred_m), int(pred_s)))
+              
+        # np.save(slice_size_file, slice_num_arr)
+        size_arr = np.load(slice_size_file)
+        print(size_arr)
+        print("Data preprocessing finished!")
