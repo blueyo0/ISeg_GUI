@@ -141,11 +141,7 @@ elif(MODE=='test'):
 
         for i in range(5):
             max_dice = 0.0
-<<<<<<< HEAD
             max_threshold = 0.5
-=======
-            max_threshold = 0.1
->>>>>>> 867673ca7e6af8b646641d91f8965a4cb2be9726
             # for threshold in np.arange(0.1, 0.7, 0.01):
             #     pred_copy = pred.copy()
             #     for x in np.nditer(pred_copy, op_flags=['readwrite']):

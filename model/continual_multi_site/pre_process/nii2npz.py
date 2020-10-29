@@ -9,7 +9,12 @@ import shutil, os
 import SimpleITK as sitk
 import numpy as np
 
-WORK_DIR = '/opt/data/private/why'
+import platform
+sysstr = platform.system()
+if(sysstr=="Windows"):
+    WORK_DIR = "D:/dataset/multi_site"
+elif(sysstr=="Linux"):
+    WORK_DIR = '/opt/data/private/why'
 DATA_DIR = os.path.join(WORK_DIR, 'dataset')
 
 def _load_normalized_vol(nii_path):
@@ -100,8 +105,8 @@ if __name__ == '__main__':
         train_list = image_list[:int(len(image_list) * 0.75)]  # 训练数据nii名称列表
         test_list = image_list[int(len(image_list) * 0.75):]  # 测试数据nii名称列表
 
-        output_train_dir = os.path.join(DATA_DIR, 'npz_data/%s/train' % dataset)  # 训练数据保存路径
-        output_test_dir = os.path.join(DATA_DIR, 'npz_data/%s/test' % dataset) # 测试数据保存路径
+        output_train_dir = os.path.join(DATA_DIR, 'npz_data_new/%s/train' % dataset)  # 训练数据保存路径
+        output_test_dir = os.path.join(DATA_DIR, 'npz_data_new/%s/test' % dataset) # 测试数据保存路径
         shutil.rmtree(output_train_dir, ignore_errors=True)
         os.makedirs(output_train_dir)
         shutil.rmtree(output_test_dir, ignore_errors=True)
