@@ -3,11 +3,11 @@
 @File    :   data.py
 @Time    :   2020/10/29 08:58:06
 @Author  :   Haoyu Wang 
-@Version :   1.0
 @Contact :   small_dark@sina.com
 '''
 
 import nibabel as nib
+import SimpleITK as sitk
 import numpy as np
 import tables
 import os
@@ -16,10 +16,31 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
 
+class KITS_SLICE_h5(Dataset):
+    def __init__(self, data_dir, return_slice=False):
+        self.case_num = 299
+        self.data_dir = data_dir
+        self.return_idx = return_idx           
+
+    def __getitem__(self, index):
+        filename = "kits_data_case_{:05d}.h5".format(index)
+        h5_file = tables.open_file(filename, mode='r')
+        img, seg = h5_file.root.img[index], h5_file.root.seg[index]
+        if(self.return_slice):
+            idx = h5_file.root.idx[index]
+            return img, seg, idx
+        return img, seg
+
+    def __len__(self):
+        total_len = 0
+        for i in range(self.case_num):
+            h5_file.root.img.shape #TO-DO
+        
+        pass
 
 class BraTS_SLICE(Dataset):
     def __init__(self, data_dir, slice_no=64):
-        self.data_num = 259 #TO-DO 全为HGG图像，实际数据集大小369
+        self.data_num = 259 
         self.data_dir = data_dir
         self.slice_no = slice_no
         pass
@@ -42,7 +63,7 @@ class BraTS_SLICE(Dataset):
 
 class BraTS_SLICE_h5(Dataset):
     def __init__(self, h5_file):
-        self.data_num = 259 #TO-DO 全为HGG图像，实际数据集大小369
+        self.data_num = 259 
         self.h5_file = tables.open_file(h5_file, mode='r')
     def __getitem__(self, index):
         img, seg = self.h5_file.root.img[index], self.h5_file.root.seg[index]
@@ -54,7 +75,7 @@ class BraTS_SLICE_h5(Dataset):
         
 
 
-def create_data_file(out_file, n_samples, image_shape, mask_shape=None):
+def create_data_file(out_file, n_samples, image_shape, mask_shape=None, use_idx=False):
     '''
     :out_file: 输出文件路径
     :n_sampels: 预计的img数量
@@ -70,7 +91,13 @@ def create_data_file(out_file, n_samples, image_shape, mask_shape=None):
     seg_storage = hdf5_file.create_earray(
                     hdf5_file.root, 'seg', tables.UInt8Atom(), 
                     shape=mask_shape, filters=filters, expectedrows=n_samples)
-    return hdf5_file, img_storage, seg_storage
+    if(not use_idx):    
+        return hdf5_file, img_storage, seg_storage
+    else: 
+        idx_storage = hdf5_file.create_earray(
+                        hdf5_file.root, 'idx', tables.UInt8Atom(), 
+                        shape=(0, 1), filters=filters, expectedrows=n_samples)
+        return hdf5_file, img_storage, seg_storage, idx_storage  
 
 def preprocess_data_to_hdf5(data_dir, out_file, image_shape, n_samples):
     # try:
@@ -108,7 +135,8 @@ def get_full_case_id(cid):
 
 def get_case_path(cid):
     # Resolve location where data should be living
-    data_path = Path("D:/dataset/KITS2019/data")
+    # data_path = Path("D:/dataset/KITS2019/data")
+    data_path = Path("/opt/data/private/why/dataset/KITS_2019/data")
     if not data_path.exists():
         raise IOError(
             "Data path, {}, could not be resolved".format(str(data_path))
@@ -127,21 +155,29 @@ def get_case_path(cid):
     return case_path
 
 
-def load_volume(cid):
+def load_volume(cid, mode):
     case_path = get_case_path(cid)
-    vol = nib.load(str(case_path / "imaging.nii.gz"))
+    if(mode=='nib'):
+        vol = nib.load(str(case_path / "imaging.nii.gz"))
+    elif(mode=='sitk'):
+        itk_vol = sitk.ReadImage(str(case_path / "imaging.nii.gz"))
+        vol = sitk.GetArrayFromImage(itk_vol).transpose([1,2,0])
     return vol
 
 
-def load_segmentation(cid):
+def load_segmentation(cid, mode):
     case_path = get_case_path(cid)
-    seg = nib.load(str(case_path / "segmentation.nii.gz"))
+    if(mode=='nib'):
+        seg = nib.load(str(case_path / "segmentation.nii.gz"))
+    elif(mode=='sitk'):
+        itk_seg = sitk.ReadImage(str(case_path / "segmentation.nii.gz"))
+        seg = sitk.GetArrayFromImage(itk_seg).transpose([1,2,0])
     return seg
 
 
-def load_case(cid):
-    vol = load_volume(cid)
-    seg = load_segmentation(cid)
+def load_case(cid, mode='nib'):
+    vol = load_volume(cid, mode)
+    seg = load_segmentation(cid, mode)
     return vol, seg
 
 
@@ -197,26 +233,46 @@ if __name__ == "__main__":
     # 用KITS测试npz和h5间的性能对比
     # 测试结果，npz 显著慢于 h5
     '''
+    SSD上
     h5 file-loading time cost:0.00300 s
     h5 data-reading time cost:0.04500 s
     npz file-loading time cost:0.00300 s
     npz data-reading time cost:31.98563 s
+    服务器上
+    h5 save time cost:6.4 s
+    npz save time cost:20.4 s
+    h5 file-loading time cost:0.06992 s
+    h5 data-reading time cost:0.19449 s
+    npz file-loading time cost:0.25221 s
+    npz data-reading time cost:30.78306 s
     '''
-    OVERWRITE = False
-    WRITE_TEST = False
-    READ_TEST = True
+    OVERWRITE = True#覆盖旧文件
+    # MODE = "preprocess"
+    MODE = "test"
+    if(MODE=="test"):
+        WRITE_TEST = True #写入测试
+        READ_TEST = True #读取测试
+        REAL_PROPRECESS = False #实际预处理代码
+    elif(MODE=="preprocess"):
+        WRITE_TEST = False #写入测试
+        READ_TEST = False #读取测试
+        REAL_PROPRECESS = True #实际预处理代码
 
-    output_train_dir = Path("D:/dataset/KITS2019_modified")
-    if(not output_train_dir.exists()): os.makedirs(output_train_dir)
-    out_file = output_train_dir / "kits_data.h5"
-    out_file2 = output_train_dir / "kits_data.npz"
+
+    # 程序入口
+    if(WRITE_TEST or READ_TEST):
+        # output_train_dir = Path("D:/dataset/KITS2019_modified")
+        output_train_dir = Path("/opt/data/private/why/dataset/KITS2019_modified")
+        if(not output_train_dir.exists()): os.makedirs(output_train_dir)
+        out_file = output_train_dir / "kits_data.h5"
+        out_file2 = output_train_dir / "kits_data.npz"
 
     if(WRITE_TEST):
         img, seg = load_case(2)
-        img = img.get_fdata() 
-        seg = seg.get_fdata()
-        img, seg = np.array(img).transpose([1,2,0]), \
-                    np.array(seg).transpose([1,2,0])
+        # img = img.get_fdata() 
+        # seg = seg.get_fdata()
+        img, seg = np.array(img.dataobj).transpose([1,2,0]), \
+                    np.array(seg.dataobj).transpose([1,2,0])
         mean = np.mean(img)
         std = np.std(img)
         normalized_img = (img - mean) / std  # 正则化处理   
@@ -230,17 +286,20 @@ if __name__ == "__main__":
                                                     out_file, n_samples=img.shape[2], 
                                                     image_shape=(img.shape[0], img.shape[1], 3),
                                                     mask_shape=(img.shape[0], img.shape[1], 2))
-            for i, slice_idx in enumerate(slice_indexs):
+
+            for i, slice_idx in enumerate(slice_indexs):       
+                # print(hdf5_file.get_filesize())
                 img_storage.append(img_patches[i][np.newaxis])
                 seg_storage.append(seg_patches[i][np.newaxis])
 
+                # print(hdf5_file.get_filesize())
             hdf5_file.close()
             print("h5 save time cost:%.1f s" % (time.time()-start))
         # npz存储
-        if((not os.path.exists(out_file2)) or OVERWRITE):
-            start = time.time()
-            np.savez(out_file2, img_patches, seg_patches)
-            print("npz save time cost:%.1f s" % (time.time()-start))
+        # if((not os.path.exists(out_file2)) or OVERWRITE):
+        #     start = time.time()
+        #     np.savez(out_file2, img_patches, seg_patches)
+        #     print("npz save time cost:%.1f s" % (time.time()-start))
 
 
     if(READ_TEST):
@@ -254,11 +313,58 @@ if __name__ == "__main__":
         print("h5 data-reading time cost:%.5f s" % ((time.time()-start)))
 
 
-        start = time.time()
-        np_file = np.load(out_file2)
-        print("npz file-loading time cost:%.5f s" % (time.time()-start))
+        # start = time.time()
+        # np_file = np.load(out_file2)
+        # print("npz file-loading time cost:%.5f s" % (time.time()-start))
 
-        start = time.time()
-        for i in range(10):
-            img2, seg2 = np_file['arr_0'][i], np_file['arr_1'][i]
-        print("npz data-reading time cost:%.5f s" % (time.time()-start))
+        # start = time.time()
+        # for i in range(10):
+        #     img2, seg2 = np_file['arr_0'][i], np_file['arr_1'][i]
+        # print("npz data-reading time cost:%.5f s" % (time.time()-start))
+
+
+    if(REAL_PROPRECESS):
+        pre_data_dir = Path("/opt/data/private/why/dataset/KITS2019_modified/")
+        if(not pre_data_dir.exists()): os.makedirs(pre_data_dir)
+        
+        print("Data preprocessing started.")
+        start = time.time() 
+        totol_slice_num = 0
+        for i in range(5):
+            out_file =  pre_data_dir / ("kits_data_"+get_full_case_id(i)+".h5")
+            img, seg = load_case(i, mode='sitk')
+            print("[%03d]Data file is loaded"%(i), end="\r")
+            mean = np.mean(img)
+            std = np.std(img)
+            normalized_img = (img - mean) / std  # 正则化处理   
+            print("[%03d]Data normalization finished"%(i), end="\r")
+
+            img_patches, seg_patches, slice_indexs = _extract_patch(normalized_img, seg)
+
+            if((not os.path.exists(out_file)) or OVERWRITE):
+                hdf5_file, img_storage, \
+                seg_storage, idx_storage = create_data_file(
+                                                out_file, n_samples=img.shape[2], 
+                                                image_shape=(img.shape[0], img.shape[1], 3),
+                                                mask_shape=(img.shape[0], img.shape[1], 2),
+                                                use_idx=True)
+
+                totol_slice_num += len(slice_indexs)
+                
+                for idx, slice_idx in enumerate(slice_indexs):
+                    img_storage.append(img_patches[idx][np.newaxis])
+                    seg_storage.append(seg_patches[idx][np.newaxis])
+                    idx_storage.append(np.array([slice_idx])[np.newaxis])
+                    print("[%03d]Slice %3d is compressed"%(i, slice_idx), end="\r")
+
+                hdf5_file.close()
+            total_sec = (time.time()-start)
+            h, m, s = total_sec/3600, (total_sec%3600)/60, total_sec%60
+            pred_sec = (300-i-1)/(i+1)*total_sec
+            pred_h, pred_m, pred_s = pred_sec/3600, (pred_sec%3600)/60, pred_sec%60
+            print("Case {:03d} Elapsed Time: {:02d}:{:02d}:{:02d} \t Left Time: {:02d}:{:02d}:{:02d}"\
+                .format(i,int(round(h)), int(round(m)), int(round(s)),
+                          int(round(pred_h)), int(round(pred_m)), int(round(pred_s))))
+          
+
+
