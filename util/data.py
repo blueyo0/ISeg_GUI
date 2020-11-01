@@ -13,8 +13,10 @@ import tables
 import os
 import time
 import torch
+from torchvision import transforms
 from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
+from imageio import imwrite
 
 class KITS_SLICE_h5(Dataset):
     def __init__(self, data_dir, return_idx=False):
@@ -22,10 +24,12 @@ class KITS_SLICE_h5(Dataset):
         self.data_dir = Path(data_dir)
         self.return_idx = return_idx
         self.size_arr = np.load(self.data_dir/"kits_slice_size.npy")
-        self.case_num = self.size_arr.shape[0]         
+        self.case_num = self.size_arr.shape[0] 
+        self.transform = transforms.Resize([512, 512])        
 
     def __getitem__(self, index):
         # TO-DO 二分根据Index确定case_id
+        # print("data index:", index)
         lb , hb = 0, 0 # 下界，上界
         for case_id in range(self.case_num):
             hb = self.size_arr[case_id, 1]
@@ -35,11 +39,19 @@ class KITS_SLICE_h5(Dataset):
         slice_id = index - lb
         filename = self.data_dir / "kits_data_case_{:05d}.h5".format(case_id)
         h5_file = tables.open_file(filename, mode='r')
-        img, seg = h5_file.root.img[slice_id], h5_file.root.seg[slice_id]
+        img, seg = h5_file.root.img[slice_id].astype(np.float32), \
+                   h5_file.root.seg[slice_id].astype(np.float32)
+        # img = self.transform(img)
+        # 数据检查
+        # assert len(np.unique(seg)) == 2
+        # assert not np.isnan(img).any()
+        result = (img, seg)
         if(self.return_idx):
-            idx = h5_file.root.idx[slice_id]
-            return img, seg, idx
-        return img, seg
+            case_idx = h5_file.root.case[slice_id]
+            slice_idx = h5_file.root.slice[slice_id]
+            result = (img, seg, np.array([case_idx, slice_idx]))
+        h5_file.close()
+        return result
 
     def __len__(self):
         return self.size_arr[-1,-1]
@@ -100,10 +112,13 @@ def create_data_file(out_file, n_samples, image_shape, mask_shape=None, use_idx=
     if(not use_idx):    
         return hdf5_file, img_storage, seg_storage
     else: 
-        idx_storage = hdf5_file.create_earray(
-                        hdf5_file.root, 'idx', tables.UInt8Atom(), 
+        caseIdx_storage = hdf5_file.create_earray(
+                        hdf5_file.root, 'case', tables.UInt8Atom(), 
                         shape=(0, 1), filters=filters, expectedrows=n_samples)
-        return hdf5_file, img_storage, seg_storage, idx_storage  
+        sliceIdx_storage = hdf5_file.create_earray(
+                        hdf5_file.root, 'slice', tables.UInt8Atom(), 
+                        shape=(0, 1), filters=filters, expectedrows=n_samples)
+        return hdf5_file, img_storage, seg_storage, caseIdx_storage, sliceIdx_storage  
 
 def preprocess_data_to_hdf5(data_dir, out_file, image_shape, n_samples):
     # try:
@@ -225,13 +240,30 @@ def _extract_patch(image, mask):
     z = _patch_center_z(mask)
     for z_i in z:
         image_patch = image[:,:,z_i-1:z_i+2]
+        if(np.isnan(image_patch).any()): continue
+        if(image_patch.shape[0]!=512 or image_patch.shape[1]!=512): continue
         mask_patch = mask[:,:,z_i]
         mask_patch = _label_decomp(mask_patch, 2)
 
-        image_patches.append(image_patch)
-        mask_patches.append(mask_patch)
+        image_patches.append(image_patch.transpose([2,0,1]))
+        mask_patches.append(mask_patch.transpose([2,0,1]))
         slice_indexs.append(z_i)
     return image_patches, mask_patches, slice_indexs
+
+def hu_to_grayscale(volume, hu_min, hu_max):
+    # Clip at max and min values if specified
+    if hu_min is not None or hu_max is not None:
+        volume = np.clip(volume, hu_min, hu_max)
+
+    # Scale to values between 0 and 1
+    mxval = np.max(volume)
+    mnval = np.min(volume)
+    im_volume = (volume - mnval)/max(mxval - mnval, 1e-3)
+
+    # Return values scaled to 0-255 range, but *not cast to uint8*
+    # Repeat three times to make compatible with color overlay
+    im_volume = 255*im_volume
+    return np.stack((im_volume, im_volume, im_volume), axis=-1)
 
 
 
@@ -256,6 +288,8 @@ if __name__ == "__main__":
     MODE = "preprocess"
     # MODE = "test"
     # MODE = "dataset"
+
+
     if(MODE=="test"):
         WRITE_TEST = True #写入测试
         READ_TEST = True #读取测试
@@ -270,12 +304,24 @@ if __name__ == "__main__":
         REAL_PROPRECESS = False #实际预处理代码
 
     if(MODE=="dataset"):
-        dataset = KITS_SLICE_h5("/opt/data/private/why/dataset/KITS2019_modified/")
+        data_dir = Path("/opt/data/private/why/dataset/KITS2019_modified/")
+        prev_dir = data_dir / "preview"
+        dataset = KITS_SLICE_h5(data_dir, return_idx=True)
+        if(not prev_dir.exists()): os.makedirs(prev_dir)
+
         loader = DataLoader(dataset, batch_size=5, shuffle=True)
-        for img, seg in loader:
-            print("h")
-
-
+        for i, (img, seg, idx) in enumerate(loader):
+            img_out = img[0,1,:,:].cpu().numpy()
+            img_out = hu_to_grayscale(img_out, None ,None).astype(np.uint8)
+            imwrite(str(prev_dir/"img_{:05d}.png".format(i*5)), img_out)
+            seg_out = seg[0,1,:,:].cpu().numpy().astype(np.uint8)
+            seg_out[seg_out==1] = 255
+            # print(np.unique(seg_out))
+            imwrite(str(prev_dir/"seg_{:05d}.png".format(i*5)), seg_out)
+            # imwrite(str(prev_dir/"seg_{:05d}_1.png".format(i*5)), seg[0,:,:,1].cpu().numpy())
+            idx = idx.cpu().numpy()
+            for order in range(5):
+                print("case %d, slice %d."%(idx[order,0], idx[order,1]))
 
 
     # 程序入口
@@ -351,7 +397,7 @@ if __name__ == "__main__":
         slice_num_arr = []
         slice_sum = 0
         slice_size_file = pre_data_dir/"kits_slice_size.npy"
-        for i in range(300):
+        for i in range(200):
             out_file =  pre_data_dir / ("kits_data_"+get_full_case_id(i)+".h5")
             img, seg = load_case(i, mode='sitk')
             print("[%03d]Data file is loaded"%(i), end="\r")
@@ -361,23 +407,24 @@ if __name__ == "__main__":
             print("[%03d]Data normalization finished"%(i), end="\r")
 
             img_patches, seg_patches, slice_indexs = _extract_patch(normalized_img, seg)
+            slice_sum += len(slice_indexs)
+            slice_num_arr.append([len(slice_indexs), slice_sum])
+            np.save(slice_size_file, np.array(slice_num_arr))
+
 
             if((not os.path.exists(out_file)) or OVERWRITE):
-                hdf5_file, img_storage, \
-                seg_storage, idx_storage = create_data_file(
+                hdf5_file, img_storage, seg_storage, \
+                caseIdx_storage, sliceIdx_storage = create_data_file(
                                                 out_file, n_samples=img.shape[2], 
-                                                image_shape=(img.shape[0], img.shape[1], 3),
-                                                mask_shape=(img.shape[0], img.shape[1], 2),
+                                                image_shape=(3, img.shape[0], img.shape[1]),
+                                                mask_shape=(2, seg.shape[0], seg.shape[1]),
                                                 use_idx=True)
-
-                slice_sum += len(slice_indexs)
-                slice_num_arr.append([len(slice_indexs), slice_sum])
-                np.save(slice_size_file, np.array(slice_num_arr))
 
                 for idx, slice_idx in enumerate(slice_indexs):
                     img_storage.append(img_patches[idx][np.newaxis])
                     seg_storage.append(seg_patches[idx][np.newaxis])
-                    idx_storage.append(np.array([slice_idx])[np.newaxis])
+                    caseIdx_storage.append(np.array([i])[np.newaxis])
+                    sliceIdx_storage.append(np.array([slice_idx])[np.newaxis])
                     print("[%03d]Slice %3d is compressed"%(i, slice_idx), end="\r")
 
                 hdf5_file.close()

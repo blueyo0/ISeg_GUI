@@ -12,7 +12,8 @@ from collections.abc import Mapping
 
 
 class Settings(Mapping):
-    def __init__(self, setting_file='settings.ini'):
+    def __init__(self, setting_file =
+                        '/opt/data/private/why/code/ISeg_igst/model/continual_multi_site/settings.ini'):
         config = configparser.ConfigParser()
         if (not os.path.exists(setting_file)):
             setting_file = os.path.join(os.path.abspath('.'), setting_file)
