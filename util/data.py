@@ -17,6 +17,7 @@ from torchvision import transforms
 from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
 from imageio import imwrite
+import platform
 
 class KITS_SLICE_h5(Dataset):
     def __init__(self, data_dir, return_idx=False):
@@ -156,8 +157,11 @@ def get_full_case_id(cid):
 
 def get_case_path(cid):
     # Resolve location where data should be living
-    # data_path = Path("D:/dataset/KITS2019/data")
-    data_path = Path("/opt/data/private/why/dataset/KITS_2019/data")
+    sysstr = platform.system()
+    if(sysstr=="Windows"):
+        data_path = Path("D:/dataset/KITS2019/data")
+    elif(sysstr=="Linux"):
+        data_path = Path("/opt/data/private/why/dataset/KITS_2019/data")
     if not data_path.exists():
         raise IOError(
             "Data path, {}, could not be resolved".format(str(data_path))
