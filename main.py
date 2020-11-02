@@ -6,8 +6,10 @@
 @Version :   1.0
 @Contact :   small_dark@sina.com
 '''
-
 import sys
+import os
+sys.path.append(os.getcwd())
+
 from PIL import Image
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -17,7 +19,7 @@ import nibabel as nib
 import SimpleITK as sitk
 import numpy as np
 import matplotlib.pyplot as plt
-from paintMode import PaintMode
+from ui.paintMode import PaintMode
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)

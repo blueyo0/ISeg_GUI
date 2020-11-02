@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="">
+        <file>笔刷.png</file>
+        <file>相机.png</file>
+        <file>橡皮擦.png</file>
+        <file>橡皮光标.png</file>
+    </qresource>
+</RCC>

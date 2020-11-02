@@ -6,12 +6,15 @@
 @Version :   1.0
 @Contact :   small_dark@sina.com
 '''
+import sys
+import os
+sys.path.append(os.getcwd())
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-from paintMode import PaintMode
+from ui.paintMode import PaintMode
 
 DEFAULT_SIZE = QSize(256,256)
 BACKGROUND_COLOR = QColor(0,0,0,255)
@@ -87,7 +90,7 @@ class PaintView(QtWidgets.QGraphicsView):
             item.setScale(s)
         if(self.mode == PaintMode.Erase):
             self.setDragMode(QGraphicsView.NoDrag)
-            self.setCursor(QCursor(QPixmap(":/Resources/橡皮光标.png")\
+            self.setCursor(QCursor(QPixmap(":/橡皮光标.png")\
                                     .scaled(self.penWidth*self.scale,self.penWidth*self.scale, 
                                             transformMode = Qt.SmoothTransformation),-1,-1))
 
@@ -127,7 +130,7 @@ class PaintView(QtWidgets.QGraphicsView):
             self.setCursor(Qt.CrossCursor)
         elif(self.mode == PaintMode.Erase):
             self.setDragMode(QGraphicsView.NoDrag)
-            self.setCursor(QCursor(QPixmap(":/Resources/橡皮光标.png")\
+            self.setCursor(QCursor(QPixmap(":/橡皮光标.png")\
                                     .scaled(self.penWidth*self.scale,self.penWidth*self.scale, 
                                             transformMode = Qt.SmoothTransformation),-1,-1))
 
@@ -157,7 +160,7 @@ class PaintView(QtWidgets.QGraphicsView):
             if(self.mode == PaintMode.Paint):
                 self.setCursor(Qt.CrossCursor)
             elif(self.mode == PaintMode.Erase):
-                self.setCursor(QCursor(QPixmap(":/Resources/橡皮光标.png")\
+                self.setCursor(QCursor(QPixmap(":/橡皮光标.png")\
                                         .scaled(self.penWidth*self.scale,self.penWidth*self.scale, 
                                                 transformMode = Qt.SmoothTransformation),-1,-1))
             self.isCursorChanged = False

@@ -76,8 +76,8 @@
              <string>A</string>
             </property>
             <property name="icon">
-             <iconset resource="../rsc.qrc">
-              <normaloff>:/Resources/相机.png</normaloff>:/Resources/相机.png</iconset>
+             <iconset resource="../Resources/rsc.qrc">
+              <normaloff>:/相机.png</normaloff>:/相机.png</iconset>
             </property>
            </widget>
           </item>
@@ -167,8 +167,8 @@
              <string>C</string>
             </property>
             <property name="icon">
-             <iconset resource="../rsc.qrc">
-              <normaloff>:/Resources/相机.png</normaloff>:/Resources/相机.png</iconset>
+             <iconset resource="../Resources/rsc.qrc">
+              <normaloff>:/相机.png</normaloff>:/相机.png</iconset>
             </property>
            </widget>
           </item>
@@ -254,8 +254,8 @@
              <string>S</string>
             </property>
             <property name="icon">
-             <iconset resource="../rsc.qrc">
-              <normaloff>:/Resources/相机.png</normaloff>:/Resources/相机.png</iconset>
+             <iconset resource="../Resources/rsc.qrc">
+              <normaloff>:/相机.png</normaloff>:/相机.png</iconset>
             </property>
            </widget>
           </item>
@@ -376,8 +376,8 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="../rsc.qrc">
-        <normaloff>:/Resources/笔刷.png</normaloff>:/Resources/笔刷.png</iconset>
+       <iconset resource="../Resources/rsc.qrc">
+        <normaloff>:/笔刷.png</normaloff>:/笔刷.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -411,8 +411,8 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="../rsc.qrc">
-        <normaloff>:/Resources/橡皮擦.png</normaloff>:/Resources/橡皮擦.png</iconset>
+       <iconset resource="../Resources/rsc.qrc">
+        <normaloff>:/橡皮擦.png</normaloff>:/橡皮擦.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -717,11 +717,11 @@
   <customwidget>
    <class>PaintView</class>
    <extends>QGraphicsView</extends>
-   <header>paintView</header>
+   <header>ui.paintView</header>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../rsc.qrc"/>
+  <include location="../Resources/rsc.qrc"/>
  </resources>
  <connections/>
 </ui>
