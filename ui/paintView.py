@@ -9,6 +9,8 @@
 import sys
 import os
 sys.path.append(os.getcwd())
+import numpy as np
+from PIL import Image
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *
@@ -105,15 +107,28 @@ class PaintView(QtWidgets.QGraphicsView):
 
     def setMask(self, seg):
         self.mask = seg.convertToFormat(QImage.Format_ARGB32)
-        f = self.mask.format()
-        for ix in range(self.mask.width()):
-            for iy in range(self.mask.height()):
-                if(ix==-65536 or iy==-65536):
-                    print("error")
-                if(self.mask.pixel(ix, iy)%0x1000000==0x000000):
-                    self.mask.setPixel(ix, iy, 0x00000000)
+        size = self.mask.size()
+        s = self.mask.bits().asstring(size.width() * size.height() * self.mask.depth() // 8)  # format 0xffRRGGBB
+        arr = np.fromstring(s, dtype=np.uint8).reshape((size.height(), size.width(), self.mask.depth() // 8))
+        # TO-DO 把这种显示方式改一改
+        # ~去查查QT官网有没有双色的显示模式
+        for ix in range(arr.shape[0]):
+            for iy in range(arr.shape[1]):
+                if ((arr[ix,iy,0:3]==np.array([0,0,0])).all()):
+                    arr[ix,iy,3]=0
                 else:
-                    self.mask.setPixel(ix, iy, 0xFFFF0000)
+                    arr[ix,iy,0:4]=np.array([255,0,0,255]) 
+        # arr[arr!=0] = 0xFFFF0000
+        self.mask = Image.fromarray(arr).toqimage()
+        # f = self.mask.format()
+        # for ix in range(self.mask.width()):
+        #     for iy in range(self.mask.height()):
+        #         if(ix==-65536 or iy==-65536):
+        #             print("error")
+        #         if(self.mask.pixel(ix, iy)%0x1000000==0x000000):
+        #             self.mask.setPixel(ix, iy, 0x00000000)
+        #         else:
+        #             self.mask.setPixel(ix, iy, 0xFFFF0000)
 
                 # if(self.mask.pixel(ix, iy)==QRGB()):
         self.scene.items()[1].setPixmap(

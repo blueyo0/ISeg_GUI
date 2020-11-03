@@ -20,6 +20,7 @@ import SimpleITK as sitk
 import numpy as np
 import matplotlib.pyplot as plt
 from ui.paintMode import PaintMode
+from util.data import load_nii_data
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
@@ -35,8 +36,22 @@ if __name__ == '__main__':
 		ui.paintButton : PaintMode.Paint,
 		ui.eraseButton : PaintMode.Erase
 	}
-
+	ui.img_3d = []
+	ui.seg_3d = []
 #-----------------------------------[ Slots ]----------------------------------#
+	def updateImgSlice():
+		if(len(ui.img_3d)<3): return None
+		ui.view_a.setImage(ui.img_3d[0][ui.verticalScrollBar_a.value()-1]) 
+		ui.view_s.setImage(ui.img_3d[1][ui.verticalScrollBar_s.value()-1]) 
+		ui.view_c.setImage(ui.img_3d[2][ui.verticalScrollBar_c.value()-1]) 
+	
+	def updateSegSlice():
+		if(len(ui.seg_3d)<3): return None
+		ui.view_a.setMask(ui.seg_3d[0][ui.verticalScrollBar_a.value()-1]) 
+		ui.view_s.setMask(ui.seg_3d[1][ui.verticalScrollBar_s.value()-1]) 
+		ui.view_c.setMask(ui.seg_3d[2][ui.verticalScrollBar_c.value()-1]) 
+
+
 	def openImageFile():
 		image_path = QFileDialog.getOpenFileName(
 			ui.centralwidget,
@@ -45,20 +60,24 @@ if __name__ == '__main__':
 		)
 		if(len(image_path[0])<1):
 			return
-		# 添加nib相关的读取
-		image_3d = nib.load(image_path[0]).get_fdata()
-		ui.verticalScrollBar_a.setMaximum(image_3d.shape[2])
-		ui.verticalScrollBar_s.setMaximum(image_3d.shape[0])
-		ui.verticalScrollBar_c.setMaximum(image_3d.shape[1])
-		image_2d = image_3d[:,:,ui.verticalScrollBar_a.value()]
-		image_2d = 255-image_2d
-		# image_2d = image_2d.astype(np.uint16)
-		for i in range(image_2d.shape[0]):
-			for j in range(image_2d.shape[1]):
-				if(image_2d[i,j]>=253):
-					# print(image_2d[i,j], i, j)
-					image_2d[i,j]=0
-		ui.view_a.setImage(Image.fromarray(np.uint8(image_2d)).rotate(90).transpose(Image.FLIP_TOP_BOTTOM).toqimage())
+
+		ui.img_3d = load_nii_data(image_path[0])
+		# TO-DO 读取时直接预处理
+		ui.img_size = [len(ui.img_3d[0]), len(ui.img_3d[1]), len(ui.img_3d[2])]	
+
+		ui.verticalScrollBar_a.setMaximum(ui.img_size[0])
+		ui.verticalScrollBar_s.setMaximum(ui.img_size[1])
+		ui.verticalScrollBar_c.setMaximum(ui.img_size[2])
+		ui.pos_x.setMaximum(ui.img_size[0])
+		ui.pos_y.setMaximum(ui.img_size[1])
+		ui.pos_z.setMaximum(ui.img_size[2])
+		
+		ui.verticalScrollBar_a.setValue(int(ui.img_size[0]/2))
+		ui.verticalScrollBar_s.setValue(int(ui.img_size[1]/2))
+		ui.verticalScrollBar_c.setValue(int(ui.img_size[2]/2))
+		# updatePos()
+		# updateImgSlice()
+
 
 	def openMaskFile():
 		mask_path = QFileDialog.getOpenFileName(
@@ -69,26 +88,32 @@ if __name__ == '__main__':
 		if(len(mask_path[0])<1):
 			return
 		# 添加nib相关的读取
-		image_3d = nib.load(mask_path[0]).get_fdata()
-		image_2d = image_3d[:,:,ui.verticalScrollBar_a.value()]
-		image_2d = 255-image_2d
-		# image_2d = image_2d.astype(np.uint16)
-		for i in range(image_2d.shape[0]):
-			for j in range(image_2d.shape[1]):
-				if(image_2d[i,j]>=253):
-					# print(image_2d[i,j], i, j)
-					image_2d[i,j]=0
-		ui.view_a.setMask(Image.fromarray(np.uint8(image_2d)).rotate(90).transpose(Image.FLIP_TOP_BOTTOM).toqimage())
+		# image_3d = nib.load(mask_path[0]).get_fdata()
+		# image_2d = image_3d[:,:,ui.verticalScrollBar_a.value()]
+		# image_2d = 255-image_2d
+		# # image_2d = image_2d.astype(np.uint16)
+		# for i in range(image_2d.shape[0]):
+		# 	for j in range(image_2d.shape[1]):
+		# 		if(image_2d[i,j]>=253):
+		# 			# print(image_2d[i,j], i, j)
+		# 			image_2d[i,j]=0
+		ui.seg_3d = load_nii_data(mask_path[0])
+		updateSegSlice()
+		# ui.view_a.setMask(Image.fromarray(np.uint8(image_2d)).rotate(90).transpose(Image.FLIP_TOP_BOTTOM).toqimage())
 
 	def updatePos():
 		ui.pos_x.setValue(ui.verticalScrollBar_a.value())
 		ui.pos_y.setValue(ui.verticalScrollBar_s.value())
 		ui.pos_z.setValue(ui.verticalScrollBar_c.value())
+		updateImgSlice()
+		updateSegSlice()
 
 	def updateVerticalScrollBar():
 		ui.verticalScrollBar_a.setValue(ui.pos_x.value())
 		ui.verticalScrollBar_s.setValue(ui.pos_y.value())
 		ui.verticalScrollBar_c.setValue(ui.pos_z.value())
+		updateImgSlice()
+		updateSegSlice()
 
 	def updateToolBox(g_mode):
 		for btn, mode in ui.toolDict.items():

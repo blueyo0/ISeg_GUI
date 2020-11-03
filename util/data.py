@@ -17,6 +17,7 @@ from torchvision import transforms
 from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
 from imageio import imwrite
+from PIL import Image
 import platform
 
 class KITS_SLICE_h5(Dataset):
@@ -179,7 +180,6 @@ def get_case_path(cid):
 
     return case_path
 
-
 def load_volume(cid, mode):
     case_path = get_case_path(cid)
     if(mode=='nib'):
@@ -269,7 +269,50 @@ def hu_to_grayscale(volume, hu_min, hu_max):
     im_volume = 255*im_volume
     return np.stack((im_volume, im_volume, im_volume), axis=-1)
 
+def load_nii_data(path, mode="image"):
+    itk_vol = sitk.ReadImage(str(path))
+    vol = sitk.GetArrayFromImage(itk_vol)#.transpose([1,2,0]
+    total_count = 0
+    total_time = vol.shape[2]*2 + vol.shape[0] + vol.shape[1]
+    img_3d = []
+    for iz in range(vol.shape[2]):
+        if(mode=="image"):
+            img_2d = hu_to_grayscale(vol[:,:,iz], None ,None).astype(np.uint8)
+        elif(mode=="mask"):
+            img_2d = vol[:,:,iz]
+            # img_2d[img_2d==1] = 255
+        img_3d.append(img_2d)
 
+        total_count += 1
+        print("loading %d/%d"%(total_count, total_time))
+    img_3d = np.array(img_3d).transpose([1,2,3,0])
+
+    img_2d_li_a = []
+    for i_a in range(img_3d.shape[3]):
+        image_2d_a = img_3d[:,:,:,i_a]
+        img_2d_li_a.append(Image.fromarray(np.uint8(image_2d_a)).rotate(90)\
+								.transpose(Image.FLIP_TOP_BOTTOM).toqimage())
+        
+        total_count += 1
+        print("loading %d/%d"%(total_count, total_time))
+
+    img_2d_li_s = []
+    for i_s in range(img_3d.shape[0]):
+        image_2d_s = img_3d[i_s,:,:,:].transpose([0,2,1])
+        img_2d_li_s.append(Image.fromarray(np.uint8(image_2d_s)).toqimage())
+        
+        total_count += 1
+        print("loading %d/%d"%(total_count, total_time))
+
+    img_2d_li_c = []
+    for i_c in range(img_3d.shape[1]):
+        image_2d_c = img_3d[:,i_c,:,:].transpose([0,2,1])
+        img_2d_li_c.append(Image.fromarray(np.uint8(image_2d_c)).toqimage())
+        
+        total_count += 1
+        print("loading %d/%d"%(total_count, total_time))
+
+    return [img_2d_li_a, img_2d_li_s, img_2d_li_c]
 
 if __name__ == "__main__":
     # 用KITS测试npz和h5间的性能对比

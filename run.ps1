@@ -5,5 +5,5 @@ pyrcc5 -o rsc_rc.py Resources/rsc.qrc
 python main.py
 
 # 清空上次编译结果
-rm ./ui/mainWindow.py
-rm rsc_rc.py 
+# rm ./ui/mainWindow.py
+# rm rsc_rc.py 
