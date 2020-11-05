@@ -20,6 +20,7 @@ from imageio import imwrite
 from PIL import Image
 import platform
 
+# from numba import jit
 class KITS_SLICE_h5(Dataset):
     def __init__(self, data_dir, return_idx=False):
         # self.case_num = 300
@@ -269,50 +270,37 @@ def hu_to_grayscale(volume, hu_min, hu_max):
     im_volume = 255*im_volume
     return np.stack((im_volume, im_volume, im_volume), axis=-1)
 
-def load_nii_data(path, mode="image"):
+def arr2img(arr, position='a'):
+    img = None
+    if(position=='a'):
+        img = Image.fromarray(np.uint8(arr)).rotate(90)\
+                .transpose(Image.FLIP_TOP_BOTTOM).toqimage()
+    else:
+        img = Image.fromarray(np.uint8(arr)).toqimage()
+    return img
+
+
+# TO-DO 重写load_nii_data函数
+def load_nii_data(path):
     itk_vol = sitk.ReadImage(str(path))
-    vol = sitk.GetArrayFromImage(itk_vol)#.transpose([1,2,0]
-    total_count = 0
-    total_time = vol.shape[2]*2 + vol.shape[0] + vol.shape[1]
-    img_3d = []
-    for iz in range(vol.shape[2]):
-        if(mode=="image"):
-            img_2d = hu_to_grayscale(vol[:,:,iz], None ,None).astype(np.uint8)
-        elif(mode=="mask"):
-            img_2d = vol[:,:,iz]
-            # img_2d[img_2d==1] = 255
-        img_3d.append(img_2d)
+    vol = sitk.GetArrayFromImage(itk_vol)
 
-        total_count += 1
-        print("loading %d/%d"%(total_count, total_time))
-    img_3d = np.array(img_3d).transpose([1,2,3,0])
-
-    img_2d_li_a = []
-    for i_a in range(img_3d.shape[3]):
-        image_2d_a = img_3d[:,:,:,i_a]
-        img_2d_li_a.append(Image.fromarray(np.uint8(image_2d_a)).rotate(90)\
-								.transpose(Image.FLIP_TOP_BOTTOM).toqimage())
+    assert vol.ndim==3
+    if(vol.shape[0]==vol.shape[2]): 
+        vol = vol.transpose([0,2,1])
+    elif(vol.shape[1]==vol.shape[2]): 
+        vol = vol.transpose([1,2,0])
         
-        total_count += 1
-        print("loading %d/%d"%(total_count, total_time))
+    vol_max, vol_min = np.max(vol), np.min(vol)
+    nvol = (vol-vol_min) / max(vol_max-vol_min, 1e-3)
+    nvol = 255*nvol
 
-    img_2d_li_s = []
-    for i_s in range(img_3d.shape[0]):
-        image_2d_s = img_3d[i_s,:,:,:].transpose([0,2,1])
-        img_2d_li_s.append(Image.fromarray(np.uint8(image_2d_s)).toqimage())
-        
-        total_count += 1
-        print("loading %d/%d"%(total_count, total_time))
+    # img_2d_li_a = [arr2img(nvol[:,:,i_a]) for i_a in range(nvol.shape[2])]
+    # img_2d_li_s = [arr2img(nvol[i_s,:,:], position='s') for i_s in range(nvol.shape[0])]
+    # img_2d_li_c = [arr2img(nvol[:,i_c,:], position='c') for i_c in range(nvol.shape[1])]
+    # return [img_2d_li_a, img_2d_li_s, img_2d_li_c]
 
-    img_2d_li_c = []
-    for i_c in range(img_3d.shape[1]):
-        image_2d_c = img_3d[:,i_c,:,:].transpose([0,2,1])
-        img_2d_li_c.append(Image.fromarray(np.uint8(image_2d_c)).toqimage())
-        
-        total_count += 1
-        print("loading %d/%d"%(total_count, total_time))
-
-    return [img_2d_li_a, img_2d_li_s, img_2d_li_c]
+    return nvol
 
 if __name__ == "__main__":
     # 用KITS测试npz和h5间的性能对比
@@ -332,9 +320,9 @@ if __name__ == "__main__":
     npz data-reading time cost:30.78306 s
     '''
     OVERWRITE = True#覆盖旧文件
-    MODE = "preprocess"
+    # MODE = "preprocess"
     # MODE = "test"
-    # MODE = "dataset"
+    MODE = "dataset"
 
 
     if(MODE=="test"):

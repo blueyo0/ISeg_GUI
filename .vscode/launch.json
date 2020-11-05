@@ -15,7 +15,7 @@
             "name": "Python: 整个项目",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal"
         },
     ]
