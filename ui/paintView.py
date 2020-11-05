@@ -10,6 +10,7 @@ import sys
 import os
 sys.path.append(os.getcwd())
 import numpy as np
+import io
 from PIL import Image
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -17,6 +18,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from ui.paintMode import PaintMode
+from util.data import qimage2numpy, numpy2qimage
 
 import time
 
@@ -40,10 +42,12 @@ class PaintView(QtWidgets.QGraphicsView):
     # 显示相关参数
     isCursorChanged = True
     scale = 1.0
+    base_scale = 1.0
     alpha = 0xff
     background = QImage(DEFAULT_SIZE, QImage.Format_ARGB32)
     image = QImage(DEFAULT_SIZE, QImage.Format_ARGB32)
-    mask = QImage(DEFAULT_SIZE, QImage.Format_ARGB32)
+    mask_0 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # 生成的 prediction
+    mask_1 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # 读取的 Ground Truth
     paint_0 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # negative paint
     paint_1 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # positive paint
     wheelSignal = pyqtSignal(int)
@@ -57,16 +61,19 @@ class PaintView(QtWidgets.QGraphicsView):
         # 设置初始的4层内容
         # self.background.fill(BACKGROUND_COLOR)
         self.image.fill(IMAGE_DEFAULT_COLOR)
-        self.mask.fill(MASK_DEFAULT_COLOR)
-        self.layers = [self.image, self.mask, self.paint_1, self.paint_0]
+        self.mask_0.fill(MASK_DEFAULT_COLOR)
+        self.mask_1.fill(MASK_DEFAULT_COLOR)
+        self.layers = [self.image, self.mask_1, self.mask_0, self.paint_1, self.paint_0]
         # 其他属性
         self.offset = [0,0]
         self.colorTable = []
+        self.paintIdx = 0
 
     def initalize(self):
         self.scene = QGraphicsScene(self)
         self.scene.setBackgroundBrush(Qt.black)        
         self.colorTable = [qRgba(0,0,0,0x00), qRgba(0xff,0,0,int(self.alpha))]
+        self.paint_li = [self.paint_0, self.paint_1]
         # self.scene.addItem(QGraphicsPixmapItem(
         #     QPixmap.fromImage(self.background.scaled(self.size()*1.5))
         # ))
@@ -74,34 +81,34 @@ class PaintView(QtWidgets.QGraphicsView):
         # 获取最大边和最小边的值
         for img in self.layers:
             self.scene.addItem(QGraphicsPixmapItem(
-                QPixmap.fromImage(img).scaled(
-                    self.size(),
-                    aspectRatioMode = Qt.KeepAspectRatio
-                )
+                QPixmap.fromImage(img)
             ))
+        self.base_scale = min(self.width()/img.width(), self.height()/img.height())
         self.setCenter()
         self.setScene(self.scene)
         self.autoRescale()
 
-    def setCenter(self, item=3):        
-        W, H = self.size().width(), self.size().height()
+    def setCenter(self, item=4):
+        items = [self.paint_0, self.paint_1, self.mask_0, self.mask_1, self.image]
+        W, H = self.width(), self.height()
         self.offset = [(W - H)/2, 0] if(W > H) else [0, (H - W)/2]
-        items = self.scene.items()
         # 添加长宽不一致图像的居中
-        w, h = items[item].pixmap().width(), \
-               items[item].pixmap().height()
+        w, h = items[item].width(), \
+               items[item].height()
         if(w>h): self.offset[1] += (w-h)/2
         else: self.offset[0] += (h-w)/2
 
-        w, h = w*self.scale, h*self.scale
+        w, h = w*self.scale*self.base_scale, h*self.scale*self.base_scale
         if(w>W and h>H): #item无法完整显示时，针对当前中心放缩
             pass
             # self.offset[0] += (W-w)/2
             # self.offset[1] += (H-h)/2
         elif(w<W and h<H): # item较小时，居中显示
-            self.offset[0] = (W-w)/2 / self.scale
-            self.offset[1] = (H-h)/2 / self.scale
+            pass
+            # self.offset[0] = (W-w)/2 / self.scale
+            # self.offset[1] = (H-h)/2 / self.scale
 
+        items = self.scene.items()
         for i in range(len(items)):
             items[i].setOffset(self.offset[0], self.offset[1])
         # print(self.offset[0], self.offset[1])
@@ -119,38 +126,34 @@ class PaintView(QtWidgets.QGraphicsView):
     def setAlpha(self, a):
         self.alpha =a
         self.colorTable = [qRgba(0,0,0,0x00), qRgba(0xff,0,0,int(self.alpha))]
-        self.mask = self.getColoredMask(self.seg_mask)
+        self.mask_1 = self.getColoredMask(self.seg_mask)
 
-        self.scene.items()[2].setPixmap(
-            QPixmap.fromImage(self.mask).scaled(
-                self.size(),
-                aspectRatioMode = Qt.KeepAspectRatio,
-                transformMode = Qt.SmoothTransformation
-            ))
-        self.setCenter(2)
+        self.scene.items()[3].setPixmap(
+            QPixmap.fromImage(self.mask_1))
+        self.setCenter(3)
 
     def setScale(self, s):        # 为所有item设置scale
         self.scale = s
         for item in self.scene.items():
-            item.setScale(s)
+            item.setScale(s*self.base_scale)
         if(self.mode == PaintMode.Erase):
             self.setDragMode(QGraphicsView.NoDrag)
             self.setCursor(QCursor(QPixmap(":/橡皮光标.png")\
-                                    .scaled(self.penWidth*self.scale,
-                                            self.penWidth*self.scale, 
+                                    .scaled(self.penWidth*self.scale*self.base_scale,
+                                            self.penWidth*self.scale*self.base_scale, 
                                             transformMode = Qt.SmoothTransformation),-1,-1))
         self.setCenter()
-        self.horizontalScrollBar().setMaximum(self.height()*max(self.scale-1, 0))
-        self.verticalScrollBar().setMaximum(self.width()*max(self.scale-1, 0))
+        self.horizontalScrollBar().setMaximum(self.height()*max(self.scale*self.base_scale-1, 0))
+        self.verticalScrollBar().setMaximum(self.width()*max(self.scale*self.base_scale-1, 0))
 
         # print(self.horizontalScrollBar().maximum(), ',', self.horizontalScrollBar().minimum(), ";",
         #       self.verticalScrollBar().maximum(), ",", self.verticalScrollBar().minimum(), ";")
 
     def autoRescale(self):
         W, H = self.width(), self.height()
-        pix_w, pix_h = self.scene.items()[0].pixmap().width(), \
-                       self.scene.items()[0].pixmap().height()
-        self.scale = float(format(min(W/pix_w, H/pix_h), ".1f"))
+        pix_w, pix_h = self.image.width(), \
+                       self.image.height()
+        self.scale = float(format(min(W/pix_w, H/pix_h)/self.base_scale, ".1f"))
         self.setScale(self.scale)
         self.horizontalScrollBar().setValue(0)
         self.verticalScrollBar().setValue(0)
@@ -158,14 +161,16 @@ class PaintView(QtWidgets.QGraphicsView):
 
     def setImage(self, img, keepRatio=True):
         mode = Qt.KeepAspectRatio if keepRatio else Qt.IgnoreAspectRatio
+        self.base_scale = min(self.width()/img.width(), self.height()/img.height())
         self.image = img
-        self.scene.items()[3].setPixmap(
+        self.scene.items()[4].setPixmap(
             QPixmap.fromImage(self.image).scaled(
-                self.size(), 
-                aspectRatioMode = mode,
+                self.image.size(),
+                aspectRatioMode = Qt.KeepAspectRatio,
                 transformMode = Qt.SmoothTransformation
             ))
-        self.setCenter(3)
+        self.resetPaintLayers()
+        self.setCenter(4)
      
     def getColoredMask(self, seg_mask):        
         seg_mask.setColorCount(2)     
@@ -177,19 +182,55 @@ class PaintView(QtWidgets.QGraphicsView):
     def setMask(self, seg, keepRatio=True):
         mode = Qt.KeepAspectRatio if keepRatio else Qt.IgnoreAspectRatio
         self.seg_mask = seg.createMaskFromColor(0xFF000000, mode=Qt.MaskOutColor)
-        self.mask = self.getColoredMask(self.seg_mask)
+        self.mask_1 = self.getColoredMask(self.seg_mask)
 
-        self.scene.items()[2].setPixmap(
-            QPixmap.fromImage(self.mask).scaled(
-                self.size(),
-                aspectRatioMode = mode,
+        self.scene.items()[3].setPixmap(
+            QPixmap.fromImage(self.mask_1).scaled(
+                self.mask_1.size(),
+                aspectRatioMode = Qt.KeepAspectRatio,
                 transformMode = Qt.SmoothTransformation
             ))
-        self.setCenter(2)
+        self.resetPaintLayers()
+        self.setCenter(3)
+    
+    def resetPaintLayers(self):
+        self.paint_0 = QImage(self.image.size(), QImage.Format_ARGB32)
+        self.paint_1 = QImage(self.image.size(), QImage.Format_ARGB32)
+        self.paint_0.fill(0)
+        self.paint_1.fill(0)
+        self.scene.items()[0].setPixmap(
+            QPixmap.fromImage(self.paint_0).scaled(
+                self.paint_0.size(),
+                aspectRatioMode = Qt.KeepAspectRatio,
+                transformMode = Qt.SmoothTransformation
+            ))
+        self.scene.items()[1].setPixmap(
+            QPixmap.fromImage(self.paint_1).scaled(
+                self.paint_1.size(),
+                aspectRatioMode = Qt.KeepAspectRatio,
+                transformMode = Qt.SmoothTransformation
+            ))
 
-    # def resizeEvent(self, event):
-    #     super().resizeEvent(event)
-    #     self.autoRescale()
+    def setPaintLayers(self, p_0, p_1, keepRatio=True):
+        mode = Qt.KeepAspectRatio if keepRatio else Qt.IgnoreAspectRatio
+        self.paint_0, self.paint_1 = numpy2qimage(p_0), numpy2qimage(p_1)
+        self.scene.items()[0].setPixmap(
+            QPixmap.fromImage(self.paint_0).scaled(
+                self.paint_0.size(),
+                aspectRatioMode = Qt.KeepAspectRatio,
+                transformMode = Qt.SmoothTransformation
+            ))
+        self.scene.items()[1].setPixmap(
+            QPixmap.fromImage(self.paint_1).scaled(
+                self.paint_1.size(),
+                aspectRatioMode = Qt.KeepAspectRatio,
+                transformMode = Qt.SmoothTransformation
+            ))
+
+    def savePaintLayer(self):
+        p_0 = qimage2numpy(self.paint_0)
+        p_1 = qimage2numpy(self.paint_1)
+        return p_0, p_1
 
     def wheelEvent(self, event):
         zoomNum = 1 if event.angleDelta().y()<0 else -1
@@ -202,7 +243,8 @@ class PaintView(QtWidgets.QGraphicsView):
         elif(self.mode == PaintMode.Erase):
             self.setDragMode(QGraphicsView.NoDrag)
             self.setCursor(QCursor(QPixmap(":/橡皮光标.png")\
-                                    .scaled(self.penWidth*self.scale,self.penWidth*self.scale, 
+                                    .scaled(self.penWidth*self.scale*self.base_scale,
+                                            self.penWidth*self.scale*self.base_scale, 
                                             transformMode = Qt.SmoothTransformation),-1,-1))
         elif(self.mode == PaintMode.Drag):
             # self.setDragMode(QGraphicsView.ScrollHandDrag)
@@ -211,21 +253,27 @@ class PaintView(QtWidgets.QGraphicsView):
         self.sPt = event.pos()
         self.ePt = event.pos()
 
-        paintIdx = 0
         if(self.mode != PaintMode.Drag):
             if(event.button()==Qt.LeftButton):
                 self.penColorIndex = 1
-                paintIdx = 1
+                self.paintIdx = 1
             elif(event.button()==Qt.RightButton):
                 self.penColorIndex = 2
+                self.paintIdx = 0
             else:
                 self.penColorIndex = 0
 
-            line = [self.mapToScene(self.sPt)/self.scale, 
-                    self.mapToScene(self.ePt)/self.scale]
-            img = QPixmap(self.scene.items()[paintIdx].pixmap())
+            line = [self.mapToScene(self.sPt)/(self.scale*self.base_scale), 
+                    self.mapToScene(self.ePt)/(self.scale*self.base_scale)]
+
+            img = self.paint_li[self.paintIdx]
             self.drawLine(line, img)
-            self.scene.items()[paintIdx].setPixmap(img)
+            self.scene.items()[self.paintIdx].setPixmap(
+                QPixmap.fromImage(img).scaled(
+                    img.size(),
+                    aspectRatioMode = Qt.KeepAspectRatio,
+                    transformMode = Qt.SmoothTransformation
+            ))
         self.isPressed = True
 
     def mouseReleaseEvent(self, event):
@@ -238,7 +286,8 @@ class PaintView(QtWidgets.QGraphicsView):
                 self.setCursor(Qt.CrossCursor)
             elif(self.mode == PaintMode.Erase):
                 self.setCursor(QCursor(QPixmap(":/橡皮光标.png")\
-                                        .scaled(self.penWidth*self.scale,self.penWidth*self.scale, 
+                                        .scaled(self.penWidth*self.scale*self.base_scale,
+                                                self.penWidth*self.scale*self.base_scale, 
                                                 transformMode = Qt.SmoothTransformation),-1,-1))
             elif(self.mode == PaintMode.Drag):
                 self.setCursor(Qt.OpenHandCursor)
@@ -246,16 +295,38 @@ class PaintView(QtWidgets.QGraphicsView):
         # ~ 鼠标移动定位记录
         self.ePt = event.pos()
 
-        # 绘画和擦除模式
-        if(self.isPressed and self.mode!=PaintMode.Drag):
-            line = [self.mapToScene(self.sPt)/self.scale, 
-                    self.mapToScene(self.ePt)/self.scale]
-            img = QPixmap(self.scene.items()[0].pixmap())
+        line = [self.mapToScene(self.sPt)/(self.scale*self.base_scale), 
+                self.mapToScene(self.ePt)/(self.scale*self.base_scale)]
+        # 绘画模式
+        if(self.isPressed and self.mode==PaintMode.Paint):
+            img = self.paint_li[self.paintIdx]
             self.drawLine(line, img)
-            self.scene.items()[0].setPixmap(img)
-            img = QPixmap(self.scene.items()[1].pixmap())
+            self.scene.items()[self.paintIdx].setPixmap(
+                QPixmap.fromImage(img).scaled(
+                    img.size(),
+                    aspectRatioMode = Qt.KeepAspectRatio,
+                    transformMode = Qt.SmoothTransformation
+            ))
+
+        # 擦除模式
+        if(self.isPressed and self.mode==PaintMode.Erase):
+            img = self.paint_li[0]
+            self.drawLine(line, img)           
+            self.scene.items()[0].setPixmap(
+                QPixmap.fromImage(img).scaled(
+                    img.size(),
+                    aspectRatioMode = Qt.KeepAspectRatio,
+                    transformMode = Qt.SmoothTransformation
+            ))
+
+            img = self.paint_li[1]
             self.drawLine(line, img)
-            self.scene.items()[1].setPixmap(img)
+            self.scene.items()[1].setPixmap(
+                QPixmap.fromImage(img).scaled(
+                    img.size(),
+                    aspectRatioMode = Qt.KeepAspectRatio,
+                    transformMode = Qt.SmoothTransformation
+            ))
         #拖拽模式
         if(self.isPressed and self.mode==PaintMode.Drag):
             scroll_val = self.ePt - self.sPt

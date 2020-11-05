@@ -19,6 +19,10 @@ from pathlib import Path
 from imageio import imwrite
 from PIL import Image
 import platform
+import io
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
 # from numba import jit
 class KITS_SLICE_h5(Dataset):
@@ -94,6 +98,26 @@ class BraTS_SLICE_h5(Dataset):
     def __len__(self):
         return self.data_num-1
         
+# def qimage2numpy(img):
+#     buffer = QBuffer()
+#     buffer.open(QBuffer.ReadWrite)
+#     img.save(buffer, "PNG")
+#     pil_im = Image.open(io.BytesIO(buffer.data()))
+#     buffer.close()
+#     np_im = np.asarray(pil_im)
+#     return np_im
+    
+def qimage2numpy(img):
+    size = img.size()
+    s = img.bits().asstring(img.width() * img.height() * img.depth() // 8)
+    arr = np.fromstring(s, dtype=np.uint8)\
+            .reshape((img.width(), img.height(), image.depth() // 8))
+    return arr
+
+
+def numpy2qimage(arr):
+    qim = Image.fromarray(np.uint8(arr)).toqimage()
+    return qim
 
 
 def create_data_file(out_file, n_samples, image_shape, mask_shape=None, use_idx=False):
@@ -303,6 +327,33 @@ def load_nii_data(path):
     return nvol
 
 if __name__ == "__main__":
+    image = QImage(3, 3, QImage.Format_ARGB32)
+    image.fill(0x00000000)
+
+    value = qRgb(189, 149, 39)  # 0xffbd9527
+    image.setPixel(1, 1, value)
+
+    value = qRgb(122, 163, 39)  # 0xff7aa327
+    image.setPixel(0, 1, value)
+    image.setPixel(1, 0, value)
+
+    value = qRgb(237, 187, 51)  # 0xffedba31
+    image.setPixel(2, 1, value)
+
+    arr = qimage2numpy(image)
+    qim = numpy2qimage(arr)
+    
+    color = []
+    for i in range(qim.width()):
+        for j in range(qim.height()):
+            if(not qim.pixel(i,j) in color):
+                color.append(qim.pixel(i,j))
+    for c in color:
+        print('%#x'%c)
+
+
+
+
     # 用KITS测试npz和h5间的性能对比
     # 测试结果，npz 显著慢于 h5
     '''
@@ -318,6 +369,7 @@ if __name__ == "__main__":
     h5 data-reading time cost:0.19449 s
     npz file-loading time cost:0.25221 s
     npz data-reading time cost:30.78306 s
+    '''
     '''
     OVERWRITE = True#覆盖旧文件
     # MODE = "preprocess"
@@ -475,3 +527,4 @@ if __name__ == "__main__":
         size_arr = np.load(slice_size_file)
         print(size_arr)
         print("Data preprocessing finished!")
+    '''

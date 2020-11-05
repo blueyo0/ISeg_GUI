@@ -38,7 +38,11 @@ if __name__ == '__main__':
 	}
 	ui.img_3d = np.array([])
 	ui.seg_3d = np.array([])
+	ui.p_0_3d = np.array([])
+	ui.p_1_3d = np.array([])
 	ui.isSizeLoad = False
+	ui.isPaintReset  = False
+	ui.pos_save = [0,0,0]
 #-----------------------------------[ Slots ]----------------------------------#
 	def updateImgSlice():
 		if(ui.img_3d.ndim<3): return None
@@ -57,6 +61,22 @@ if __name__ == '__main__':
 		ui.view_c.setMask(arr2img(ui.seg_3d[:,ui.verticalScrollBar_c.value()-1,:], position='c')) 
 
 
+	def savePaintSlice(save_pos, position='a'):
+		if(ui.p_0_3d.ndim<4 or ui.p_1_3d.ndim<4): return None
+		p_0, p_1 = ui.view_a.savePaintLayer()
+		if(ui.p_0_3d[:,:,:,save_pos].shape != p_0.shape or
+		   ui.p_1_3d[:,:,:,save_pos].shape != p_1.shape): return None
+		if(position=='a'):
+			ui.p_0_3d[:,:,:,save_pos] = p_0
+			ui.p_1_3d[:,:,:,save_pos] = p_1
+			print("save_pos:%d"%save_pos)
+
+	def updatePaintSlice(load_pos, position='a'):
+		if(ui.p_0_3d.ndim<4 or ui.p_1_3d.ndim<4): return None
+		if(position=='a'):
+			ui.view_a.setPaintLayers(ui.p_0_3d[:,:,:,load_pos], ui.p_1_3d[:,:,:,load_pos]) 
+			print("load_pos:%d"%load_pos)
+
 	def openImageFile():
 		image_path = QFileDialog.getOpenFileName(
 			ui.centralwidget,
@@ -66,8 +86,14 @@ if __name__ == '__main__':
 		if(len(image_path[0])<1):
 			return None
 
+		ui.imgResizeFlag = False
 		ui.img_3d = load_nii_data(image_path[0])
-		if(not ui.isSizeLoad):
+		ui.p_0_3d = np.zeros([ui.img_3d.shape[0], ui.img_3d.shape[1], 
+							  4, ui.img_3d.shape[2]], dtype=np.uint8)
+		ui.p_1_3d = np.zeros([ui.img_3d.shape[0], ui.img_3d.shape[1], 
+							  4, ui.img_3d.shape[2]], dtype=np.uint8)
+		# ui.p_0_3d.resize()
+		if(not ui.isSizeLoad):			
 			ui.img_size = [ui.img_3d.shape[2], ui.img_3d.shape[0], ui.img_3d.shape[1]]	
 
 			ui.verticalScrollBar_a.setMaximum(ui.img_size[0])
@@ -82,6 +108,11 @@ if __name__ == '__main__':
 			ui.verticalScrollBar_c.setValue(int(ui.img_size[2]/2))
 			ui.isSizeLoad = True
 		autoRescale()
+		ui.view_a.resetPaintLayers()
+		ui.view_s.resetPaintLayers()
+		ui.view_c.resetPaintLayers()
+		ui.actionopen_seg.setEnabled(True)
+		ui.isPaintReset = True
 
 
 	def openMaskFile():
@@ -110,36 +141,30 @@ if __name__ == '__main__':
 		else:		
 			updateSegSlice()
 		autoRescale()
-		# ui.view_a.setMask(Image.fromarray(np.uint8(image_2d)).rotate(90).transpose(Image.FLIP_TOP_BOTTOM).toqimage())
-
+		
 	def updateXPosByWheel(val):
 		ui.pos_x.setValue(ui.pos_x.value()+val)
-		# updateImgSlice()
-		# updateSegSlice()
-
+	
 	def updateYPosByWheel(val):
 		ui.pos_y.setValue(ui.pos_y.value()+val)
-		# updateImgSlice()
-		# updateSegSlice()
 
 	def updateZPosByWheel(val):
 		ui.pos_z.setValue(ui.pos_z.value()+val)
-		# updateImgSlice()
-		# updateSegSlice()
 
 	def updatePos():
 		ui.pos_x.setValue(ui.verticalScrollBar_a.value())
 		ui.pos_y.setValue(ui.verticalScrollBar_s.value())
 		ui.pos_z.setValue(ui.verticalScrollBar_c.value())
+		# savePaintSlice(ui.pos_save[0]-1)
+		ui.pos_save = [ui.pos_x.value(),ui.pos_y.value(),ui.pos_z.value()]
 		updateImgSlice()
 		updateSegSlice()
+		# updatePaintSlice(ui.pos_x.value()-1)
 
 	def updateVerticalScrollBar():
 		ui.verticalScrollBar_a.setValue(ui.pos_x.value())
 		ui.verticalScrollBar_s.setValue(ui.pos_y.value())
 		ui.verticalScrollBar_c.setValue(ui.pos_z.value())
-		# updateImgSlice()
-		# updateSegSlice()
 
 	def updateToolBox(g_mode):
 		for btn, mode in ui.toolDict.items():
@@ -229,6 +254,7 @@ if __name__ == '__main__':
 	ui.penWidthSpinBox.valueChanged.connect(updatePenWidth)
 	ui.scaleSpinBox.valueChanged.connect(updateScale)
 	ui.autoScaleButton.clicked.connect(autoRescale)
+	# ui.autoScaleButton.clicked.connect(updatePaintSlice)
 
 	ui.paintButton.clicked.connect(changeModeToPaint)
 	ui.eraseButton.clicked.connect(changeModeToErase)

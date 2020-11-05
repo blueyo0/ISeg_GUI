@@ -379,6 +379,7 @@ class Ui_MainWindow(object):
         self.actionOpen_main_image = QtWidgets.QAction(MainWindow)
         self.actionOpen_main_image.setObjectName("actionOpen_main_image")
         self.actionopen_seg = QtWidgets.QAction(MainWindow)
+        self.actionopen_seg.setEnabled(False)
         self.actionopen_seg.setObjectName("actionopen_seg")
         self.menuFile.addAction(self.actionOpen_main_image)
         self.menuseg.addAction(self.actionopen_seg)
