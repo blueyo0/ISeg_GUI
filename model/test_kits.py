@@ -39,7 +39,7 @@ if __name__ == '__main__':
     model = Unet(net_params)
     model.load_state_dict(torch.load(MODEL_PATH))
 
-    caseId = 3
+    caseId = 1
     img, seg = load_case(caseId, mode='sitk')
     z = _patch_center_z(seg)[10].item()
     img_patch = img[:,:,z-1:z+2]
