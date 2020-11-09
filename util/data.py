@@ -17,7 +17,7 @@ from torchvision import transforms
 from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
 from imageio import imwrite
-from PIL import Image
+from PIL import Image, ImageQt
 import platform
 
 # from numba import jit
@@ -270,18 +270,20 @@ def hu_to_grayscale(volume, hu_min, hu_max):
     im_volume = 255*im_volume
     return np.stack((im_volume, im_volume, im_volume), axis=-1)
 
-def arr2img(arr, position='a'):
+def arr2img(arr, position='a', direction=None):
     img = None
     if(position=='a'):
-        img = Image.fromarray(np.uint8(arr)).rotate(90)\
+        rotate_angle = 90
+        if(direction): rotate_angle = 180 if direction[0]>0 else 90
+        img = Image.fromarray(np.uint8(arr)).rotate(rotate_angle)\
                 .transpose(Image.FLIP_TOP_BOTTOM).toqimage()
     else:
-        img = Image.fromarray(np.uint8(arr)).toqimage()
+        img = Image.fromarray(np.uint8(arr).T).toqimage()
     return img
 
 
-# TO-DO 重写load_nii_data函数
-def load_nii_data(path):
+# 重写load_nii_data函数， sitk读取加ndarray格式输出
+def load_nii_data(path, getDirection=False):
     itk_vol = sitk.ReadImage(str(path))
     vol = sitk.GetArrayFromImage(itk_vol)
 
@@ -300,7 +302,28 @@ def load_nii_data(path):
     # img_2d_li_c = [arr2img(nvol[:,i_c,:], position='c') for i_c in range(nvol.shape[1])]
     # return [img_2d_li_a, img_2d_li_s, img_2d_li_c]
 
+    if(getDirection): return nvol, itk_vol.GetDirection()
     return nvol
+
+'''QImage, QPixmap, numpy ndArray互转'''
+def qimage2numpy(img):
+    size = img.size()
+    s = img.bits().asstring(img.width() * img.height() * img.depth() // 8)
+    arr = np.fromstring(s, dtype=np.uint8)\
+            .reshape((img.width(), img.height(), img.depth() // 8))
+    return arr
+
+def qpixmap2numpy(pix):
+    return qimage2numpy(pix.toImage())
+
+def numpy2qimage(arr):
+    qim = Image.fromarray(np.uint8(arr)).toqimage()
+    return qim
+
+def numpy2qpixmap(arr):
+    qim = Image.fromarray(np.uint8(arr))
+    return ImageQt.toqpixmap(qim)
+
 
 if __name__ == "__main__":
     # 用KITS测试npz和h5间的性能对比

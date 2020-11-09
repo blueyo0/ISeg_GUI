@@ -37,8 +37,15 @@ if __name__ == '__main__':
 		ui.dragButton  : PaintMode.Drag
 	}
 	ui.img_3d = np.array([])
+	ui.direction_img = None
 	ui.seg_3d = np.array([])
+	ui.direction_seg = None
+	ui.paint_3d = [{},{}]
 	ui.isSizeLoad = False
+	ui.isPaintSaved = False
+	ui.currPos = [0,0,0]
+
+	ui.counter = [0, 0]
 #-----------------------------------[ Slots ]----------------------------------#
 	def updateImgSlice():
 		if(ui.img_3d.ndim<3): return None
@@ -46,15 +53,15 @@ if __name__ == '__main__':
 		# ui.view_s.setImage(ui.img_3d[1][ui.verticalScrollBar_s.value()-1]) 
 		# ui.view_c.setImage(ui.img_3d[2][ui.verticalScrollBar_c.value()-1]) 
 	
-		ui.view_a.setImage(arr2img(ui.img_3d[:,:,ui.verticalScrollBar_a.value()-1], position='a')) 
-		ui.view_s.setImage(arr2img(ui.img_3d[ui.verticalScrollBar_s.value()-1,:,:], position='s')) 
-		ui.view_c.setImage(arr2img(ui.img_3d[:,ui.verticalScrollBar_c.value()-1,:], position='c')) 
+		ui.view_a.setImage(arr2img(ui.img_3d[:,:,ui.verticalScrollBar_a.value()-1], position='a', direction=ui.direction_img)) 
+		ui.view_s.setImage(arr2img(ui.img_3d[ui.verticalScrollBar_s.value()-1,:,:], position='s', direction=ui.direction_img)) 
+		ui.view_c.setImage(arr2img(ui.img_3d[:,ui.verticalScrollBar_c.value()-1,:], position='c', direction=ui.direction_img)) 
 	
 	def updateSegSlice():
 		if(ui.seg_3d.ndim<3): return None
-		ui.view_a.setMask(arr2img(ui.seg_3d[:,:,ui.verticalScrollBar_a.value()-1], position='a')) 
-		ui.view_s.setMask(arr2img(ui.seg_3d[ui.verticalScrollBar_s.value()-1,:,:], position='s')) 
-		ui.view_c.setMask(arr2img(ui.seg_3d[:,ui.verticalScrollBar_c.value()-1,:], position='c')) 
+		ui.view_a.setMask(arr2img(ui.seg_3d[:,:,ui.verticalScrollBar_a.value()-1], position='a', direction=ui.direction_seg)) 
+		ui.view_s.setMask(arr2img(ui.seg_3d[ui.verticalScrollBar_s.value()-1,:,:], position='s', direction=ui.direction_seg)) 
+		ui.view_c.setMask(arr2img(ui.seg_3d[:,ui.verticalScrollBar_c.value()-1,:], position='c', direction=ui.direction_seg)) 
 
 
 	def openImageFile():
@@ -66,21 +73,22 @@ if __name__ == '__main__':
 		if(len(image_path[0])<1):
 			return None
 
-		ui.img_3d = load_nii_data(image_path[0])
-		if(not ui.isSizeLoad):
-			ui.img_size = [ui.img_3d.shape[2], ui.img_3d.shape[0], ui.img_3d.shape[1]]	
-
-			ui.verticalScrollBar_a.setMaximum(ui.img_size[0])
-			ui.verticalScrollBar_s.setMaximum(ui.img_size[1])
-			ui.verticalScrollBar_c.setMaximum(ui.img_size[2])
-			ui.pos_x.setMaximum(ui.img_size[0])
-			ui.pos_y.setMaximum(ui.img_size[1])
-			ui.pos_z.setMaximum(ui.img_size[2])
+		ui.img_3d, ui.direction_img = load_nii_data(image_path[0], getDirection=True)
+		# if(not ui.isSizeLoad):
+		ui.img_size = [ui.img_3d.shape[2], ui.img_3d.shape[0], ui.img_3d.shape[1]]	
+		ui.paint_3d = [{},{}]
+		ui.verticalScrollBar_a.setMaximum(ui.img_size[0])
+		ui.verticalScrollBar_s.setMaximum(ui.img_size[1])
+		ui.verticalScrollBar_c.setMaximum(ui.img_size[2])
+		ui.pos_x.setMaximum(ui.img_size[0])
+		ui.pos_y.setMaximum(ui.img_size[1])
+		ui.pos_z.setMaximum(ui.img_size[2])
 			
-			ui.verticalScrollBar_a.setValue(int(ui.img_size[0]/2))
-			ui.verticalScrollBar_s.setValue(int(ui.img_size[1]/2))
-			ui.verticalScrollBar_c.setValue(int(ui.img_size[2]/2))
-			ui.isSizeLoad = True
+		ui.verticalScrollBar_a.setValue(int(ui.img_size[0]/2))
+		ui.verticalScrollBar_s.setValue(int(ui.img_size[1]/2))
+		ui.verticalScrollBar_c.setValue(int(ui.img_size[2]/2))
+		ui.isSizeLoad = True
+		updateImgSlice()
 		autoRescale()
 
 
@@ -93,7 +101,8 @@ if __name__ == '__main__':
 		if(len(mask_path[0])<1):
 			return None
 
-		ui.seg_3d = load_nii_data(mask_path[0])
+		# ui.seg_3d = load_nii_data(mask_path[0])
+		ui.seg_3d, ui.direction_seg = load_nii_data(mask_path[0], getDirection=True)
 		if(not ui.isSizeLoad):
 			ui.img_size = [ui.seg_3d.shape[2], ui.seg_3d.shape[0], ui.seg_3d.shape[1]]	
 
@@ -113,24 +122,43 @@ if __name__ == '__main__':
 		# ui.view_a.setMask(Image.fromarray(np.uint8(image_2d)).rotate(90).transpose(Image.FLIP_TOP_BOTTOM).toqimage())
 
 	def updateXPosByWheel(val):
+		if(not ui.isPaintSaved): savePaint(ui.verticalScrollBar_a.value())
 		ui.pos_x.setValue(ui.pos_x.value()+val)
-		# updateImgSlice()
-		# updateSegSlice()
+
 
 	def updateYPosByWheel(val):
 		ui.pos_y.setValue(ui.pos_y.value()+val)
-		# updateImgSlice()
-		# updateSegSlice()
+
 
 	def updateZPosByWheel(val):
 		ui.pos_z.setValue(ui.pos_z.value()+val)
-		# updateImgSlice()
-		# updateSegSlice()
+
 
 	def updatePos():
 		ui.pos_x.setValue(ui.verticalScrollBar_a.value())
 		ui.pos_y.setValue(ui.verticalScrollBar_s.value())
 		ui.pos_z.setValue(ui.verticalScrollBar_c.value())
+		ui.currPos = [ui.pos_x.value(), ui.pos_y.value(), ui.pos_z.value()]
+		updateImgSlice()
+		updateSegSlice()
+
+	def updatePosByX():
+		if(not ui.isPaintSaved): savePaint(ui.pos_x.value())
+		ui.pos_x.setValue(ui.verticalScrollBar_a.value())
+		ui.currPos = [ui.pos_x.value(), ui.pos_y.value(), ui.pos_z.value()]
+		updateImgSlice()
+		updateSegSlice()
+		loadPaint(ui.currPos[0])
+
+	def updatePosByY():
+		ui.pos_y.setValue(ui.verticalScrollBar_s.value())
+		ui.currPos = [ui.pos_x.value(), ui.pos_y.value(), ui.pos_z.value()]
+		updateImgSlice()
+		updateSegSlice()
+
+	def updatePosByZ():
+		ui.pos_z.setValue(ui.verticalScrollBar_c.value())
+		ui.currPos = [ui.pos_x.value(), ui.pos_y.value(), ui.pos_z.value()]
 		updateImgSlice()
 		updateSegSlice()
 
@@ -138,8 +166,16 @@ if __name__ == '__main__':
 		ui.verticalScrollBar_a.setValue(ui.pos_x.value())
 		ui.verticalScrollBar_s.setValue(ui.pos_y.value())
 		ui.verticalScrollBar_c.setValue(ui.pos_z.value())
-		# updateImgSlice()
-		# updateSegSlice()
+
+	def updateVerticalScrollBarByX():
+		if(not ui.isPaintSaved): savePaint(ui.verticalScrollBar_a.value())
+		ui.verticalScrollBar_a.setValue(ui.pos_x.value())
+
+	def updateVerticalScrollBarByY():
+		ui.verticalScrollBar_s.setValue(ui.pos_y.value())
+
+	def updateVerticalScrollBarByZ():
+		ui.verticalScrollBar_c.setValue(ui.pos_z.value())
 
 	def updateToolBox(g_mode):
 		for btn, mode in ui.toolDict.items():
@@ -211,6 +247,35 @@ if __name__ == '__main__':
 		ui.view_s.setPenWidth(ui.penWidthSpinBox.value())
 		ui.view_c.setPenWidth(ui.penWidthSpinBox.value())
 
+	def savePaint(val):
+		if(len(ui.paint_3d)<2): return None
+		# ~ for test
+		# val = ui.currPos[0]
+
+		val = val-1
+		p0, p1 = ui.view_a.savePaint()
+		if(val in ui.paint_3d[0]): ui.paint_3d[0].update({val:p0})
+		else: ui.paint_3d[0][val] = p0
+		if(val in ui.paint_3d[1]): ui.paint_3d[1].update({val:p1})
+		else: ui.paint_3d[1][val] = p1
+		ui.isPaintSaved = True
+
+	def loadPaint(val):
+		if(len(ui.paint_3d)<2): return None
+		val = val-1
+		if(val in ui.paint_3d[0] and val in ui.paint_3d[1]):
+			p0 = ui.paint_3d[0][val]
+			p1 = ui.paint_3d[1][val]
+			ui.view_a.loadPaint(p0, p1)
+		else:
+			ui.view_a.clearPaint()
+		ui.isPaintSaved = False
+		
+
+	def clearPaint():
+		ui.view_a.clearPaint()
+
+
 #-----------------------------------[ Connect ]--------------------------------#
 	ui.actionOpen_main_image.triggered.connect(openImageFile)
 	ui.actionopen_seg.triggered.connect(openMaskFile)
@@ -218,21 +283,24 @@ if __name__ == '__main__':
 	ui.view_a.wheelSignal.connect(updateXPosByWheel)
 	ui.view_s.wheelSignal.connect(updateYPosByWheel)
 	ui.view_c.wheelSignal.connect(updateZPosByWheel)
-	ui.verticalScrollBar_a.valueChanged.connect(updatePos)
-	ui.verticalScrollBar_s.valueChanged.connect(updatePos)
-	ui.verticalScrollBar_c.valueChanged.connect(updatePos)
-	ui.pos_x.valueChanged.connect(updateVerticalScrollBar)
-	ui.pos_y.valueChanged.connect(updateVerticalScrollBar)
-	ui.pos_z.valueChanged.connect(updateVerticalScrollBar)
+	ui.verticalScrollBar_a.valueChanged.connect(updatePosByX)
+	ui.verticalScrollBar_s.valueChanged.connect(updatePosByY)
+	ui.verticalScrollBar_c.valueChanged.connect(updatePosByZ)
+	ui.pos_x.valueChanged.connect(updateVerticalScrollBarByX)
+	ui.pos_y.valueChanged.connect(updateVerticalScrollBarByY)
+	ui.pos_z.valueChanged.connect(updateVerticalScrollBarByZ)
 	ui.alphaHSlider.valueChanged.connect(updateASpinBox)
 	ui.alphaSpinBox.valueChanged.connect(updateASlider)
 	ui.penWidthSpinBox.valueChanged.connect(updatePenWidth)
 	ui.scaleSpinBox.valueChanged.connect(updateScale)
 	ui.autoScaleButton.clicked.connect(autoRescale)
+	# ui.autoScaleButton.clicked.connect(clearPaint)
+	# ui.autoScaleButton.clicked.connect(savePaint)
 
 	ui.paintButton.clicked.connect(changeModeToPaint)
 	ui.eraseButton.clicked.connect(changeModeToErase)
 	ui.dragButton.clicked.connect(changeModeToDrag)
+	# ui.dragButton.clicked.connect(loadPaint)
 
 #-----------------------------------[ Novel end ]------------------------------#	
 	myWin.show()
