@@ -9,12 +9,15 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "internalConsole"
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+            // "console": "internalConsole"
         },
         {
             "name": "Python: 整个项目",
             "type": "python",
             "request": "launch",
+            // "cwd": "${workspaceFolder}",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal"
         },

@@ -90,6 +90,7 @@ if __name__ == '__main__':
 		ui.isSizeLoad = True
 		updateImgSlice()
 		autoRescale()
+		ui.actionopen_seg.setEnabled(True)
 
 
 	def openMaskFile():

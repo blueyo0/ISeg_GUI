@@ -307,6 +307,11 @@ def load_nii_data(path, getDirection=False):
 
 '''QImage, QPixmap, numpy ndArray互转'''
 def qimage2numpy(img):
+    '''
+    @Brief: QImage转numpy.array
+    :Param img: QImage(m*n)对象，一般为ARGB格式
+    @Return: arr(m*n*4), 每个像素位置上顺序为BGRA
+    '''
     size = img.size()
     s = img.bits().asstring(img.width() * img.height() * img.depth() // 8)
     arr = np.fromstring(s, dtype=np.uint8)\

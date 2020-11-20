@@ -48,6 +48,7 @@ class PaintView(QtWidgets.QGraphicsView):
     mask_1 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # 读取的 Ground Truth
     paint_0 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # negative paint
     paint_1 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # positive paint
+    seg_mask = None
     wheelSignal = pyqtSignal(int)
         
     def __init__(self, widgets):
@@ -130,6 +131,7 @@ class PaintView(QtWidgets.QGraphicsView):
         self.isCursorChanged = True
 
     def setAlpha(self, a):
+        if(not self.seg_mask): return 
         self.alpha =a
         self.colorTable = [qRgba(0,0,0,0x00), qRgba(0xff,0,0,int(self.alpha))]
         self.mask_1 = self.getColoredMask(self.seg_mask)
