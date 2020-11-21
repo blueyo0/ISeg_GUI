@@ -13,6 +13,7 @@ import tables
 import os
 import time
 import torch
+import cv2
 from torchvision import transforms
 from torch.utils.data import DataLoader, Dataset
 from pathlib import Path
@@ -206,6 +207,15 @@ def load_case(cid, mode='nib'):
     seg = load_segmentation(cid, mode)
     return vol, seg
 
+def load_case_sitk(cid, data_path):
+    case_id = "case_{:05d}".format(int(cid))
+    case_path = Path(data_path) / case_id
+    itk_vol = sitk.ReadImage(str(case_path / "imaging.nii.gz"))
+    vol = sitk.GetArrayFromImage(itk_vol)#.transpose([1,2,0])
+    itk_seg = sitk.ReadImage(str(case_path / "segmentation.nii.gz"))
+    seg = sitk.GetArrayFromImage(itk_seg)#.transpose([1,2,0])
+    return vol, seg
+
 
 def _patch_center_z(mask):
     '''
@@ -254,6 +264,26 @@ def _extract_patch(image, mask):
         mask_patches.append(mask_patch.transpose([2,0,1]))
         slice_indexs.append(z_i)
     return image_patches, mask_patches, slice_indexs
+
+def extract_kits_patch(image, mask, num_cls=2, shape=[512, 512]):
+    '''提取KITS case中的有效2d数据'''
+    slice_indexs, image_patches, mask_patches  = [], [], []
+    z = _patch_center_z(mask)
+    for z_i in z:
+        image_patch = image[:,:,z_i-1:z_i+2]
+        if(np.isnan(image_patch).any() or 
+           np.isinf(image_patch).any() or 
+           image_patch.shape[0]!=shape[0] or 
+           image_patch.shape[1]!=shape[1]): continue
+        mask_patch = mask[:,:,z_i]
+        mask_patch = _label_decomp(mask_patch, num_cls)
+        image_patches.append(image_patch)
+        mask_patches.append(mask_patch)
+        slice_indexs.append(z_i)
+    return image_patches, mask_patches, slice_indexs
+
+
+
 
 def hu_to_grayscale(volume, hu_min, hu_max):
     # Clip at max and min values if specified
@@ -329,6 +359,12 @@ def numpy2qpixmap(arr):
     qim = Image.fromarray(np.uint8(arr))
     return ImageQt.toqpixmap(qim)
 
+def grayscale2bgra(arr):
+    if(arr.dtype==np.float or 
+       arr.dtype==np.float32 or 
+       arr.dtype==np.float16): arr = (arr*255).astype(np.uint8)
+    arr = cv2.cvtColor(arr, cv2.COLOR_GRAY2BGRA)
+    return arr
 
 if __name__ == "__main__":
     # 用KITS测试npz和h5间的性能对比

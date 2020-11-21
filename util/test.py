@@ -1,3 +1,12 @@
+# -*- encoding: utf-8 -*-
+'''
+@File    :   test.py
+@Time    :   2020/11/21 18:46:45
+@Author  :   Haoyu Wang 
+@Contact :   small_dark@sina.com
+@Brief   :   测试时用的一些功能，比如显示，便捷获得测试数据之类的
+'''
+
 from data import *
 from simulate import *
 from PIL import Image, ImageQt
@@ -26,10 +35,29 @@ def imageShow(img):
     pil_img = pil_img.resize((300, 300), Image.BOX)
     pil_img.show()
 
-def cv_show(img):
+def cv_show(img, strategy=None):
+    if(strategy=='normalize'): 
+        length = np.max(img)-np.min(img)
+        low_bound = np.min(img)
+        img = (img-low_bound)/length
     cv2.imshow("test", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()   #cv2.destroyWindow(wname)
+
+def cv_show_with_sim(img, li_1=[], li_0=[], strategy='normalize'):
+    for pt in li_1:
+        img[pt.x(), pt.y()] = np.array([0,255,0,255])
+        img[pt.x()+1, pt.y()-1] = np.array([0,255,0,255])
+        img[pt.x()+1, pt.y()+1] = np.array([0,255,0,255])
+        img[pt.x()-1, pt.y()+1] = np.array([0,255,0,255])
+        img[pt.x()-1, pt.y()-1] = np.array([0,255,0,255])
+    for pt in li_0:
+        img[pt.x(), pt.y()] = np.array([0,255,255,255])
+        img[pt.x()+1, pt.y()-1] = np.array([0,255,255,255])
+        img[pt.x()+1, pt.y()+1] = np.array([0,255,255,255])
+        img[pt.x()-1, pt.y()+1] = np.array([0,255,255,255])
+        img[pt.x()-1, pt.y()-1] = np.array([0,255,255,255])
+    cv_show(img, strategy)
 
 def testPosiGen():
     img_path = "D:\\dataset\\KITS2019\\data\\case_00000\\segmentation.nii.gz"

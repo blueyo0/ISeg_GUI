@@ -3,8 +3,8 @@
 @File    :   main.py
 @Time    :   2020/10/28 17:00:29
 @Author  :   Haoyu Wang 
-@Version :   1.0
 @Contact :   small_dark@sina.com
+@Brief   :   主函数
 '''
 import sys
 import os
