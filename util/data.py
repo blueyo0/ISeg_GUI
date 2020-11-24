@@ -22,6 +22,45 @@ from PIL import Image, ImageQt
 import platform
 
 # from numba import jit
+class KITS_SLICE_sim(Dataset):
+    def __init__(self, data_dir, return_idx=False, size_filename="kits_slice_size.npy"):
+        # self.case_num = 300
+        self.data_dir = Path(data_dir)
+        self.return_idx = return_idx
+        self.size_arr = np.load(self.data_dir/size_filename)
+        self.case_num = self.size_arr.shape[0] 
+        self.transform = transforms.Resize([512, 512])        
+
+    def __getitem__(self, index):
+        # TO-DO 二分根据Index确定case_id
+        # print("data index:", index)
+        lb , hb = 0, 0 # 下界，上界
+        for case_id in range(self.case_num):
+            hb = self.size_arr[case_id, 1]
+            if(index>=lb and index<hb): break
+            lb = hb
+
+        slice_id = index - lb
+        filename = self.data_dir / "kits_data_case_{:05d}.h5".format(case_id)
+        h5_file = tables.open_file(filename, mode='r')
+        img, seg = h5_file.root.img[slice_id].astype(np.float32), \
+                   h5_file.root.seg[slice_id].astype(np.float32)
+        sim = h5_file.root.sim[slice_id].astype(np.float32)
+        # img = self.transform(img)
+        # 数据检查
+        # assert len(np.unique(seg)) == 2
+        # assert not np.isnan(img).any()
+        result = (np.concatenate((img,sim),axis=2), seg)
+        if(self.return_idx):
+            case_idx = h5_file.root.case[slice_id]
+            slice_idx = h5_file.root.slice[slice_id]
+            result = (np.concatenate((img,sim),axis=2), seg, np.array([case_idx, slice_idx]))
+        h5_file.close()
+        return result
+
+    def __len__(self):
+        return self.size_arr[-1,-1]
+
 class KITS_SLICE_h5(Dataset):
     def __init__(self, data_dir, return_idx=False):
         # self.case_num = 300

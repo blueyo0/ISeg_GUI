@@ -70,7 +70,7 @@ def getSimInteraction(img_patches, seg_patches):
     
     new_kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
     dilated_nega = cv2.dilate(nega, new_kernel, iterations=1)
-    li_0 = randomScribble(li_0, dilated_nega)
+    # li_0 = randomScribble(li_0, dilated_nega)
 
     # dilated_nega = cv2.dilate(nega, kernel, iterations=3)
     dist_map_0 = getEuclidDistanceMap(li_0, nega)
@@ -83,7 +83,7 @@ def getSimInteraction(img_patches, seg_patches):
     posi = cv2.erode(seg, kernel, iterations=3)
     li_1 = randomSample(posi)
     # TO-DO： 先不生成scribble
-    li_1 = randomScribble(li_1, seg)
+    # li_1 = randomScribble(li_1, seg)
     dist_map_1 = getEuclidDistanceMap(li_1, seg)
     # cv_show_with_sim(dist_map, li_1=li_1)
     dist_map_0 = cv2.cvtColor(dist_map_0, cv2.COLOR_BGRA2GRAY).astype(np.float)/255
@@ -94,10 +94,10 @@ def getSimInteraction(img_patches, seg_patches):
 if __name__ == "__main__":
     # 默认地址设置
     ini_data_dir =Path("/opt/data/private/why/dataset/KITS_2019/data")
-    pre_data_dir = Path("/opt/data/private/why/dataset/KITS2019_preprocess_2/")
+    pre_data_dir = Path("/opt/data/private/why/dataset/KITS2019_preprocess/")
     if(platform.system()=='Windows'): 
         ini_data_dir = Path("D:/dataset/KITS2019/data")
-        pre_data_dir = Path("D:/dataset/KITS2019_preprocess_2")
+        pre_data_dir = Path("D:/dataset/KITS2019_preprocess")
     if(not pre_data_dir.exists()): os.makedirs(pre_data_dir)
 
     # 初始化命令行参数
@@ -148,7 +148,7 @@ if __name__ == "__main__":
                 sim_shape=(512, 512, 2),
                 seg_shape=(512, 512, 2),
             )
-            count = 10
+            # count = 10
             for idx, slice_idx in enumerate(slice_indexs):
                 img_storage.append(img_patches[idx][np.newaxis])
                 seg_storage.append(seg_patches[idx][np.newaxis])
@@ -159,8 +159,8 @@ if __name__ == "__main__":
                 sim_storage.append(sim_patch[np.newaxis])
                 print("[%03d]Slice %3d is compressed                                         "%\
                       (i, slice_idx), end="\r")
-                count -= 1
-                if(count<0): break
+                # count -= 1
+                # if(count<0): break
 
             hdf5_file.close()
             pass

@@ -106,6 +106,7 @@ def isBoundaryReached(pt: QPoint, area: np.array, margin: int):
 
 def getLinearPoints(start, end):
     pt_li = []
+    if(end.x()==start.x()): return pt_li
     k = (end.y()-start.y()) / (end.x()-start.x())
     b = start.y()-k*start.x()
     x_range = np.arange(end.x()+1, start.x()) if(start.x() > end.x()) else np.arange(start.x()+1, end.x())
