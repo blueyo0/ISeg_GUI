@@ -50,11 +50,11 @@ class KITS_SLICE_sim(Dataset):
         # 数据检查
         # assert len(np.unique(seg)) == 2
         # assert not np.isnan(img).any()
-        result = (np.concatenate((img,sim),axis=2), seg)
+        result = (np.concatenate((img,sim),axis=2).transpose([2,0,1]), seg.transpose([2,0,1]))
         if(self.return_idx):
             case_idx = h5_file.root.case[slice_id]
             slice_idx = h5_file.root.slice[slice_id]
-            result = (np.concatenate((img,sim),axis=2), seg, np.array([case_idx, slice_idx]))
+            result = (np.concatenate((img,sim),axis=2).transpose([2,0,1]), seg.transpose([2,0,1]), np.array([case_idx, slice_idx]))
         h5_file.close()
         return result
 

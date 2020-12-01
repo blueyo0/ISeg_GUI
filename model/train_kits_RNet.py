@@ -1,14 +1,15 @@
 # -*- encoding: utf-8 -*-
 '''
-@File    :   train_kits.py
-@Time    :   2020/10/30 10:24:11
+@File    :   train_kits_RNet.py
+@Time    :   2020/12/01 10:46:10
 @Author  :   Haoyu Wang 
 @Contact :   small_dark@sina.com
-@Brief   :   使用KITS_2d的数据训练网络，获得分割
+@Brief   :   训练带SIm的RNet,使用KITS_2d + sim
 '''
 
+
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2'
 
 import torch
 import numpy as np
@@ -56,7 +57,7 @@ def validation(model, loader_val):
         if(i>20): break #TO-DO
         slice_name, img, gt = batch[2], batch[0].cuda(), batch[1].cuda()
         if(img.shape[2]!=512 or img.shape[3]!=512):
-            print("error")
+            logging.info("error in data shape")
         with torch.no_grad():
             model.eval()
             pred = model(img)
@@ -74,19 +75,21 @@ def validation(model, loader_val):
     return np.mean([np.mean(v) for v in val_dice_case.values()])
 
 if __name__ == "__main__":
-    DATA_DIR = "/opt/data/private/why/dataset/KITS2019_modified/"
-    MODEL_DIR = "/opt/data/private/why/model/KITS2019_p1"
+    DATA_DIR = "/opt/data/private/why/dataset/KITS2019_preprocess/"
+    MODEL_DIR = "/opt/data/private/why/model/KITS2019_r1/"
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    # logging.getLogger().addHandler(logging.StreamHandler())
     logging.getLogger().addHandler(logging.FileHandler(os.path.join(MODEL_DIR, 'train_logs.txt'),"w"))
-   
-    train_loader, valid_loader = get_loader(DATA_DIR)
-    net_params = {"num_classes" : 2, "num_channels" : 3, "num_filters" : 32}
+    
+    logging.info("start training")
+    train_loader, valid_loader = get_loader(DATA_DIR, dataset_type='sim')
+    net_params = {"num_classes" : 2, "num_channels" : 5, "num_filters" : 32}
     train_params = {    
         "iterations"     : 300000,
         "learning_rate"  : 1e-3,
         "momentum"       : 0.9,
         "weight_decay"   : 1e-8,
-        # "print_freq"     : 10,
+        # "print_freq"     : 1,
         # "val_freq"       : 10,
         "print_freq"     : 20,
         "val_freq"       : 1000,
@@ -96,6 +99,7 @@ if __name__ == "__main__":
     model = Unet(net_params=net_params)
     # model = torch.nn.DataParallel(model)
     model = model.cuda()
+    logging.info("model is loaded")
     
     optimizer = torch.optim.SGD(model.parameters(), 
                           lr=train_params['learning_rate'], 
@@ -135,7 +139,7 @@ if __name__ == "__main__":
         # TO-DO: 修改一下输出部分
         if global_step % train_params['print_freq'] == 0:
             logging.info('Iteration %d (lr-%.4f): loss_bce : %.4f; loss_dice: %.4f; loss: %.4f; ' %
-                    (global_step, optimizer.param_groups[0]['lr'], loss_bce.item(), loss_dice.item(), loss.item()))
+                        (global_step, optimizer.param_groups[0]['lr'], loss_bce.item(), loss_dice.item(), loss.item()))
 
         if global_step % train_params['val_freq'] == 0:
             cur_dice = validation(model, valid_loader)

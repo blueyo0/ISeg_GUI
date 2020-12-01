@@ -7,8 +7,8 @@
 @Brief   :   测试时用的一些功能，比如显示，便捷获得测试数据之类的
 '''
 
-from data import *
-from simulate import *
+from util.data import *
+from util.simulate import *
 from PIL import Image, ImageQt
 from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtGui import QColor, QImage, QPixmap, qRgb
