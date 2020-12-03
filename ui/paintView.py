@@ -192,6 +192,11 @@ class PaintView(QtWidgets.QGraphicsView):
         seg_mask.convertToFormat(QImage.Format_ARGB32)
         return seg_mask
 
+    def getPaint(self, idx=0, shape=None):
+        pix = QPixmap(self.scene.items()[idx].pixmap()).copy()
+        if(shape): pix = pix.scaled(shape[0], shape[1])
+        return pix
+
     def setMask(self, seg, keepRatio=True, idx=1):
         mode = Qt.KeepAspectRatio if keepRatio else Qt.IgnoreAspectRatio
         self.seg_mask = seg.createMaskFromColor(0xFF000000, mode=Qt.MaskOutColor)

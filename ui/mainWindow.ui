@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1154</width>
+    <width>1156</width>
     <height>793</height>
    </rect>
   </property>
@@ -300,23 +300,25 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1154</width>
-     <height>22</height>
+     <width>1156</width>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>文件</string>
     </property>
-    <addaction name="actionOpen_main_image"/>
+    <addaction name="action_open_main_image"/>
+    <addaction name="action_open_seg"/>
    </widget>
    <widget class="QMenu" name="menuseg">
     <property name="title">
-     <string>Segmentation</string>
+     <string>分割</string>
     </property>
-    <addaction name="actionopen_seg"/>
     <addaction name="action_predict"/>
     <addaction name="action_refine"/>
+    <addaction name="separator"/>
+    <addaction name="action_snap_dist_map"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuseg"/>
@@ -333,7 +335,7 @@
     <set>Qt::LeftDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>ISeg Toolbox</string>
+    <string>ISeg 工具箱</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -894,12 +896,12 @@
     </widget>
    </widget>
   </widget>
-  <action name="actionOpen_main_image">
+  <action name="action_open_main_image">
    <property name="text">
     <string>打开图像</string>
    </property>
   </action>
-  <action name="actionopen_seg">
+  <action name="action_open_seg">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -909,12 +911,17 @@
   </action>
   <action name="action_predict">
    <property name="text">
-    <string>pnet predict</string>
+    <string>粗分割预测</string>
    </property>
   </action>
   <action name="action_refine">
    <property name="text">
-    <string>rnet refine</string>
+    <string>交互分割生成</string>
+   </property>
+  </action>
+  <action name="action_snap_dist_map">
+   <property name="text">
+    <string>截取欧几里得距离图</string>
    </property>
   </action>
  </widget>

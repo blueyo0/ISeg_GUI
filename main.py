@@ -11,6 +11,7 @@ import os
 sys.path.append(os.getcwd())
 
 import numpy as np
+import time
 
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -19,8 +20,10 @@ from ui.mainWindow import *
 
 from ui.paintMode import PaintMode
 from util.data import load_nii_data
-from util.data import arr2img
+from util.data import arr2img, qpixmap2numpy
 import model.model_util as mutil
+from util.simulate import getEuclidDistanceMap
+from util.test import cv_show
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
@@ -49,7 +52,7 @@ if __name__ == '__main__':
 	ui.counter = [0, 0]
 	# ！ model preload
 	ui.pnet_model = mutil.load_net_model(type='pnet')
-	ui.rnet_model = None
+	ui.rnet_model = mutil.load_net_model(type='rnet')
 #-----------------------------------[ Slots ]----------------------------------#
 	def updateImgSlice():
 		if(ui.img_3d.ndim<3): return None
@@ -94,7 +97,7 @@ if __name__ == '__main__':
 		ui.isSizeLoad = True
 		updateImgSlice()
 		autoRescale()
-		ui.actionopen_seg.setEnabled(True)
+		ui.action_open_seg.setEnabled(True)
 
 
 	def openMaskFile():
@@ -299,14 +302,47 @@ if __name__ == '__main__':
 		# TO-DO: mask_0的三维化
 
 	def refine():
+		paint = [qpixmap2numpy(ui.view_a.getPaint().scaled(512,512)), qpixmap2numpy(ui.view_a.getPaint(1).scaled(512,512))]
+		# cv_show(paint_0)
+		img = ui.img_3d[:,:,ui.verticalScrollBar_a.value()-2:ui.verticalScrollBar_a.value()+1]
+		for i in range(3):
+			img_single = img[:,:,i]
+			mean = np.mean(img_single)
+			std = np.std(img_single)
+			normalized_img = (img_single - mean) / std  # 正则化处理  
+			img[:,:,i] = normalized_img
+		start = time.time()
+		li, shape = [[],[]], paint[0].shape
+		for pidx in range(2):
+			for ix in range(shape[0]):
+				for iy in range(shape[1]):
+					if(paint[pidx][ix,iy,:3]!=[0,0,0]).any(): li[pidx].append(QPoint(ix,iy))
+		print("time cost:%.1f s" % (time.time()-start))
+		map_0 = getEuclidDistanceMap(li[0], img[:,:,0], dim=1)
+		print("map_0 with time cost:%.1f s" % (time.time()-start))
+		map_1 = getEuclidDistanceMap(li[1], img[:,:,0], dim=1)
+		print("map_1 with time cost:%.1f s" % (time.time()-start))
+		map_0 = map_0.astype(np.float)/255
+		map_1 = map_1.astype(np.float)/255
+		sim = np.array([map_0,map_1]).transpose([1,2,0])
+		img_patchs = np.concatenate((img,sim),axis=2)
+
+		pred = mutil.predict(ui.rnet_model, img_patchs)
+		ui.view_a.setMask(arr2img(pred, position='a'), idx=0) 
 		# TO-DO: 使用四叉树处理点的距离，绘制欧几里得距离图 
 		pass
 
+	def testMessageBox():
+		msgBox = QMessageBox(QMessageBox.Information, "测试", "test function")
+		msgBox.exec()
+		pass
+
 #-----------------------------------[ Connect ]--------------------------------#
-	ui.actionOpen_main_image.triggered.connect(openImageFile)
-	ui.actionopen_seg.triggered.connect(openMaskFile)
+	ui.action_open_main_image.triggered.connect(openImageFile)
+	ui.action_open_seg.triggered.connect(openMaskFile)
 	ui.action_predict.triggered.connect(predict)
 	ui.action_refine.triggered.connect(refine)
+	ui.action_snap_dist_map.triggered.connect(testMessageBox)
 
 	ui.view_a.wheelSignal.connect(updateXPosByWheel)
 	ui.view_s.wheelSignal.connect(updateYPosByWheel)
@@ -329,6 +365,10 @@ if __name__ == '__main__':
 	ui.paintButton.clicked.connect(changeModeToPaint)
 	ui.eraseButton.clicked.connect(changeModeToErase)
 	ui.dragButton.clicked.connect(changeModeToDrag)
+
+	ui.toolButton_a.clicked.connect(testMessageBox)
+	ui.toolButton_s.clicked.connect(testMessageBox)
+	ui.toolButton_c.clicked.connect(testMessageBox)
 
 #-----------------------------------[ Novel end ]------------------------------#	
 	myWin.show()

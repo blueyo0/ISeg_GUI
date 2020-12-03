@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: 当前文件",
+            "name": "当前文件",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -14,7 +14,7 @@
             // "console": "internalConsole"
         },
         {
-            "name": "Python: 整个项目",
+            "name": "整个项目",
             "type": "python",
             "request": "launch",
             // "cwd": "${workspaceFolder}",

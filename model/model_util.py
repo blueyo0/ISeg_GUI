@@ -24,11 +24,13 @@ torch.set_default_tensor_type('torch.FloatTensor')
 
 from model.Unet import Unet
 
-def load_net_model(type='pnet', net_params={'num_filters':32, 
-                                            'num_channels':3, 
-                                            'num_classes':2}):
+def load_net_model(type='pnet'):
+    net_params={'num_filters':32, 
+                'num_channels':3 if(type=='pnet') else 5, 
+                'num_classes':2}
     model = Unet(net_params)
-    model.load_state_dict(torch.load("./model/prnet/pnet_model.pth"))
+    model_pth = "./model/prnet/pnet_model.pth" if(type=='pnet') else "./model/prnet/rnet_model.pth"
+    model.load_state_dict(torch.load(model_pth))
     return model
 
 def predict(model, img_patch):

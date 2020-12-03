@@ -151,14 +151,14 @@ def randomScribble(pts: list, area: np.array,
 
     return pts + scribble_pts
 
-def getEuclidDistanceMap(pts: list, area: np.array):
+def getEuclidDistanceMap(pts: list, area: np.array, dim=4):
     result = np.zeros(area.shape, np.uint8)
     for ix in range(result.shape[0]):
         for iy in range(result.shape[1]):
             dist = [int(sqrt(euclidDistance(pt, QPoint(ix, iy)))) for pt in pts]
             min_dist = int(np.min(dist)) if(len(dist)>0) else 255
             if(min_dist>255): min_dist=255
-            result[ix, iy] = np.array([min_dist,min_dist,min_dist,255])
+            result[ix, iy] = np.array([min_dist,min_dist,min_dist,255]) if(dim==4) else 255
     return result
 
 
