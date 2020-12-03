@@ -20,6 +20,7 @@ from ui.mainWindow import *
 from ui.paintMode import PaintMode
 from util.data import load_nii_data
 from util.data import arr2img
+import model.model_util as mutil
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
@@ -46,6 +47,9 @@ if __name__ == '__main__':
 	ui.currPos = [0,0,0]
 
 	ui.counter = [0, 0]
+	# ！ model preload
+	ui.pnet_model = mutil.load_net_model(type='pnet')
+	ui.rnet_model = None
 #-----------------------------------[ Slots ]----------------------------------#
 	def updateImgSlice():
 		if(ui.img_3d.ndim<3): return None
@@ -180,10 +184,8 @@ if __name__ == '__main__':
 
 	def updateToolBox(g_mode):
 		for btn, mode in ui.toolDict.items():
-			if(mode == g_mode):
-				btn.setChecked(True)
-			else:
-				btn.setChecked(False)
+			if(mode == g_mode): btn.setChecked(True)
+			else: btn.setChecked(False)
 
 	def updatePaintMode():	
 		ui.view_a.setMode(ui.general_mode)
@@ -211,6 +213,14 @@ if __name__ == '__main__':
 		ui.view_s.setAlpha(int(2.55*ui.alphaSpinBox.value()))
 		ui.view_c.setAlpha(int(2.55*ui.alphaSpinBox.value()))
 
+	def updateASlider_2():
+		ui.alphaHSlider_2.setValue(ui.alphaSpinBox_2.value())
+
+	def updateASpinBox_2():
+		ui.alphaSpinBox_2.setValue(ui.alphaHSlider_2.value())
+		ui.view_a.setAlpha(int(2.55*ui.alphaSpinBox_2.value()), idx=0)
+		ui.view_s.setAlpha(int(2.55*ui.alphaSpinBox_2.value()), idx=0)
+		ui.view_c.setAlpha(int(2.55*ui.alphaSpinBox_2.value()), idx=0)
 
 	def changeModeToPaint():
 		ui.penWidthIdx = 0
@@ -276,10 +286,27 @@ if __name__ == '__main__':
 	def clearPaint():
 		ui.view_a.clearPaint()
 
+	def predict():
+		img_patchs = ui.img_3d[:,:,ui.verticalScrollBar_a.value()-2:ui.verticalScrollBar_a.value()+1].copy()
+		for i in range(3):
+			img_single = img_patchs[:,:,i]
+			mean = np.mean(img_single)
+			std = np.std(img_single)
+			normalized_img = (img_single - mean) / std  # 正则化处理  
+			img_patchs[:,:,i] = normalized_img
+		pred = mutil.predict(ui.pnet_model, img_patchs)
+		ui.view_a.setMask(arr2img(pred, position='a'), idx=0) 
+		# TO-DO: mask_0的三维化
+
+	def refine():
+		# TO-DO: 使用四叉树处理点的距离，绘制欧几里得距离图 
+		pass
 
 #-----------------------------------[ Connect ]--------------------------------#
 	ui.actionOpen_main_image.triggered.connect(openImageFile)
 	ui.actionopen_seg.triggered.connect(openMaskFile)
+	ui.action_predict.triggered.connect(predict)
+	ui.action_refine.triggered.connect(refine)
 
 	ui.view_a.wheelSignal.connect(updateXPosByWheel)
 	ui.view_s.wheelSignal.connect(updateYPosByWheel)
@@ -292,16 +319,16 @@ if __name__ == '__main__':
 	ui.pos_z.valueChanged.connect(updateVerticalScrollBarByZ)
 	ui.alphaHSlider.valueChanged.connect(updateASpinBox)
 	ui.alphaSpinBox.valueChanged.connect(updateASlider)
+	ui.alphaHSlider_2.valueChanged.connect(updateASpinBox_2)
+	ui.alphaSpinBox_2.valueChanged.connect(updateASlider_2)
+
 	ui.penWidthSpinBox.valueChanged.connect(updatePenWidth)
 	ui.scaleSpinBox.valueChanged.connect(updateScale)
 	ui.autoScaleButton.clicked.connect(autoRescale)
-	# ui.autoScaleButton.clicked.connect(clearPaint)
-	# ui.autoScaleButton.clicked.connect(savePaint)
 
 	ui.paintButton.clicked.connect(changeModeToPaint)
 	ui.eraseButton.clicked.connect(changeModeToErase)
 	ui.dragButton.clicked.connect(changeModeToDrag)
-	# ui.dragButton.clicked.connect(loadPaint)
 
 #-----------------------------------[ Novel end ]------------------------------#	
 	myWin.show()

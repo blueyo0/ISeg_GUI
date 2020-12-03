@@ -33,8 +33,9 @@ torch.backends.cudnn.deterministic = True
 torch.set_default_tensor_type('torch.DoubleTensor')
 
 if __name__ == '__main__':
-    MODEL_PATH =  "D:/BME/model/best_model.pth"
-    prev_dir = Path(os.path.join("D:/BME/model/", "preview"))
+    # MODEL_PATH =  "D:/BME/model/best_model.pth"
+    MODEL_PATH =  "./model/prnet/pnet_model.pth"
+    prev_dir = Path(os.path.join("D:/BME/model/", "preview_pnet"))
     
     # MODEL_PATH =  "D:/BME/model/step_22000_curdice_0.1421.pth"
     # prev_dir = Path(os.path.join("D:/BME/model/", "preview_2"))

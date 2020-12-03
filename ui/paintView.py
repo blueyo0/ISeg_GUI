@@ -41,7 +41,7 @@ class PaintView(QtWidgets.QGraphicsView):
     # 显示相关参数
     isCursorChanged = True
     scale = 1.0
-    alpha = 0xff
+    alpha = [0x7f, 0x7f]
     # background = QImage(DEFAULT_SIZE, QImage.Format_ARGB32)
     image = QImage(DEFAULT_SIZE, QImage.Format_ARGB32)
     mask_0 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # 生成的 prediction
@@ -71,7 +71,7 @@ class PaintView(QtWidgets.QGraphicsView):
     def initalize(self):
         self.scene = QGraphicsScene(self)
         self.scene.setBackgroundBrush(Qt.black)        
-        self.colorTable = [qRgba(0,0,0,0x00), qRgba(0xff,0,0,int(self.alpha))]
+        self.colorTable = [qRgba(0,0,0,0x00), qRgba(0xff,0,0,int(self.alpha[1]))]
         # self.scene.addItem(QGraphicsPixmapItem(
         #     QPixmap.fromImage(self.background.scaled(self.size()*1.5))
         # ))
@@ -130,19 +130,23 @@ class PaintView(QtWidgets.QGraphicsView):
         self.penWidth = w
         self.isCursorChanged = True
 
-    def setAlpha(self, a):
+    def setAlpha(self, a, idx=1, r=0xff, g=0x00, b=0x00):
         if(not self.seg_mask): return 
-        self.alpha =a
-        self.colorTable = [qRgba(0,0,0,0x00), qRgba(0xff,0,0,int(self.alpha))]
-        self.mask_1 = self.getColoredMask(self.seg_mask)
+        if(idx!=1 and idx!=0): return
+        self.alpha[idx] = a
+        # self.colorTable = [qRgba(0,0,0,0x00), qRgba(r,g,b,int(self.alpha[1]))]
+        
+        if(idx==1): self.mask_1 = self.getColoredMask(self.seg_mask)
+        elif(idx==0): self.mask_0 = self.getColoredMask(self.seg_mask, r=89, g=99, b=210, a=a)
+        mask = self.mask_1 if(idx==1) else self.mask_0
 
-        self.scene.items()[3].setPixmap(
-            QPixmap.fromImage(self.mask_1).scaled(
+        self.scene.items()[2+idx].setPixmap(
+            QPixmap.fromImage(mask).scaled(
                 self.size(),
                 aspectRatioMode = Qt.KeepAspectRatio,
                 transformMode = Qt.SmoothTransformation
             ))
-        self.setCenter(3)
+        self.setCenter(2+idx)
 
     def setScale(self, s):        # 为所有item设置scale
         self.scale = s
@@ -182,25 +186,26 @@ class PaintView(QtWidgets.QGraphicsView):
             ))
         self.setCenter(4)
      
-    def getColoredMask(self, seg_mask):        
+    def getColoredMask(self, seg_mask, r=0xff, g=0x00, b=0x00, a=0x7f):        
         seg_mask.setColorCount(2)     
-        seg_mask.setColorTable(self.colorTable)
+        seg_mask.setColorTable([qRgba(0,0,0,0x00), qRgba(r,g,b,int(a))])
         seg_mask.convertToFormat(QImage.Format_ARGB32)
         return seg_mask
 
-
-    def setMask(self, seg, keepRatio=True):
+    def setMask(self, seg, keepRatio=True, idx=1):
         mode = Qt.KeepAspectRatio if keepRatio else Qt.IgnoreAspectRatio
         self.seg_mask = seg.createMaskFromColor(0xFF000000, mode=Qt.MaskOutColor)
-        self.mask_1 = self.getColoredMask(self.seg_mask)
-
-        self.scene.items()[3].setPixmap(
-            QPixmap.fromImage(self.mask_1).scaled(
+        if(idx==1): self.mask_1 = self.getColoredMask(self.seg_mask)
+        elif(idx==0): self.mask_0 = self.getColoredMask(self.seg_mask, r=89, g=99, b=210)
+            
+        mask = self.mask_1 if(idx==1) else self.mask_0
+        self.scene.items()[2+idx].setPixmap(
+            QPixmap.fromImage(mask).scaled(
                 self.size(),
                 aspectRatioMode = mode,
                 transformMode = Qt.SmoothTransformation
             ))
-        self.setCenter(3)
+        self.setCenter(2+idx)
 
     def savePaint(self):
         items = self.scene.items()
