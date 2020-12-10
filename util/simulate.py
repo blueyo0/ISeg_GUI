@@ -158,7 +158,7 @@ def getEuclidDistanceMap(pts: list, area: np.array, dim=4):
             dist = [int(sqrt(euclidDistance(pt, QPoint(ix, iy)))) for pt in pts]
             min_dist = int(np.min(dist)) if(len(dist)>0) else 255
             if(min_dist>255): min_dist=255
-            result[ix, iy] = np.array([min_dist,min_dist,min_dist,255]) if(dim==4) else 255
+            result[ix, iy] = np.array([min_dist,min_dist,min_dist,255]) if(dim==4) else min_dist
     return result
 
 

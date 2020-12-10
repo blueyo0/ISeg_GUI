@@ -23,7 +23,8 @@ from util.data import load_nii_data
 from util.data import arr2img, qpixmap2numpy
 import model.model_util as mutil
 from util.simulate import getEuclidDistanceMap
-from util.test import cv_show
+from util.test import cv_show, cv_show_with_sim
+import cv2
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
@@ -33,7 +34,7 @@ if __name__ == '__main__':
 
 #------------------------------[ Inter Variables ]-----------------------------#
 	ui.general_mode = PaintMode.Paint
-	ui.penWidthList = [5, 15, 0]
+	ui.penWidthList = [1, 15, 0]
 	ui.penWidthIdx = 0
 	ui.toolDict = { 
 		ui.paintButton : PaintMode.Paint,
@@ -84,9 +85,12 @@ if __name__ == '__main__':
 		# if(not ui.isSizeLoad):
 		ui.img_size = [ui.img_3d.shape[2], ui.img_3d.shape[0], ui.img_3d.shape[1]]	
 		ui.paint_3d = [{},{}]
-		ui.verticalScrollBar_a.setMaximum(ui.img_size[0])
-		ui.verticalScrollBar_s.setMaximum(ui.img_size[1])
-		ui.verticalScrollBar_c.setMaximum(ui.img_size[2])
+		ui.verticalScrollBar_a.setMaximum(ui.img_size[0]-1)
+		ui.verticalScrollBar_a.setMinimum(1)
+		ui.verticalScrollBar_s.setMaximum(ui.img_size[1]-1)
+		ui.verticalScrollBar_s.setMinimum(1)
+		ui.verticalScrollBar_c.setMaximum(ui.img_size[2]-1)
+		ui.verticalScrollBar_c.setMinimum(1)
 		ui.pos_x.setMaximum(ui.img_size[0])
 		ui.pos_y.setMaximum(ui.img_size[1])
 		ui.pos_z.setMaximum(ui.img_size[2])
@@ -98,6 +102,8 @@ if __name__ == '__main__':
 		updateImgSlice()
 		autoRescale()
 		ui.action_open_seg.setEnabled(True)
+		ui.action_predict.setEnabled(True)
+		ui.action_refine.setEnabled(True)
 
 
 	def openMaskFile():
@@ -302,9 +308,11 @@ if __name__ == '__main__':
 		# TO-DO: mask_0的三维化
 
 	def refine():
-		paint = [qpixmap2numpy(ui.view_a.getPaint().scaled(512,512)), qpixmap2numpy(ui.view_a.getPaint(1).scaled(512,512))]
-		# cv_show(paint_0)
-		img = ui.img_3d[:,:,ui.verticalScrollBar_a.value()-2:ui.verticalScrollBar_a.value()+1]
+		paint_c = [qpixmap2numpy(ui.view_a.getPaint().scaled(512,512)), qpixmap2numpy(ui.view_a.getPaint(1).scaled(512,512))]
+		paint = [cv2.cvtColor(paint_c[0], cv2.COLOR_BGRA2GRAY), cv2.cvtColor(paint_c[1], cv2.COLOR_BGRA2GRAY)]
+		# cv_show(paint[0])
+		# cv_show(paint[1])
+		img = ui.img_3d[:,:,ui.verticalScrollBar_a.value()-2:ui.verticalScrollBar_a.value()+1].copy()
 		for i in range(3):
 			img_single = img[:,:,i]
 			mean = np.mean(img_single)
@@ -314,9 +322,14 @@ if __name__ == '__main__':
 		start = time.time()
 		li, shape = [[],[]], paint[0].shape
 		for pidx in range(2):
+			val = np.max(paint[pidx])
 			for ix in range(shape[0]):
 				for iy in range(shape[1]):
-					if(paint[pidx][ix,iy,:3]!=[0,0,0]).any(): li[pidx].append(QPoint(ix,iy))
+					if(paint[pidx][iy,ix]==val): li[pidx].append(QPoint(ix,iy))
+		# cv_show(paint[0])
+		# cv_show(paint[1])
+		# cv_show_with_sim(img[:,:,1].copy(), li[0], li[1], dim=1)
+
 		print("time cost:%.1f s" % (time.time()-start))
 		map_0 = getEuclidDistanceMap(li[0], img[:,:,0], dim=1)
 		print("map_0 with time cost:%.1f s" % (time.time()-start))
@@ -324,6 +337,12 @@ if __name__ == '__main__':
 		print("map_1 with time cost:%.1f s" % (time.time()-start))
 		map_0 = map_0.astype(np.float)/255
 		map_1 = map_1.astype(np.float)/255
+
+		np.savez("D:/code/ISeg_igst/ISeg_GUI/model/input_save/map_0.npz", map_0)
+		np.savez("D:/code/ISeg_igst/ISeg_GUI/model/input_save/map_1.npz", map_1)
+		# cv_show(map_1)
+		# cv_show(map_0)
+
 		sim = np.array([map_0,map_1]).transpose([1,2,0])
 		img_patchs = np.concatenate((img,sim),axis=2)
 

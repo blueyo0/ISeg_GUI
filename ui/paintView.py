@@ -29,7 +29,7 @@ MASK_DEFAULT_COLOR = QColor(200, 200, 200, 0)
 
 class PaintView(QtWidgets.QGraphicsView):
     # 绘制相关参数
-    penWidth = 5
+    penWidth = 1
     penColorIndex = 0
     penColor = [QColor(0, 0, 0, 0), # 空白色
                 QColor(0, 255, 0, 255), 

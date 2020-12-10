@@ -44,15 +44,23 @@ def cv_show(img, strategy=None):
     cv2.waitKey(0)
     cv2.destroyAllWindows()   #cv2.destroyWindow(wname)
 
-def cv_show_with_sim(img, li_1=[], li_0=[], strategy='normalize'):
+def cv_show_with_sim(img, li_1=[], li_0=[], strategy='normalize', dim=4):
+    if(dim==1):
+        default = img.copy()
+        img = np.zeros((img.shape[0], img.shape[1], 4))
+        for ix in range(img.shape[0]):
+            for iy in range(img.shape[1]):
+                val = default[ix,iy]*255
+                img[ix, iy] = np.array([val, val, val, 255])
+
     for pt in li_1:
-        img[pt.x(), pt.y()] = np.array([0,255,0,255])
-        img[pt.x()+1, pt.y()-1] = np.array([0,255,0,255])
-        img[pt.x()+1, pt.y()+1] = np.array([0,255,0,255])
-        img[pt.x()-1, pt.y()+1] = np.array([0,255,0,255])
-        img[pt.x()-1, pt.y()-1] = np.array([0,255,0,255])
+        img[pt.x(), pt.y()] = np.array([0,255,0,255]) 
+        img[pt.x()+1, pt.y()-1] = np.array([0,255,0,255]) 
+        img[pt.x()+1, pt.y()+1] = np.array([0,255,0,255]) 
+        img[pt.x()-1, pt.y()+1] = np.array([0,255,0,255]) 
+        img[pt.x()-1, pt.y()-1] = np.array([0,255,0,255]) 
     for pt in li_0:
-        img[pt.x(), pt.y()] = np.array([0,255,255,255])
+        img[pt.x(), pt.y()] = np.array([0,255,255,255]) 
         img[pt.x()+1, pt.y()-1] = np.array([0,255,255,255])
         img[pt.x()+1, pt.y()+1] = np.array([0,255,255,255])
         img[pt.x()-1, pt.y()+1] = np.array([0,255,255,255])
