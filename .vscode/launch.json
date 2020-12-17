@@ -21,7 +21,8 @@
             "request": "launch",
             // "cwd": "${workspaceFolder}",
             "program": "${workspaceFolder}/main.py",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            // "preLaunchTask": "build_qt"
         },
     ]
 }

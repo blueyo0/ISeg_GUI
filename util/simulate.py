@@ -27,6 +27,7 @@ from imageio import imwrite
 from pathlib import Path
 from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtGui import QImage, QColor
+import cv2
 
 def isTheSameColor(pixel_color: np.array, standard_color: QColor):
     '''判断bgra格式的ndarray color是否和对应Qcolor同色'''
@@ -152,14 +153,17 @@ def randomScribble(pts: list, area: np.array,
     return pts + scribble_pts
 
 def getEuclidDistanceMap(pts: list, area: np.array, dim=4):
-    result = np.zeros(area.shape, np.uint8)
-    for ix in range(result.shape[0]):
-        for iy in range(result.shape[1]):
-            dist = [int(sqrt(euclidDistance(pt, QPoint(ix, iy)))) for pt in pts]
-            min_dist = int(np.min(dist)) if(len(dist)>0) else 255
-            if(min_dist>255): min_dist=255
-            result[ix, iy] = np.array([min_dist,min_dist,min_dist,255]) if(dim==4) else min_dist
-    return result
+    result = np.ones(area.shape, np.uint8)
+    for pt in pts:
+        result[pt.x(), pt.y()] = 0
+    dist_img = cv2.distanceTransform(result, cv2.DIST_L2, cv2.DIST_MASK_3)
+    # for ix in range(result.shape[0]):
+    #     for iy in range(result.shape[1]):
+    #         dist = [int(sqrt(euclidDistance(pt, QPoint(ix, iy)))) for pt in pts]
+    #         min_dist = int(np.min(dist)) if(len(dist)>0) else 255
+    #         if(min_dist>255): min_dist=255
+    #         result[ix, iy] = np.array([min_dist,min_dist,min_dist,255]) if(dim==4) else min_dist
+    return dist_img
 
 
 

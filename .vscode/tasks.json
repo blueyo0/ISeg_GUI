@@ -6,18 +6,9 @@
         {
             "label": "build_qt",
             "type": "shell",
-            "command": "",
-            "args": [
-                "./run.ps1"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "reveal": "silent"
-            },
-            "problemMatcher": "$msCompile"
+            "command": "conda activate iseg; pyuic5 -o ui/mainWindow.py ui/mainWindow.ui; pyrcc5 -o rsc_rc.py Resources/rsc.qrc",
+            // "command": "echo 'hello'",
+            // "problemMatcher": "$msCompile"
         }
     ]
 }
