@@ -486,9 +486,12 @@ class Ui_MainWindow(object):
         self.action_open_image_seg.setObjectName("action_open_image_seg")
         self.action_clear_paint = QtWidgets.QAction(MainWindow)
         self.action_clear_paint.setObjectName("action_clear_paint")
+        self.action_save_snap = QtWidgets.QAction(MainWindow)
+        self.action_save_snap.setObjectName("action_save_snap")
         self.dockWidget.raise_()
         self.menuFile.addAction(self.action_open_main_image)
         self.menuFile.addAction(self.action_open_seg)
+        self.menuFile.addAction(self.action_save_snap)
         self.menuseg.addAction(self.action_predict)
         self.menuseg.addAction(self.action_refine)
         self.menuseg.addSeparator()
@@ -531,5 +534,6 @@ class Ui_MainWindow(object):
         self.action_snap_dist_map.setText(_translate("MainWindow", "截取欧几里得距离图"))
         self.action_open_image_seg.setText(_translate("MainWindow", "打开图像和分割"))
         self.action_clear_paint.setText(_translate("MainWindow", "清空本截面标注"))
+        self.action_save_snap.setText(_translate("MainWindow", "保存截图"))
 from ui.paintView import PaintView
 import rsc_rc

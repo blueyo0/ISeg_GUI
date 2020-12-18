@@ -454,12 +454,33 @@ if __name__ == '__main__':
 	def saveUpdate():
 		ui.isPaintSaved = False
 
+	def saveSnap(view):
+		save_path = QFileDialog.getSaveFileName(
+			ui.centralwidget,
+			"输入截图文件名", 
+			filter="Image(*.png)"
+		)
+		if(len(save_path[0])<1):
+			return None
+		view.screenSnap(save_path[0])
+
+	def saveSnap_a():
+		saveSnap(ui.view_a)
+	def saveSnap_s():
+		saveSnap(ui.view_s)
+	def saveSnap_c():
+		saveSnap(ui.view_c)
+	def saveSnap_3d():
+		if(ui.view_dim==3): saveSnap(ui.view_a)
+		elif(ui.view_dim==2): saveSnap(ui.view_3d)
+
 #-----------------------------------[ Connect ]--------------------------------#
 	ui.action_open_main_image.triggered.connect(openImageFile)
 	ui.action_open_seg.triggered.connect(openMaskFile)
 	ui.action_predict.triggered.connect(predict)
 	ui.action_refine.triggered.connect(refine)
 	ui.action_clear_paint.triggered.connect(clearOnePaint)
+	ui.action_save_snap.triggered.connect(saveSnap_3d)
 	# ui.action_snap_dist_map.triggered.connect(testMessageBox)
 
 	ui.view_a.wheelSignal.connect(updateXPosByWheel)
@@ -500,16 +521,16 @@ if __name__ == '__main__':
 	# ui.offset_synButton.clicked.connect(synOffset)
 	# ui.offset_updButton.clicked.connect(updateOffset)
 
-	ui.toolButton_a.clicked.connect(testMessageBox)
-	ui.toolButton_s.clicked.connect(testMessageBox)
-	ui.toolButton_c.clicked.connect(testMessageBox)
+	ui.toolButton_a.clicked.connect(saveSnap_a)
+	ui.toolButton_s.clicked.connect(saveSnap_s)
+	ui.toolButton_c.clicked.connect(saveSnap_c)
 
 #-----------------------------------[ Novel end ]------------------------------#	
 	myWin.show()
 	ui.view_a.initalize(name="a")
 	ui.view_s.initalize(name="s")
 	ui.view_c.initalize(name="c")
-	ui.view_3d.initalize(imageColor=QColor(0, 0, 0, 255))
+	ui.view_3d.initalize(imageColor=QColor(0, 0, 0, 0))
 	ui.view_3d.isLocked = True
 	ui.view_s.isLocked = True
 	ui.view_c.isLocked = True

@@ -310,6 +310,7 @@
     </property>
     <addaction name="action_open_main_image"/>
     <addaction name="action_open_seg"/>
+    <addaction name="action_save_snap"/>
    </widget>
    <widget class="QMenu" name="menuseg">
     <property name="title">
@@ -1031,6 +1032,11 @@
   <action name="action_clear_paint">
    <property name="text">
     <string>清空本截面标注</string>
+   </property>
+  </action>
+  <action name="action_save_snap">
+   <property name="text">
+    <string>保存截图</string>
    </property>
   </action>
   <zorder>dockWidget</zorder>

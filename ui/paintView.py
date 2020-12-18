@@ -389,7 +389,7 @@ class PaintView(QtWidgets.QGraphicsView):
             # elif(event.button()==Qt.RightButton):
             img = self.scene.items()[self.paintIdx].pixmap()
             self.drawLine(line, img)
-            img.save("C:\\Users\\small\\Desktop\\img{}.png".format(self.paintIdx))
+            # img.save("C:\\Users\\small\\Desktop\\img{}.png".format(self.paintIdx))
             self.scene.items()[self.paintIdx].setPixmap(img)
         #拖拽模式
         if(self.isPressed and self.mode==PaintMode.Drag):
@@ -423,4 +423,13 @@ class PaintView(QtWidgets.QGraphicsView):
         if(self.isInitalized): self.resizeSignal.emit(self.autoRescale())
         pass
 
-    
+    def screenSnap(self, filename):
+        image = QImage(self.size(), QImage.Format_ARGB32);
+        painter = QPainter(image)
+        self.scene.render(painter)
+        painter.end()
+        size = self.scene.items()[4].pixmap().size()
+        image = image.copy(self.offset[0], self.offset[1], 
+                           size.width()*self.view_scale,
+                           size.height()*self.view_scale).scaled(self.image.size())
+        image.save(filename)
