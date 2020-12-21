@@ -20,7 +20,7 @@ from ui.mainWindow import *
 
 from ui.paintMode import PaintMode
 from util.data import load_nii_data
-from util.data import arr2img, qpixmap2numpy
+from util.data import arr2img, qpixmap2numpy, qimage2numpy
 import model.model_util as mutil
 from util.simulate import getEuclidDistanceMap
 from util.test import cv_show, cv_show_with_sim
@@ -45,6 +45,7 @@ if __name__ == '__main__':
 		ui.dragButton  : PaintMode.Drag
 	}
 	ui.img_3d = np.array([])
+	ui.img_2d = QImage(QSize(256,256), QImage.Format_Mono)
 	ui.direction_img = None
 	ui.seg_3d = np.array([])
 	ui.direction_seg = None
@@ -58,6 +59,7 @@ if __name__ == '__main__':
 	# ！ model preload
 	ui.pnet_model = mutil.load_net_model(type='pnet')
 	ui.rnet_model = mutil.load_net_model(type='rnet')
+	ui.coseg_pnet = mutil.load_coseg_model(type='pnet')
 #-----------------------------------[ Slots ]----------------------------------#
 	def updateImgSlice():
 		if(ui.img_3d.ndim<3): return None
@@ -115,7 +117,8 @@ if __name__ == '__main__':
 		else:
 			if(ui.view_dim==3): changeViewTo2d()
 			ui.view_3d.initalize(imageColor=QColor(0, 0, 0, 255))
-			ui.view_3d.setImage(QImage(image_path[0]))
+			ui.img_2d = QImage(image_path[0])
+			ui.view_3d.setImage(ui.img_2d)
 			ui.view_3d.setCenter()
 			ui.view_a.clearImage(); ui.view_a.clearPaint()
 			ui.view_s.clearImage(); ui.view_s.clearPaint()
@@ -352,16 +355,25 @@ if __name__ == '__main__':
 		ui.view_a.clearPaint()
 
 	def predict():
-		img_patchs = ui.img_3d[:,:,ui.verticalScrollBar_a.value()-2:ui.verticalScrollBar_a.value()+1].copy()
-		for i in range(3):
-			img_single = img_patchs[:,:,i]
-			mean = np.mean(img_single)
-			std = np.std(img_single)
-			normalized_img = (img_single - mean) / std  # 正则化处理  
-			img_patchs[:,:,i] = normalized_img
-		pred = mutil.predict(ui.pnet_model, img_patchs)
-		ui.view_a.setMask(arr2img(pred, position='a'), idx=0) 
-		ui.view_a.isPredicted = True
+		if(ui.view_dim==3):
+			img_patchs = ui.img_3d[:,:,ui.verticalScrollBar_a.value()-2:ui.verticalScrollBar_a.value()+1].copy()
+			for i in range(3):
+				img_single = img_patchs[:,:,i]
+				mean = np.mean(img_single)
+				std = np.std(img_single)
+				normalized_img = (img_single - mean) / std  # 正则化处理  
+				img_patchs[:,:,i] = normalized_img
+			pred = mutil.predict(ui.pnet_model, img_patchs)
+			ui.view_a.setMask(arr2img(pred, position='a'), idx=0) 
+			ui.view_a.isPredicted = True
+		elif(ui.view_dim==2):
+			img_patchs = qimage2numpy(ui.img_2d)
+			pred = mutil.predict(ui.coseg_pnet, img_patchs)
+			transform = QTransform(); transform.rotate(90)
+			ui.view_3d.setMask(arr2img(pred, position='a').mirrored(horizontal=False, vertical=True)\
+														  .transformed(transform), idx=0) 
+			ui.view_3d.isPredicted = True
+
 		ui.isPaintSaved = False
 		# TO-DO: mask_0的三维化
 

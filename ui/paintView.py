@@ -52,6 +52,7 @@ class PaintView(QtWidgets.QGraphicsView):
     paint_0 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # negative paint
     paint_1 = QImage(DEFAULT_SIZE, QImage.Format_ARGB32) # positive paint
     seg_mask = None
+    seg_pred = None
     wheelSignal = pyqtSignal(int)
     wheelSignal2d = pyqtSignal(int)
     resizeSignal = pyqtSignal(int)
@@ -160,13 +161,14 @@ class PaintView(QtWidgets.QGraphicsView):
         self.isCursorChanged = True
 
     def setAlpha(self, a, idx=1, r=0xff, g=0x00, b=0x00):
-        if(not self.seg_mask): return 
-        if(idx!=1 and idx!=0): return
+        if(idx!=1 and idx!=0): return None
+        if(not self.seg_mask and idx==1): return None 
+        if(not self.seg_pred and idx==0): return None 
         self.alpha[idx] = a
         # self.colorTable = [qRgba(0,0,0,0x00), qRgba(r,g,b,int(self.alpha[1]))]
         
-        if(idx==1): self.mask_1 = self.getColoredMask(self.seg_mask)
-        elif(idx==0): self.mask_0 = self.getColoredMask(self.seg_mask, r=89, g=99, b=210, a=a)
+        if(idx==1): self.mask_1 = self.getColoredMask(self.seg_mask, a=a)
+        if(idx==0): self.mask_0 = self.getColoredMask(self.seg_pred, r=89, g=99, b=210, a=a)
         mask = self.mask_1 if(idx==1) else self.mask_0
 
         self.scene.items()[2+idx].setPixmap(
@@ -249,9 +251,12 @@ class PaintView(QtWidgets.QGraphicsView):
 
     def setMask(self, seg, keepRatio=True, idx=1):
         mode = Qt.KeepAspectRatio if keepRatio else Qt.IgnoreAspectRatio
-        self.seg_mask = seg.createMaskFromColor(0xFF000000, mode=Qt.MaskOutColor)
-        if(idx==1): self.mask_1 = self.getColoredMask(self.seg_mask)
-        elif(idx==0): self.mask_0 = self.getColoredMask(self.seg_mask, r=89, g=99, b=210)
+        if(idx==1): 
+            self.seg_mask = seg.createMaskFromColor(0xFF000000, mode=Qt.MaskOutColor)
+            self.mask_1 = self.getColoredMask(self.seg_mask)
+        elif(idx==0): 
+            self.seg_pred = seg.createMaskFromColor(0xFF000000, mode=Qt.MaskOutColor)
+            self.mask_0 = self.getColoredMask(self.seg_pred, r=89, g=99, b=210)
 
         mask = self.mask_1 if(idx==1) else self.mask_0
         self.scene.items()[2+idx].setPixmap(

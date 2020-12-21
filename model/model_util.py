@@ -33,6 +33,16 @@ def load_net_model(type='pnet'):
     model.load_state_dict(torch.load(model_pth))
     return model
 
+def load_coseg_model(type="pnet"):
+    net_params={'num_filters':32, 
+                'num_channels':1 if(type=='pnet') else 3, 
+                'num_classes':2}
+    model = torch.nn.DataParallel(Unet(net_params), device_ids=[0])
+    model_pth = "./model/prnet/coseg_pnet.pth" if(type=='pnet') else "./model/prnet/coseg_rnet.pth"
+    model.load_state_dict(torch.load(model_pth))
+    return model
+
+
 def predict(model, img_patch):
     img_patch = torch.from_numpy(img_patch.transpose([2,0,1])[np.newaxis].astype(np.float32))
     # img_patch = img_patch.double()
