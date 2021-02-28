@@ -38,7 +38,7 @@ def load_coseg_model(type="pnet"):
                 'num_channels':1 if(type=='pnet') else 3, 
                 'num_classes':2}
     model = torch.nn.DataParallel(Unet(net_params), device_ids=[0])
-    model_pth = "./model/prnet/coseg_pnet.pth" if(type=='pnet') else "./model/prnet/coseg_rnet.pth"
+    model_pth = "./model/prnet/coseg_pnet_v1.1.pth" if(type=='pnet') else "./model/prnet/coseg_rnet.pth"
     model.load_state_dict(torch.load(model_pth))
     return model
 
